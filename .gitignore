@@ -1,11 +1,34 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
+
+# Vite cache
 .vite/
+
+# Environment variables
+.env*
+!.env.example
+
+# Local overrides
 *.local
+
+# Cloudflare Wrangler CLI cache
+.wrangler/
+
+# Local dev session files
+.claude/
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# OS
 .DS_Store
 Thumbs.db
-.claude/SESSION_CONTEXT.md
-.claude/settings.local.json
-.claude/PLAN.md
-.env
-.env.local
+desktop.ini
+
+# Logs
+*.log

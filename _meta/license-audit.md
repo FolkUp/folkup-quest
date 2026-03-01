@@ -60,6 +60,7 @@
 - [x] No CC BY-NC content in commercial use context
 - [x] No proprietary dependencies
 - [x] All fonts self-hosted (GDPR)
+- [x] Font OFL 1.1 license text included (public/fonts/OFL.txt)
 - [ ] Audio licenses documented before deployment
 - [x] SPDX identifiers in README
 - [x] LICENSE file present
