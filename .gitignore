@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vite/
+*.local
+.DS_Store
+Thumbs.db
+.claude/SESSION_CONTEXT.md
+.claude/settings.local.json
+.claude/PLAN.md

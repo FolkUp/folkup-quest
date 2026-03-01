@@ -1,0 +1,25 @@
+{
+  "name": "folkup-quest",
+  "private": true,
+  "version": "1.0.0",
+  "description": "FolkUp Quest — interactive text adventure (Ink engine)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/compile-ink.js && vite build",
+    "preview": "vite preview",
+    "compile-ink": "node scripts/compile-ink.js",
+    "validate": "node scripts/validate.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "inkjs": "^2.3.0",
+    "motion": "^11.18.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0",
+    "vitest": "^4.0.18"
+  },
+  "license": "MIT"
+}

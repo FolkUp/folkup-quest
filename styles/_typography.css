@@ -1,0 +1,93 @@
+/* FolkUp Quest — Typography
+   Reading rhythm optimized for long-form narrative text */
+
+/* Self-hosted Google Fonts (GDPR compliant) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Story text */
+.story-paragraph {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  animation: fadeInUp var(--transition-slow) forwards;
+}
+
+.story-paragraph em {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* Dialogue */
+.story-paragraph:has(> :first-child) {
+  text-indent: 0;
+}
+
+/* Choice buttons text */
+.choice-btn {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+}
+
+/* Scene title (if used) */
+.scene-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--color-amber);
+  margin-bottom: var(--space-xl);
+  letter-spacing: 0.02em;
+}
+
+/* End text */
+.end-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+/* Footer links */
+.footer-link {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--color-amber);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-paragraph {
+    opacity: 1;
+    animation: none;
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FolkUp Quest</title>
+  <meta name="description" content="Интерактивный текстовый квест от FolkUp. История о коде, людях и выборе.">
+
+  <!-- OG Meta -->
+  <meta property="og:title" content="FolkUp Quest">
+  <meta property="og:description" content="Интерактивный текстовый квест. 35 минут. 9 выборов. 3 концовки.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quest.folkup.app">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles/_variables.css">
+  <link rel="stylesheet" href="/styles/_typography.css">
+  <link rel="stylesheet" href="/styles/_layout.css">
+</head>
+<body>
+  <main id="game" role="main">
+    <!-- Lamp indicator -->
+    <div id="lamp" data-state="steady" role="img" aria-label="Лампа Lucerna"></div>
+
+    <!-- Start screen -->
+    <div id="start-screen">
+      <h1>FolkUp Quest</h1>
+      <p>Интерактивный текстовый квест. 35 минут. 9 выборов. 3 концовки.</p>
+      <button class="start-btn" id="new-game-btn">Начать</button>
+      <button class="start-btn" id="continue-game-btn" style="display: none; background: var(--color-surface); border: 1px solid var(--color-divider);">Продолжить</button>
+    </div>
+
+    <!-- Story area -->
+    <section id="story" aria-live="polite" aria-atomic="false" style="display: none;"></section>
+
+    <!-- Choices -->
+    <div id="choices" role="group" aria-label="Варианты выбора"></div>
+
+    <!-- Continue button -->
+    <button id="continue-btn" aria-label="Продолжить чтение">Продолжить ▸</button>
+
+    <!-- Footer -->
+    <footer id="footer-nav">
+      <a href="/legal/privacy.html" class="footer-link">Конфиденциальность</a>
+      <a href="/legal/terms.html" class="footer-link">Условия</a>
+      <a href="/legal/cookies.html" class="footer-link">Cookies</a>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
