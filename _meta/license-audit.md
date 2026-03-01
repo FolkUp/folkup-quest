@@ -16,21 +16,20 @@
 | Package | Version | License | Compatible | Notes |
 |---------|---------|---------|------------|-------|
 | inkjs | ^2.3.0 | MIT | Yes | Ink runtime for JavaScript |
-| motion | ^11.18.0 | MIT | Yes | Animation library (formerly Framer Motion) |
 
 ### Dev Dependencies
 
 | Package | Version | License | Compatible | Notes |
 |---------|---------|---------|------------|-------|
 | vite | ^6.2.0 | MIT | Yes | Build tool, not included in output |
+| vitest | ^4.0.18 | MIT | Yes | Test runner, not included in output |
 
-## Fonts (Google Fonts — self-hosted)
+## Fonts (self-hosted, GDPR compliant)
 
 | Font | License | Compatible | Notes |
 |------|---------|------------|-------|
-| Instrument Serif | OFL 1.1 | Yes | Display/heading font |
-| Playfair Display | OFL 1.1 | Yes | Heading font |
-| Source Sans 3 | OFL 1.1 | Yes | Body text |
+| Playfair Display | OFL 1.1 | Yes | Heading font, self-hosted woff2 |
+| Source Sans 3 | OFL 1.1 | Yes | Body text, self-hosted woff2 |
 
 ## Audio Assets
 
@@ -49,10 +48,10 @@
 
 ## Compliance Check
 
-- [ ] No GPL contamination in MIT code
-- [ ] No CC BY-NC content in commercial use context
-- [ ] No proprietary dependencies
-- [ ] All fonts self-hosted (GDPR)
+- [x] No GPL contamination in MIT code
+- [x] No CC BY-NC content in commercial use context
+- [x] No proprietary dependencies
+- [x] All fonts self-hosted (GDPR)
 - [ ] Audio licenses documented before deployment
 - [x] SPDX identifiers in README
 - [x] LICENSE file present

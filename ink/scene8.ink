@@ -98,7 +98,7 @@
 -> scene8_end
 
 = scene8_dragon
-~ folk_counter = folk_counter + 5
+~ folk_counter = folk_counter - 5
 
 — Нам нужен план. Конкретный, с цифрами и дедлайнами.
 

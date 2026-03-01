@@ -12,20 +12,6 @@ export class InkEngine {
   }
 
   /**
-   * Load story from JSON
-   * @param {string} jsonString
-   * @returns {InkEngine}
-   */
-  static fromJSON(jsonString) {
-    // Dynamic import handled by caller
-    const { Story } = window.__inkjs || {};
-    if (Story) {
-      return new InkEngine(new Story(jsonString));
-    }
-    throw new Error('inkjs Story class not available');
-  }
-
-  /**
    * Load story from Story instance
    * @param {import('inkjs').Story} storyInstance
    * @returns {InkEngine}

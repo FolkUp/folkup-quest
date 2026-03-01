@@ -62,7 +62,7 @@ describe('Scene 8 Ink Story', () => {
     expect(story.variablesState['folk_counter']).toBe(55);
   });
 
-  it('dragon path increases folk_counter by 5', () => {
+  it('dragon path decreases folk_counter by 5', () => {
     while (story.canContinue) {
       story.Continue();
     }
@@ -71,8 +71,8 @@ describe('Scene 8 Ink Story', () => {
     while (story.canContinue) {
       story.Continue();
     }
-    // Dragon path also +5 (constructive dragon)
-    expect(story.variablesState['folk_counter']).toBe(55);
+    // Dragon path -5 (constructive but still dragon)
+    expect(story.variablesState['folk_counter']).toBe(45);
   });
 
   it('folk path has FEEDBACK: folk tag', () => {

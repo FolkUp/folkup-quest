@@ -11,10 +11,30 @@ let engine = null;
 let renderer = null;
 
 async function init() {
+  const startScreen = document.getElementById('start-screen');
+  const storyEl = document.getElementById('story');
+  const newGameBtn = document.getElementById('new-game-btn');
+  const continueBtn = document.getElementById('continue-game-btn');
+
+  // Show loading state
+  const loadingP = document.createElement('p');
+  loadingP.textContent = 'Загрузка...';
+  loadingP.style.color = 'var(--color-text-muted)';
+  startScreen.appendChild(loadingP);
+
   // Load compiled story
-  const response = await fetch('/story.json');
+  let response;
+  try {
+    response = await fetch('/story.json');
+  } catch {
+    loadingP.textContent = 'Не удалось загрузить. Проверьте интернет и обновите страницу.';
+    loadingP.style.color = 'var(--color-bordeaux)';
+    return;
+  }
+
   if (!response.ok) {
-    console.error('Failed to load story.json');
+    loadingP.textContent = 'Не удалось загрузить историю. Обновите страницу.';
+    loadingP.style.color = 'var(--color-bordeaux)';
     return;
   }
 
@@ -23,19 +43,22 @@ async function init() {
   engine = InkEngine.fromStory(story);
   renderer = new Renderer(document.getElementById('game'));
 
-  // Setup start screen
-  const startScreen = document.getElementById('start-screen');
-  const storyEl = document.getElementById('story');
-  const newGameBtn = document.getElementById('new-game-btn');
-  const continueBtn = document.getElementById('continue-game-btn');
+  // Loading complete — hide loading text
+  loadingP.remove();
 
   // Check for saved game
   if (SaveManager.hasSave()) {
     continueBtn.style.display = '';
     continueBtn.addEventListener('click', () => {
-      const save = SaveManager.load();
-      if (save) {
-        engine.loadState(save.state);
+      try {
+        const save = SaveManager.load();
+        if (save) {
+          engine.loadState(save.state);
+        }
+      } catch {
+        // Corrupted save — start fresh
+        engine.reset();
+        SaveManager.clear();
       }
       startGame(startScreen, storyEl);
     });
@@ -66,15 +89,18 @@ function advance() {
   if (result.choices.length > 0) {
     renderer.showChoices(result.choices, (index) => {
       engine.choose(index);
-      // Auto-save after choice
       saveGame();
-      // Small delay before advancing for UX
-      setTimeout(() => advance(), 400);
+      setTimeout(() => {
+        advance();
+        renderer.scrollToBottom();
+      }, 400);
     });
   } else if (engine.canContinue()) {
-    renderer.showContinue(() => advance());
+    renderer.showContinue(() => {
+      advance();
+      renderer.scrollToBottom();
+    });
   } else {
-    // Story ended
     renderer.showEnd();
     saveGame();
   }
@@ -91,4 +117,13 @@ function saveGame() {
 }
 
 // Boot
-init().catch(console.error);
+init().catch((err) => {
+  console.error('Init error:', err);
+  const startScreen = document.getElementById('start-screen');
+  if (startScreen) {
+    const errorP = document.createElement('p');
+    errorP.textContent = 'Ошибка загрузки. Обновите страницу.';
+    errorP.style.color = 'var(--color-bordeaux)';
+    startScreen.appendChild(errorP);
+  }
+});

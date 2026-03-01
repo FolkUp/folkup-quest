@@ -14,8 +14,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "inkjs": "^2.3.0",
-    "motion": "^11.18.0"
+    "inkjs": "^2.3.0"
   },
   "devDependencies": {
     "vite": "^6.2.0",
