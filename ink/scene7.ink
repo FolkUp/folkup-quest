@@ -168,7 +168,7 @@
 
     Дэн на экране — тихо, почти шёпот:
 
-    — Well. That's a blues I didn't want to play. 🎸
+    — Well. That's a blues I didn't want to play.
 
     Экран выключился.
 

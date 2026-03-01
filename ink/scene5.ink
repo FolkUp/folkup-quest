@@ -1,15 +1,15 @@
 // Scene 5: RETRO-TECH / ДЭН
-// Act 2, Choice 4, ~3 min read
+// Act 1, Choice 4, ~3 min read
 // Tone: Bulgakov 40% + Pain 30% + Strugatsky 20% + Schwartz 10%
 // +Folk: "Расскажи, как рассказывать" / +Dragon: "Аудитория сейчас"
 
 === scene5 ===
 ~ current_scene = 5
-~ current_act = 2
+~ current_act = 1
 ~ visited_retrotech = true
 
 # SCENE: retrotech_dan
-# ACT: 2
+# ACT: 1
 
 Дверь вела не в комнату — в экран. Синий свет видеозвонка, задержка в полсекунды, и за этой полсекундой — Чикаго. Кухня. Виниловые пластинки на стене — Muddy Waters, Howlin' Wolf, Robert Johnson, кто-то неизвестный, чей конверт так истёрся, что осталось только лицо и гитара. Кружка с надписью «I woke up this morning» — первая строчка любого блюза и любого понедельника.
 
