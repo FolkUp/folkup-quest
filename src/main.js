@@ -48,6 +48,10 @@ async function init() {
 
   // Check for saved game
   if (SaveManager.hasSave()) {
+    const meta = SaveManager.getMeta();
+    const actNames = { 1: 'I', 2: 'II', 3: 'III' };
+    const actLabel = meta?.act ? ` · Акт ${actNames[meta.act] || meta.act}` : '';
+    continueBtn.textContent = `Продолжить${actLabel}`;
     continueBtn.style.display = '';
     continueBtn.addEventListener('click', () => {
       try {
@@ -76,33 +80,56 @@ async function init() {
 function startGame(startScreen, storyEl) {
   startScreen.style.display = 'none';
   storyEl.style.display = '';
+
+  // Show restart button
+  const restartBtn = document.getElementById('restart-btn');
+  if (restartBtn) {
+    restartBtn.style.display = '';
+    restartBtn.addEventListener('click', () => {
+      if (confirm('Начать заново? Текущий прогресс будет потерян.')) {
+        engine.reset();
+        SaveManager.clear();
+        location.reload();
+      }
+    });
+  }
+
   advance();
 }
 
 function advance() {
   const result = engine.continueToBreak();
+  const hasSceneChange = result.tags.some((t) => t.startsWith('SCENE:'));
 
-  if (result.paragraphs.length > 0) {
-    renderer.showText(result.paragraphs, result.tags);
-  }
+  const render = () => {
+    if (result.paragraphs.length > 0) {
+      renderer.showText(result.paragraphs, result.tags);
+    }
 
-  if (result.choices.length > 0) {
-    renderer.showChoices(result.choices, (index) => {
-      engine.choose(index);
-      saveGame();
-      setTimeout(() => {
+    if (result.choices.length > 0) {
+      renderer.showChoices(result.choices, (index) => {
+        engine.choose(index);
+        saveGame();
+        setTimeout(() => {
+          advance();
+          renderer.scrollToBottom();
+        }, 400);
+      });
+    } else if (engine.canContinue()) {
+      renderer.showContinue(() => {
         advance();
         renderer.scrollToBottom();
-      }, 400);
-    });
-  } else if (engine.canContinue()) {
-    renderer.showContinue(() => {
-      advance();
-      renderer.scrollToBottom();
-    });
+      });
+    } else {
+      renderer.showEnd(result.tags);
+      saveGame();
+    }
+  };
+
+  if (hasSceneChange) {
+    renderer.transitionScene(render);
   } else {
-    renderer.showEnd();
-    saveGame();
+    render();
   }
 }
 

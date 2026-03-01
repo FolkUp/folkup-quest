@@ -2,7 +2,12 @@
  * UI Renderer — displays story text, choices, and continue buttons
  */
 
-import { parseFeedbackTag, parseLampTag } from '../engine/moral-system.js';
+import {
+  parseFeedbackTag,
+  parseLampTag,
+  parseEndingTag,
+  getEndingName,
+} from '../engine/moral-system.js';
 
 export class Renderer {
   /** @param {HTMLElement} container */
@@ -13,6 +18,8 @@ export class Renderer {
     this.continueEl = container.querySelector('#continue-btn');
     this.lampEl = container.querySelector('#lamp');
     this.footerEl = container.querySelector('#footer-nav');
+    this.progressEl = container.querySelector('#progress');
+    this.currentEnding = null;
   }
 
   /**
@@ -29,6 +36,7 @@ export class Renderer {
       const act = actTag.split(':')[1]?.trim();
       if (act) {
         document.documentElement.setAttribute('data-act', act);
+        this.updateProgress(act);
       }
     }
 
@@ -47,6 +55,13 @@ export class Renderer {
       fragment.appendChild(p);
     });
     this.storyEl.appendChild(fragment);
+
+    // Focus management: focus first paragraph for screen readers
+    const firstP = this.storyEl.querySelector('.story-paragraph');
+    if (firstP) {
+      firstP.setAttribute('tabindex', '-1');
+      firstP.focus({ preventScroll: true });
+    }
 
     // Process feedback/lamp tags
     tags.forEach((tag) => {
@@ -97,6 +112,10 @@ export class Renderer {
       });
       this.choicesEl.appendChild(btn);
     });
+
+    // Focus first choice for keyboard navigation
+    const firstBtn = this.choicesEl.querySelector('.choice-btn');
+    if (firstBtn) firstBtn.focus({ preventScroll: true });
   }
 
   /** Hide choices container */
@@ -148,18 +167,33 @@ export class Renderer {
     }
   }
 
-  /** Show "end of story" screen */
-  showEnd() {
+  /**
+   * Show "end of story" screen
+   * @param {string[]} [tags=[]] — tags from the final passage
+   */
+  showEnd(tags = []) {
     this.hideContinue();
     this.hideChoices();
+
+    // Check for ending tag
+    for (const tag of tags) {
+      const ending = parseEndingTag(tag);
+      if (ending) this.currentEnding = ending;
+    }
+
+    const endingLabel = this.currentEnding
+      ? `<p class="end-label">${getEndingName(this.currentEnding)}</p>`
+      : '';
 
     const endEl = document.createElement('div');
     endEl.className = 'story-end';
     endEl.innerHTML = `
       <div class="end-divider"></div>
-      <p class="end-text">Продолжение следует...</p>
+      ${endingLabel}
+      <p class="end-text">Конец</p>
     `;
     this.storyEl.appendChild(endEl);
+    this.showFooter();
   }
 
   /** Show footer navigation */
@@ -167,6 +201,35 @@ export class Renderer {
     if (this.footerEl) {
       this.footerEl.classList.add('visible');
     }
+  }
+
+  /**
+   * Fade-out, run callback, fade-in. Only for scene changes.
+   * @param {() => void} callback
+   */
+  transitionScene(callback) {
+    const duration = parseFloat(getComputedStyle(this.storyEl).transitionDuration) * 1000 || 300;
+    this.storyEl.classList.add('fading-out');
+    setTimeout(() => {
+      callback();
+      this.storyEl.classList.remove('fading-out');
+    }, duration);
+  }
+
+  /**
+   * Update progress dots for current act
+   * @param {number|string} act — 1, 2, or 3
+   */
+  updateProgress(act) {
+    if (!this.progressEl) return;
+    this.progressEl.style.display = '';
+    const actNum = parseInt(act, 10);
+    this.progressEl.querySelectorAll('.progress-dot').forEach((dot) => {
+      const dotNum = parseInt(dot.dataset.dot, 10);
+      dot.classList.remove('completed', 'current');
+      if (dotNum < actNum) dot.classList.add('completed');
+      else if (dotNum === actNum) dot.classList.add('current');
+    });
   }
 
   /** Scroll story container to bottom smoothly */

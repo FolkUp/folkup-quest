@@ -82,6 +82,24 @@
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px var(--color-amber-glow);
+
+  /* Act-driven accent (overridden by html[data-act]) */
+  --accent: var(--color-amber);
+  --accent-glow: var(--color-amber-glow);
+}
+
+/* Act color temperature */
+html[data-act="1"] {
+  --accent: var(--act-1-accent);
+  --accent-glow: rgba(107, 138, 158, 0.15);
+}
+html[data-act="2"] {
+  --accent: var(--act-2-accent);
+  --accent-glow: var(--color-amber-glow);
+}
+html[data-act="3"] {
+  --accent: var(--act-3-accent);
+  --accent-glow: rgba(196, 92, 92, 0.15);
 }
 
 /* Reduced motion */

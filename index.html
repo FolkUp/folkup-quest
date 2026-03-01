@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>FolkUp Quest</title>
   <meta name="description" content="Интерактивный текстовый квест от FolkUp. История о коде, людях и выборе.">
 
@@ -20,9 +20,17 @@
   <link rel="stylesheet" href="/styles/_layout.css">
 </head>
 <body>
+  <a href="#story" class="skip-link">Перейти к содержанию</a>
   <main id="game">
     <!-- Lamp indicator -->
     <div id="lamp" data-state="steady" role="img" aria-label="Лампа Lucerna"></div>
+
+    <!-- Progress (3 acts) -->
+    <nav id="progress" aria-label="Прогресс по актам" style="display: none;">
+      <span class="progress-dot" data-dot="1" aria-label="Акт I"></span>
+      <span class="progress-dot" data-dot="2" aria-label="Акт II"></span>
+      <span class="progress-dot" data-dot="3" aria-label="Акт III"></span>
+    </nav>
 
     <!-- Start screen -->
     <div id="start-screen">
@@ -43,6 +51,7 @@
 
     <!-- Footer -->
     <footer id="footer-nav">
+      <button id="restart-btn" class="footer-link" style="display: none; background: none; border: none; cursor: pointer; font: inherit;">Начать заново</button>
       <a href="/legal/privacy.html" class="footer-link">Конфиденциальность</a>
       <a href="/legal/terms.html" class="footer-link">Условия</a>
       <a href="/legal/cookies.html" class="footer-link">Cookies</a>

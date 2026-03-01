@@ -65,3 +65,13 @@ export function parseLampTag(tag) {
   const match = tag.match(/^LAMP:\s*(steady|bright|flicker)$/i);
   return match ? match[1].toLowerCase() : null;
 }
+
+/**
+ * Parse ending tag from Ink
+ * @param {string} tag — e.g. "ENDING: lantern" or "ENDING: bridge" or "ENDING: chair"
+ * @returns {'lantern' | 'bridge' | 'chair' | null}
+ */
+export function parseEndingTag(tag) {
+  const match = tag.match(/^ENDING:\s*(lantern|bridge|chair)$/i);
+  return match ? match[1].toLowerCase() : null;
+}

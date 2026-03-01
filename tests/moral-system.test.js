@@ -4,6 +4,7 @@ import {
   getEndingName,
   parseFeedbackTag,
   parseLampTag,
+  parseEndingTag,
 } from '../src/engine/moral-system.js';
 
 describe('determineEnding', () => {
@@ -104,5 +105,23 @@ describe('parseLampTag', () => {
   });
   it('returns null for unknown state', () => {
     expect(parseLampTag('LAMP: off')).toBeNull();
+  });
+});
+
+describe('parseEndingTag', () => {
+  it('parses lantern ending', () => {
+    expect(parseEndingTag('ENDING: lantern')).toBe('lantern');
+  });
+  it('parses bridge ending', () => {
+    expect(parseEndingTag('ENDING: bridge')).toBe('bridge');
+  });
+  it('parses chair ending', () => {
+    expect(parseEndingTag('ENDING: chair')).toBe('chair');
+  });
+  it('returns null for non-ending tag', () => {
+    expect(parseEndingTag('SCENE: test')).toBeNull();
+  });
+  it('returns null for invalid ending', () => {
+    expect(parseEndingTag('ENDING: invalid')).toBeNull();
   });
 });
