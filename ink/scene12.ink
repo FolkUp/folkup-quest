@@ -61,6 +61,8 @@ Ink — движок интерактивных историй (inkle)
 
 folkup.app
 
+Рассказы по мотивам игры: quest.folkup.app/stories/
+
 # SCENE_END: 12
 
 -> END
