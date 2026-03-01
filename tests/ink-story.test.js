@@ -7,190 +7,227 @@ import { Story } from 'inkjs';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const storyJson = readFileSync(resolve(__dirname, '../public/story.json'), 'utf-8');
 
-describe('Scene 8 Ink Story', () => {
+/** Advance story to next choice or end, collecting all text and tags */
+function advance(story) {
+  const text = [];
+  const tags = [];
+  while (story.canContinue) {
+    text.push(story.Continue());
+    tags.push(...story.currentTags);
+  }
+  return { text: text.join(' '), tags, choices: story.currentChoices };
+}
+
+/** Choose first option whose text contains the search string */
+function chooseByText(story, search) {
+  const idx = story.currentChoices.findIndex((c) => c.text.includes(search));
+  if (idx < 0) throw new Error(`Choice not found: "${search}" in [${story.currentChoices.map(c => c.text).join(', ')}]`);
+  story.ChooseChoiceIndex(idx);
+  return advance(story);
+}
+
+/** Play the canonical folk path to a specific scene */
+function playCanonicalTo(story, targetScene) {
+  advance(story); // Epigraph → Scene 1 transition
+
+  if (targetScene <= 1) return;
+  chooseByText(story, 'Войти'); // Skip flashback, enter library
+
+  if (targetScene <= 2) return;
+  chooseByText(story, 'дождь и кирпич'); // Barnes
+
+  if (targetScene <= 3) return;
+  chooseByText(story, 'Давай разберёмся'); // Folk with Alice
+  chooseByText(story, 'земля и грибы'); // Cogumelos
+
+  if (targetScene <= 4) return;
+  chooseByText(story, 'Каждый факт'); // Folk with Gonzo
+  // Right door (no flashback seen → nested choice)
+  chooseByText(story, 'Правая дверь');
+  chooseByText(story, 'Открыть'); // Skip flashback, go to Dan
+
+  if (targetScene <= 5) return;
+  chooseByText(story, 'Расскажи, как рассказывать'); // Folk with Dan
+  chooseByText(story, 'Не сейчас'); // Skip Breus flashback → back to hub → Scene 7
+
+  if (targetScene <= 7) return;
+  chooseByText(story, 'Нет. Эти люди'); // Refuse Breus
+  chooseByText(story, 'Я найду другой путь'); // Other way
+
+  if (targetScene <= 8) return;
+  // Now at Scene 8 choice
+  chooseByText(story, 'Мы справимся'); // Folk
+
+  if (targetScene <= 9) return;
+  // Scene 9 choice
+  chooseByText(story, 'Говори. Что ты видишь'); // Listen (folk)
+
+  if (targetScene <= 10) return;
+  // Scene 10 — final choice available
+}
+
+describe('Story Basics', () => {
   let story;
+  beforeEach(() => { story = new Story(storyJson); });
 
-  beforeEach(() => {
-    story = new Story(storyJson);
-  });
-
-  it('loads story without errors', () => {
+  it('loads without errors', () => {
     expect(story).toBeDefined();
     expect(story.canContinue).toBe(true);
   });
 
-  it('has initial variables set correctly', () => {
+  it('initial variables correct', () => {
     expect(story.variablesState['folk_counter']).toBe(50);
     expect(story.variablesState['current_scene']).toBe(0);
     expect(story.variablesState['alice_trust']).toBe(50);
+    expect(story.variablesState['gonzo_trust']).toBe(50);
+    expect(story.variablesState['dan_trust']).toBe(50);
+    expect(story.variablesState['saw_flashback_stick']).toBe(false);
+    expect(story.variablesState['saw_flashback_young_breus']).toBe(false);
   });
 
-  it('starts at scene 8', () => {
-    // Continue until first CONTINUE tag
-    while (story.canContinue) {
-      story.Continue();
-      if (story.currentTags.includes('CONTINUE')) break;
-    }
+  it('starts with epigraph', () => {
+    const { tags } = advance(story);
+    expect(tags.some((t) => t.includes('SCENE: epigraph'))).toBe(true);
+  });
+});
+
+describe('Hub Navigation', () => {
+  it('library has door choices', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 2);
+    expect(story.variablesState['current_scene']).toBe(2);
+    expect(story.currentChoices.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('visiting Barnes sets flag', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 3);
+    expect(story.variablesState['visited_barnes']).toBe(true);
+  });
+
+  it('visiting all areas triggers scene 7', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 7);
+    expect(story.variablesState['visited_barnes']).toBe(true);
+    expect(story.variablesState['visited_cogumelos']).toBe(true);
+    expect(story.variablesState['visited_retrotech']).toBe(true);
+    expect(story.variablesState['current_scene']).toBe(7);
+  });
+});
+
+describe('Folk/Dragon Choices', () => {
+  it('folk choices increase folk_counter', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 7); // All folk choices
+    // Alice +10, Gonzo +10, Dan +10 = 80
+    expect(story.variablesState['folk_counter']).toBe(80);
+  });
+
+  it('dragon choices decrease folk_counter', () => {
+    const story = new Story(storyJson);
+    advance(story);
+    chooseByText(story, 'Войти');
+    chooseByText(story, 'дождь и кирпич');
+    chooseByText(story, 'У меня мало времени'); // Dragon Alice
+    chooseByText(story, 'земля и грибы');
+    chooseByText(story, 'Всё проверять не получится'); // Dragon Gonzo
+    chooseByText(story, 'Правая дверь');
+    chooseByText(story, 'Открыть');
+    chooseByText(story, 'Мне нужна аудитория'); // Dragon Dan
+    chooseByText(story, 'Не сейчас');
+    // Alice -10, Gonzo -10, Dan -10 = 20
+    expect(story.variablesState['folk_counter']).toBe(20);
+  });
+});
+
+describe('Scene 8', () => {
+  it('scene 8 has 2 choices', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 8);
     expect(story.variablesState['current_scene']).toBe(8);
-    expect(story.variablesState['current_act']).toBe(2);
-  });
-
-  it('has SCENE tag', () => {
-    story.Continue();
-    const allTags = [...story.currentTags];
-    expect(allTags.some((t) => t.startsWith('SCENE:'))).toBe(true);
-  });
-
-  it('reaches choice point with 2 options', () => {
-    while (story.canContinue) {
-      story.Continue();
-    }
     expect(story.currentChoices.length).toBe(2);
     expect(story.currentChoices[0].text).toContain('Мы справимся');
     expect(story.currentChoices[1].text).toContain('план');
   });
 
-  it('folk path increases folk_counter by 5', () => {
-    while (story.canContinue) {
-      story.Continue();
-    }
-    // Choose "Мы справимся. Вместе."
-    story.ChooseChoiceIndex(0);
-    while (story.canContinue) {
-      story.Continue();
-    }
-    expect(story.variablesState['folk_counter']).toBe(55);
+  it('folk path +5, dragon path -5', () => {
+    const s1 = new Story(storyJson);
+    playCanonicalTo(s1, 8);
+    const before = s1.variablesState['folk_counter'];
+    chooseByText(s1, 'Мы справимся');
+    expect(s1.variablesState['folk_counter']).toBe(before + 5);
+
+    const s2 = new Story(storyJson);
+    playCanonicalTo(s2, 8);
+    chooseByText(s2, 'план');
+    expect(s2.variablesState['folk_counter']).toBe(before - 5);
   });
+});
 
-  it('dragon path decreases folk_counter by 5', () => {
-    while (story.canContinue) {
-      story.Continue();
-    }
-    // Choose "План с цифрами"
-    story.ChooseChoiceIndex(1);
-    while (story.canContinue) {
-      story.Continue();
-    }
-    // Dragon path -5 (constructive but still dragon)
-    expect(story.variablesState['folk_counter']).toBe(45);
-  });
-
-  it('folk path has FEEDBACK: folk tag', () => {
-    while (story.canContinue) {
-      story.Continue();
-    }
-    story.ChooseChoiceIndex(0);
-    const allTags = [];
-    while (story.canContinue) {
-      story.Continue();
-      allTags.push(...story.currentTags);
-    }
-    expect(allTags.some((t) => t.includes('FEEDBACK: folk'))).toBe(true);
-  });
-
-  it('dragon path has FEEDBACK: dragon tag', () => {
-    while (story.canContinue) {
-      story.Continue();
-    }
-    story.ChooseChoiceIndex(1);
-    const allTags = [];
-    while (story.canContinue) {
-      story.Continue();
-      allTags.push(...story.currentTags);
-    }
-    expect(allTags.some((t) => t.includes('FEEDBACK: dragon'))).toBe(true);
-  });
-
-  it('both paths have LAMP tag', () => {
-    // Folk path
-    const storyFolk = new Story(storyJson);
-    while (storyFolk.canContinue) { storyFolk.Continue(); }
-    storyFolk.ChooseChoiceIndex(0);
-    const folkTags = [];
-    while (storyFolk.canContinue) {
-      storyFolk.Continue();
-      folkTags.push(...storyFolk.currentTags);
-    }
-    expect(folkTags.some((t) => t.startsWith('LAMP:'))).toBe(true);
-
-    // Dragon path
-    const storyDragon = new Story(storyJson);
-    while (storyDragon.canContinue) { storyDragon.Continue(); }
-    storyDragon.ChooseChoiceIndex(1);
-    const dragonTags = [];
-    while (storyDragon.canContinue) {
-      storyDragon.Continue();
-      dragonTags.push(...storyDragon.currentTags);
-    }
-    expect(dragonTags.some((t) => t.startsWith('LAMP:'))).toBe(true);
-  });
-
-  it('both paths reach SCENE_END: 8', () => {
-    // Folk path
-    const storyFolk = new Story(storyJson);
-    while (storyFolk.canContinue) { storyFolk.Continue(); }
-    storyFolk.ChooseChoiceIndex(0);
-    const folkTags = [];
-    while (storyFolk.canContinue) {
-      storyFolk.Continue();
-      folkTags.push(...storyFolk.currentTags);
-    }
-    expect(folkTags.some((t) => t === 'SCENE_END: 8')).toBe(true);
-
-    // Dragon path
-    const storyDragon = new Story(storyJson);
-    while (storyDragon.canContinue) { storyDragon.Continue(); }
-    storyDragon.ChooseChoiceIndex(1);
-    const dragonTags = [];
-    while (storyDragon.canContinue) {
-      storyDragon.Continue();
-      dragonTags.push(...storyDragon.currentTags);
-    }
-    expect(dragonTags.some((t) => t === 'SCENE_END: 8')).toBe(true);
-  });
-
-  it('story ends (no infinite loops)', () => {
-    while (story.canContinue) {
-      story.Continue();
-    }
-    story.ChooseChoiceIndex(0);
-    while (story.canContinue) {
-      story.Continue();
+describe('Endings', () => {
+  it('story ends after credits', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 10);
+    chooseByText(story, 'Отказать');
+    // Run until complete end
+    let safety = 0;
+    while (story.canContinue || story.currentChoices.length > 0) {
+      if (story.canContinue) story.Continue();
+      else story.ChooseChoiceIndex(0);
+      if (++safety > 500) break;
     }
     expect(story.canContinue).toBe(false);
     expect(story.currentChoices.length).toBe(0);
+    expect(safety).toBeLessThan(500);
   });
 
-  describe('with high alice_trust', () => {
-    it('shows Alice speaking in folk path', () => {
-      story.variablesState['alice_trust'] = 60;
-      const allText = [];
-      while (story.canContinue) {
-        allText.push(story.Continue());
-      }
-      story.ChooseChoiceIndex(0);
-      while (story.canContinue) {
-        allText.push(story.Continue());
-      }
-      const fullText = allText.join(' ');
-      expect(fullText).toContain('Let me think');
-    });
+  it('final_choice variable is set', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 10);
+    chooseByText(story, 'Отказать');
+    advance(story);
+    expect(story.variablesState['final_choice']).toBe('refuse');
+  });
+});
+
+describe('Flashbacks', () => {
+  it('stick flashback sets flag', () => {
+    const story = new Story(storyJson);
+    advance(story);
+    chooseByText(story, 'Вспомнить');
+    expect(story.variablesState['saw_flashback_stick']).toBe(true);
   });
 
-  describe('with low alice_trust', () => {
-    it('Alice stays silent', () => {
-      story.variablesState['alice_trust'] = 40;
-      const allText = [];
-      while (story.canContinue) {
-        allText.push(story.Continue());
-      }
-      story.ChooseChoiceIndex(0);
-      while (story.canContinue) {
-        allText.push(story.Continue());
-      }
-      const fullText = allText.join(' ');
-      expect(fullText).not.toContain('Let me think');
-      expect(fullText).toContain('молчала');
-    });
+  it('young breus flashback sets flag', () => {
+    const story = new Story(storyJson);
+    advance(story);
+    chooseByText(story, 'Войти');
+    chooseByText(story, 'дождь и кирпич');
+    chooseByText(story, 'Давай разберёмся');
+    chooseByText(story, 'земля и грибы');
+    chooseByText(story, 'Каждый факт');
+    chooseByText(story, 'Правая дверь');
+    chooseByText(story, 'Открыть');
+    chooseByText(story, 'Расскажи, как рассказывать');
+    chooseByText(story, 'Вспомнить');
+    expect(story.variablesState['saw_flashback_young_breus']).toBe(true);
+  });
+});
+
+describe('Trust System', () => {
+  it('folk alice choice increases trust', () => {
+    const story = new Story(storyJson);
+    playCanonicalTo(story, 3);
+    chooseByText(story, 'Давай разберёмся');
+    expect(story.variablesState['alice_trust']).toBe(60);
+  });
+
+  it('dragon alice choice decreases trust', () => {
+    const story = new Story(storyJson);
+    advance(story);
+    chooseByText(story, 'Войти');
+    chooseByText(story, 'дождь и кирпич');
+    chooseByText(story, 'У меня мало времени');
+    expect(story.variablesState['alice_trust']).toBe(45);
   });
 });

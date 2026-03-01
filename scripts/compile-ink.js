@@ -25,8 +25,8 @@ async function compile() {
 
   const mainSource = readFileSync(mainInk, 'utf-8');
 
-  // Provide file handler for INCLUDEs
-  const compiler = new Compiler(mainSource, {
+  // Provide file handler for INCLUDEs and error handler
+  const compilerOptions = {
     sourceFilename: 'main.ink',
     fileHandler: {
       ResolveInkFilename(filename) {
@@ -41,7 +41,17 @@ async function compile() {
         return readFileSync(filePath, 'utf-8');
       },
     },
-  });
+    errorHandler: (message, type) => {
+      if (type === 0) { // ErrorType.Author
+        console.error(`INK ERROR: ${message}`);
+      } else if (type === 1) { // ErrorType.Warning
+        console.warn(`INK WARNING: ${message}`);
+      } else {
+        console.error(`INK: ${message}`);
+      }
+    },
+  };
+  const compiler = new Compiler(mainSource, compilerOptions);
 
   const story = compiler.Compile();
 
