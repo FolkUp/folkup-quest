@@ -1,8 +1,7 @@
 /* FolkUp Quest — Typography
    Reading rhythm optimized for long-form narrative text */
 
-/* Self-hosted Google Fonts (GDPR compliant — no external requests) */
-@import url('/fonts/fonts.css');
+/* Self-hosted Google Fonts — loaded via <link> in index.html to avoid @import waterfall */
 
 body {
   font-family: var(--font-body);

@@ -38,8 +38,24 @@ async function init() {
     return;
   }
 
-  const storyJson = await response.text();
-  const story = new Story(storyJson);
+  let storyJson;
+  try {
+    storyJson = await response.text();
+  } catch {
+    loadingP.textContent = 'Не удалось загрузить историю. Обновите страницу.';
+    loadingP.style.color = 'var(--color-bordeaux)';
+    return;
+  }
+
+  let story;
+  try {
+    story = new Story(storyJson);
+  } catch {
+    loadingP.textContent = 'Ошибка данных. Очистите кеш и обновите страницу.';
+    loadingP.style.color = 'var(--color-bordeaux)';
+    return;
+  }
+
   engine = InkEngine.fromStory(story);
   renderer = new Renderer(document.getElementById('game'));
 
@@ -98,38 +114,49 @@ function startGame(startScreen, storyEl) {
 }
 
 function advance() {
-  const result = engine.continueToBreak();
-  const hasSceneChange = result.tags.some((t) => t.startsWith('SCENE:'));
+  try {
+    const result = engine.continueToBreak();
+    const hasSceneChange = result.tags.some((t) => t.startsWith('SCENE:'));
 
-  const render = () => {
-    if (result.paragraphs.length > 0) {
-      renderer.showText(result.paragraphs, result.tags);
-    }
+    const render = () => {
+      if (result.paragraphs.length > 0) {
+        renderer.showText(result.paragraphs, result.tags);
+      }
 
-    if (result.choices.length > 0) {
-      renderer.showChoices(result.choices, (index) => {
-        engine.choose(index);
-        saveGame();
-        setTimeout(() => {
+      if (result.choices.length > 0) {
+        renderer.showChoices(result.choices, (index) => {
+          engine.choose(index);
+          saveGame();
+          setTimeout(() => {
+            advance();
+            renderer.scrollToBottom();
+          }, 400);
+        });
+      } else if (engine.canContinue()) {
+        renderer.showContinue(() => {
           advance();
           renderer.scrollToBottom();
-        }, 400);
-      });
-    } else if (engine.canContinue()) {
-      renderer.showContinue(() => {
-        advance();
-        renderer.scrollToBottom();
-      });
-    } else {
-      renderer.showEnd(result.tags);
-      saveGame();
-    }
-  };
+        });
+      } else {
+        renderer.showEnd(result.tags);
+        saveGame();
+      }
+    };
 
-  if (hasSceneChange) {
-    renderer.transitionScene(render);
-  } else {
-    render();
+    if (hasSceneChange) {
+      renderer.transitionScene(render);
+    } else {
+      render();
+    }
+  } catch (err) {
+    console.error('Story error:', err);
+    const storyEl = document.getElementById('story');
+    if (storyEl) {
+      const errorP = document.createElement('p');
+      errorP.textContent = 'Произошла ошибка. Попробуйте начать заново.';
+      errorP.style.color = 'var(--color-bordeaux)';
+      storyEl.appendChild(errorP);
+    }
   }
 }
 

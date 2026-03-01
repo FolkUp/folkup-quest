@@ -9,6 +9,13 @@ import {
   getEndingName,
 } from '../engine/moral-system.js';
 
+/** Escape HTML entities to prevent XSS */
+function escapeHtml(text) {
+  const el = document.createElement('span');
+  el.textContent = text;
+  return el.innerHTML;
+}
+
 export class Renderer {
   /** @param {HTMLElement} container */
   constructor(container) {
@@ -82,8 +89,9 @@ export class Renderer {
    * @returns {string}
    */
   formatText(text) {
-    // Convert *text* to <em>text</em>
-    return text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    // Escape HTML first, then convert *text* to <em>text</em>
+    const escaped = escapeHtml(text);
+    return escaped.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   }
 
   /**
@@ -96,13 +104,16 @@ export class Renderer {
     this.choicesEl.classList.add('visible');
     this.hideContinue();
 
+    let chosen = false;
+
     choices.forEach((choice, i) => {
       const btn = document.createElement('button');
       btn.className = 'choice-btn';
       btn.textContent = choice.text;
       btn.style.animationDelay = `${i * 0.1}s`;
       btn.addEventListener('click', () => {
-        // Disable all buttons after click
+        if (chosen) return;
+        chosen = true;
         this.choicesEl.querySelectorAll('.choice-btn').forEach((b) => {
           b.disabled = true;
           b.classList.add('disabled');
@@ -131,12 +142,19 @@ export class Renderer {
     this.continueEl.classList.add('visible');
     this.hideChoices();
 
-    // Remove old listeners
+    // Remove old listeners via cloneNode
     const newBtn = this.continueEl.cloneNode(true);
     this.continueEl.replaceWith(newBtn);
     this.continueEl = newBtn;
 
-    newBtn.addEventListener('click', onContinue);
+    newBtn.disabled = false;
+    let clicked = false;
+    newBtn.addEventListener('click', () => {
+      if (clicked) return;
+      clicked = true;
+      newBtn.disabled = true;
+      onContinue();
+    });
   }
 
   /** Hide continue button */
@@ -181,17 +199,25 @@ export class Renderer {
       if (ending) this.currentEnding = ending;
     }
 
-    const endingLabel = this.currentEnding
-      ? `<p class="end-label">${getEndingName(this.currentEnding)}</p>`
-      : '';
-
     const endEl = document.createElement('div');
     endEl.className = 'story-end';
-    endEl.innerHTML = `
-      <div class="end-divider"></div>
-      ${endingLabel}
-      <p class="end-text">Конец</p>
-    `;
+
+    const divider = document.createElement('div');
+    divider.className = 'end-divider';
+    endEl.appendChild(divider);
+
+    if (this.currentEnding) {
+      const label = document.createElement('p');
+      label.className = 'end-label';
+      label.textContent = getEndingName(this.currentEnding);
+      endEl.appendChild(label);
+    }
+
+    const endText = document.createElement('p');
+    endText.className = 'end-text';
+    endText.textContent = 'Конец';
+    endEl.appendChild(endText);
+
     this.storyEl.appendChild(endEl);
     this.showFooter();
   }
