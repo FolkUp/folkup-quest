@@ -27,6 +27,16 @@ body {
   color: var(--color-text-secondary);
 }
 
+/* Epigraph — book-style dedication */
+#story[data-scene="epigraph"] .story-paragraph {
+  text-align: right;
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+}
+
 /* Dialogue */
 .story-paragraph:has(> :first-child) {
   text-indent: 0;

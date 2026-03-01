@@ -40,6 +40,13 @@ export class Renderer {
     const sceneTag = tags.find((t) => t.startsWith('SCENE:'));
     const actTag = tags.find((t) => t.startsWith('ACT:'));
 
+    if (sceneTag) {
+      const scene = sceneTag.split(':')[1]?.trim();
+      if (scene) this.storyEl.setAttribute('data-scene', scene);
+    } else {
+      this.storyEl.removeAttribute('data-scene');
+    }
+
     if (actTag) {
       const act = actTag.split(':')[1]?.trim();
       if (act) {
