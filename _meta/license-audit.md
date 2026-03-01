@@ -45,6 +45,14 @@
 |-------|--------|---------|------------|-------|
 | Favicon | FolkUp brand asset | Proprietary (FolkUp) | Yes | Own brand |
 | OG image | FolkUp brand asset | Proprietary (FolkUp) | Yes | Own brand |
+| PWA icon 192 | FolkUp brand asset | Proprietary (FolkUp) | Yes | Generated from favicon design |
+| PWA icon 512 | FolkUp brand asset | Proprietary (FolkUp) | Yes | Generated from favicon design |
+
+## Analytics
+
+| Service | License/Terms | GDPR | Notes |
+|---------|--------------|------|-------|
+| Cloudflare Web Analytics | Free, CF ToS | Yes — no cookies, no PII | Privacy-first, cookieless |
 
 ## Compliance Check
 
@@ -56,3 +64,4 @@
 - [x] SPDX identifiers in README
 - [x] LICENSE file present
 - [x] LICENSE-CONTENT file present
+- [x] Analytics: cookieless, GDPR compliant (Cloudflare Web Analytics)

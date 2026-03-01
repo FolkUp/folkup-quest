@@ -232,6 +232,7 @@ body {
 #footer-nav {
   display: none;
   justify-content: center;
+  flex-wrap: wrap;
   gap: var(--space-lg);
   padding: var(--space-lg) 0;
   border-top: 1px solid var(--color-divider);
@@ -240,6 +241,14 @@ body {
 
 #footer-nav.visible {
   display: flex;
+}
+
+.footer-disclaimer {
+  width: 100%;
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
 }
 
 /* Start screen */

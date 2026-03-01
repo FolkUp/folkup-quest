@@ -6,6 +6,13 @@ import { Story } from 'inkjs';
 import { InkEngine } from './engine/ink-engine.js';
 import { SaveManager } from './engine/save-manager.js';
 import { Renderer } from './ui/renderer.js';
+import {
+  initAnalytics,
+  trackGameStart,
+  trackChoiceMade,
+  trackEndingReached,
+  trackGameCompleted,
+} from './utils/analytics.js';
 
 let engine = null;
 let renderer = null;
@@ -59,6 +66,14 @@ async function init() {
   engine = InkEngine.fromStory(story);
   renderer = new Renderer(document.getElementById('game'));
 
+  // Initialize analytics
+  initAnalytics();
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  }
+
   // Loading complete — hide loading text
   loadingP.remove();
 
@@ -80,6 +95,7 @@ async function init() {
         engine.reset();
         SaveManager.clear();
       }
+      trackGameStart(false);
       startGame(startScreen, storyEl);
     });
   }
@@ -87,6 +103,7 @@ async function init() {
   newGameBtn.addEventListener('click', () => {
     engine.reset();
     SaveManager.clear();
+    trackGameStart(true);
     startGame(startScreen, storyEl);
   });
 
@@ -126,6 +143,7 @@ function advance() {
       if (result.choices.length > 0) {
         renderer.showChoices(result.choices, (index) => {
           engine.choose(index);
+          trackChoiceMade(index, engine.getVariable('current_scene'));
           saveGame();
           setTimeout(() => {
             advance();
@@ -138,6 +156,13 @@ function advance() {
           renderer.scrollToBottom();
         });
       } else {
+        // Extract ending from tags
+        const endingTag = result.tags.find((t) => t.startsWith('ENDING:'));
+        const ending = endingTag ? endingTag.split(':')[1]?.trim() : null;
+        if (ending) {
+          trackEndingReached(ending);
+          trackGameCompleted(ending, engine.getVariable('folk_counter'));
+        }
         renderer.showEnd(result.tags);
         saveGame();
       }

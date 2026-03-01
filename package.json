@@ -11,7 +11,8 @@
     "compile-ink": "node scripts/compile-ink.js",
     "validate": "node scripts/validate.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate-icons": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/generate-pwa-icons.ps1"
   },
   "dependencies": {
     "inkjs": "^2.3.0"

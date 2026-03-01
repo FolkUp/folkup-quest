@@ -1,0 +1,29 @@
+{
+  "name": "FolkUp Quest",
+  "short_name": "Quest",
+  "description": "Интерактивный текстовый квест. 35 минут. 9 выборов. 3 концовки.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1714",
+  "theme_color": "#1a1714",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

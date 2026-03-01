@@ -8,6 +8,7 @@ import {
   parseEndingTag,
   getEndingName,
 } from '../engine/moral-system.js';
+import { trackActChanged } from '../utils/analytics.js';
 
 /** Escape HTML entities to prevent XSS */
 function escapeHtml(text) {
@@ -44,6 +45,7 @@ export class Renderer {
       if (act) {
         document.documentElement.setAttribute('data-act', act);
         this.updateProgress(act);
+        trackActChanged(act);
       }
     }
 
