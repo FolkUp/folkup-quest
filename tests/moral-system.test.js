@@ -5,6 +5,7 @@ import {
   parseFeedbackTag,
   parseLampTag,
   parseEndingTag,
+  parseAudioTag,
 } from '../src/engine/moral-system.js';
 
 describe('determineEnding', () => {
@@ -123,5 +124,26 @@ describe('parseEndingTag', () => {
   });
   it('returns null for invalid ending', () => {
     expect(parseEndingTag('ENDING: invalid')).toBeNull();
+  });
+});
+
+describe('parseAudioTag', () => {
+  it('parses track name', () => {
+    expect(parseAudioTag('AUDIO: act1-dark')).toBe('act1-dark');
+  });
+  it('parses stop command', () => {
+    expect(parseAudioTag('AUDIO: stop')).toBe('stop');
+  });
+  it('returns null for non-audio tag', () => {
+    expect(parseAudioTag('SCENE: test')).toBeNull();
+  });
+  it('is case insensitive', () => {
+    expect(parseAudioTag('Audio: Act2-Tension')).toBe('act2-tension');
+  });
+  it('handles hyphens in track name', () => {
+    expect(parseAudioTag('AUDIO: act3-resolution')).toBe('act3-resolution');
+  });
+  it('returns null for empty value', () => {
+    expect(parseAudioTag('AUDIO: ')).toBeNull();
   });
 });

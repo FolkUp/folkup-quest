@@ -1,6 +1,6 @@
 # License Audit — FolkUp Quest
 
-> Last updated: 2026-03-01
+> Last updated: 2026-03-02
 
 ## Project Licenses
 
@@ -23,6 +23,7 @@
 |---------|---------|---------|------------|-------|
 | vite | ^6.2.0 | MIT | Yes | Build tool, not included in output |
 | vitest | ^4.0.18 | MIT | Yes | Test runner, not included in output |
+| node-id3 | ^0.2.6 | MIT | Yes | MP3 ID3 tagging, dev only |
 
 ## Fonts (self-hosted, GDPR compliant)
 
@@ -35,9 +36,9 @@
 
 | Asset | Source | License | Compatible | Notes |
 |-------|--------|---------|------------|-------|
-| Ambient track | TBD | Royalty-free | TBD | To be sourced in Phase 5 |
-| Click SFX | TBD | Royalty-free | TBD | To be sourced in Phase 5 |
-| Transition SFX | TBD | Royalty-free | TBD | To be sourced in Phase 5 |
+| act1-dark.mp3 | Stable Audio 2.5 (Stability AI) via Replicate | Stability AI Community License — user owns outputs, commercial OK (<$1M revenue) | Yes | Act 1 dark ambient, 120s, trained on fully licensed dataset |
+| act2-tension.mp3 | Stable Audio 2.5 (Stability AI) via Replicate | Stability AI Community License — user owns outputs, commercial OK (<$1M revenue) | Yes | Act 2 tension ambient, 120s, trained on fully licensed dataset |
+| act3-resolution.mp3 | Stable Audio 2.5 (Stability AI) via Replicate | Stability AI Community License — user owns outputs, commercial OK (<$1M revenue) | Yes | Act 3 resolution ambient, 120s, trained on fully licensed dataset |
 
 ## Images
 
@@ -48,6 +49,7 @@
 | PWA icon 192 | FolkUp brand asset | Proprietary (FolkUp) | Yes | Generated from favicon design |
 | PWA icon 512 | FolkUp brand asset | Proprietary (FolkUp) | Yes | Generated from favicon design |
 | Scene backgrounds (16 images) | FLUX.1 Schnell (Black Forest Labs) via Replicate | Apache 2.0 — user owns outputs | Yes | No attribution required; model outputs are freely usable |
+| Character illustrations (10 images) | FLUX.1 Schnell (Black Forest Labs) via Replicate | Apache 2.0 — user owns outputs | Yes | Portrait 2:3, WebP format, same license as scene backgrounds |
 
 ## Analytics
 
@@ -62,7 +64,7 @@
 - [x] No proprietary dependencies
 - [x] All fonts self-hosted (GDPR)
 - [x] Font OFL 1.1 license text included (public/fonts/OFL.txt)
-- [ ] Audio licenses documented before deployment
+- [x] Audio: Stable Audio 2.5, Stability AI Community License, user owns outputs, commercial OK (<$1M)
 - [x] SPDX identifiers in README
 - [x] LICENSE file present
 - [x] LICENSE-CONTENT file present

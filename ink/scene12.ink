@@ -6,6 +6,7 @@
 ~ current_act = 3
 
 # SCENE: credits
+# AUDIO: stop
 
 — FolkUp Quest —
 

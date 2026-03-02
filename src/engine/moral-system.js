@@ -75,3 +75,13 @@ export function parseEndingTag(tag) {
   const match = tag.match(/^ENDING:\s*(lantern|bridge|chair)$/i);
   return match ? match[1].toLowerCase() : null;
 }
+
+/**
+ * Parse audio tag from Ink
+ * @param {string} tag — e.g. "AUDIO: act1-dark" or "AUDIO: stop"
+ * @returns {string|null} — track name or 'stop', or null if not an audio tag
+ */
+export function parseAudioTag(tag) {
+  const match = tag.match(/^AUDIO:\s*([\w-]+)$/i);
+  return match ? match[1].toLowerCase() : null;
+}

@@ -6,6 +6,7 @@ import {
   parseFeedbackTag,
   parseLampTag,
   parseEndingTag,
+  parseAudioTag,
   getEndingName,
 } from '../engine/moral-system.js';
 import { EndingTracker } from '../engine/ending-tracker.js';
@@ -24,8 +25,11 @@ function escapeHtml(text) {
 }
 
 export class Renderer {
-  /** @param {HTMLElement} container */
-  constructor(container) {
+  /**
+   * @param {HTMLElement} container
+   * @param {import('../engine/audio-manager.js').AudioManager} [audioManager]
+   */
+  constructor(container, audioManager = null) {
     this.container = container;
     this.storyEl = container.querySelector('#story');
     this.choicesEl = container.querySelector('#choices');
@@ -36,6 +40,7 @@ export class Renderer {
     this.sidebarEl = container.querySelector('#sidebar');
     this.sidebarImgEl = container.querySelector('.sidebar-illustration');
     this.gameContentEl = container.querySelector('.game-content');
+    this.audioManager = audioManager;
     this.currentCharacter = null;
     this._sidebarTimeout = null;
     this.currentEnding = null;
@@ -107,6 +112,10 @@ export class Renderer {
       const lamp = parseLampTag(tag);
       if (lamp) {
         this.setLampState(lamp);
+      }
+      const audio = parseAudioTag(tag);
+      if (audio && this.audioManager) {
+        audio === 'stop' ? this.audioManager.stop() : this.audioManager.play(audio);
       }
     });
 

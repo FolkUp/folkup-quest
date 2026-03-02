@@ -44,9 +44,35 @@ film grain texture, wide composition, no text, no people faces.
 | 11c: Кресло | `scene11c-chair.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
 | 12: Credits | `scene12-credits.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
 
+## Character Illustrations (Sidebar)
+
+| # | ID | Файл | Источник | Лицензия | Статус |
+|---|-----|------|----------|----------|--------|
+| 1 | arni | `char-arni.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 2 | alice | `char-alice.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 3 | gonzo | `char-gonzo.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 4 | dan | `char-dan.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 5 | breus-young | `char-breus-young.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 6 | breus | `char-breus.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 7 | arni-mirror | `char-arni-mirror.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 8 | comandante | `char-comandante.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 9 | team | `char-team.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+| 10 | chair | `char-chair.webp` | FLUX.1 Schnell | Apache 2.0 (user owns output) | pending |
+
+### Character Style prefix
+
+```
+Dark atmospheric portrait, Caravaggio lighting, Villeneuve color grading,
+muted cinematic palette with bordeaux and sage accents, film grain texture,
+moody, painterly, no text.
+```
+
++ unique character suffix. Aspect ratio: 2:3 (portrait, 640x960). Format: WebP quality 80.
+
 ## Workflow
 
-1. Генерация 3 вариантов на сцену через `scripts/generate-scenes.js`
-2. Ревью вариантов → выбор лучшего
-3. Копия в `public/images/` с финальным именем
-4. CSS backgrounds через `styles/_scenes.css`
+1. **Scenes:** Генерация 3 вариантов на сцену через `scripts/generate-scenes.js`
+2. **Characters:** Генерация 3 вариантов на персонажа через `scripts/generate-characters.js`
+3. Ревью вариантов → выбор лучшего
+4. Копия в `public/images/` с финальным именем
+5. CSS backgrounds через `styles/_scenes.css`, sidebar через `src/ui/character-images.js`

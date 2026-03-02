@@ -6,6 +6,7 @@ import { Story } from 'inkjs';
 import { InkEngine } from './engine/ink-engine.js';
 import { SaveManager } from './engine/save-manager.js';
 import { Renderer } from './ui/renderer.js';
+import { AudioManager } from './engine/audio-manager.js';
 import {
   initAnalytics,
   trackGameStart,
@@ -16,6 +17,7 @@ import {
 
 let engine = null;
 let renderer = null;
+let audioManager = null;
 
 async function init() {
   const startScreen = document.getElementById('start-screen');
@@ -64,7 +66,10 @@ async function init() {
   }
 
   engine = InkEngine.fromStory(story);
-  renderer = new Renderer(document.getElementById('game'));
+  if (AudioManager.isSupported()) {
+    audioManager = new AudioManager();
+  }
+  renderer = new Renderer(document.getElementById('game'), audioManager);
 
   // Initialize analytics
   initAnalytics();
@@ -114,6 +119,14 @@ function startGame(startScreen, storyEl) {
   startScreen.style.display = 'none';
   storyEl.style.display = '';
 
+  // Unlock audio on user gesture
+  audioManager?.unlock();
+
+  // Create mute button
+  if (audioManager) {
+    createMuteButton(document.getElementById('game'));
+  }
+
   // Show restart button
   const restartBtn = document.getElementById('restart-btn');
   if (restartBtn) {
@@ -128,6 +141,29 @@ function startGame(startScreen, storyEl) {
   }
 
   advance();
+}
+
+function createMuteButton(container) {
+  const btn = document.createElement('button');
+  btn.className = 'mute-btn';
+  btn.type = 'button';
+  btn.setAttribute('aria-pressed', audioManager.muted ? 'true' : 'false');
+  btn.setAttribute('aria-label', audioManager.muted ? 'Включить звук' : 'Выключить звук');
+
+  const iconOn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+  const iconOff = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+
+  btn.innerHTML = audioManager.muted ? iconOff : iconOn;
+
+  btn.addEventListener('click', () => {
+    audioManager.toggleMute();
+    const muted = audioManager.muted;
+    btn.setAttribute('aria-pressed', muted ? 'true' : 'false');
+    btn.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
+    btn.innerHTML = muted ? iconOff : iconOn;
+  });
+
+  container.appendChild(btn);
 }
 
 function advance() {

@@ -15,6 +15,10 @@ vi.mock('../src/engine/moral-system.js', () => ({
     const m = tag.match(/^ENDING:\s*(lantern|bridge|chair)$/i);
     return m ? m[1].toLowerCase() : null;
   },
+  parseAudioTag: (tag) => {
+    const m = tag.match(/^AUDIO:\s*([\w-]+)$/i);
+    return m ? m[1].toLowerCase() : null;
+  },
   getEndingName: (e) => ({ lantern: 'Фонарь', bridge: 'Мост', chair: 'Кресло' }[e] || e),
 }));
 
@@ -719,6 +723,36 @@ describe('Renderer', () => {
       renderer.showText(['Lantern text'], ['ENDING: lantern']);
       expect(renderer.storyEl.getAttribute('data-scene')).toBe('ending');
       expect(renderer.storyEl.getAttribute('data-ending')).toBe('lantern');
+    });
+  });
+
+  // ── Audio integration ────────────────────────────────────────
+
+  describe('audio integration', () => {
+    it('calls audioManager.play on AUDIO tag', () => {
+      const mockAudio = { play: vi.fn(), stop: vi.fn() };
+      const r = new Renderer(game, mockAudio);
+      r.showText(['Text'], ['AUDIO: act1-dark']);
+      expect(mockAudio.play).toHaveBeenCalledWith('act1-dark');
+    });
+
+    it('calls audioManager.stop on AUDIO: stop tag', () => {
+      const mockAudio = { play: vi.fn(), stop: vi.fn() };
+      const r = new Renderer(game, mockAudio);
+      r.showText(['Text'], ['AUDIO: stop']);
+      expect(mockAudio.stop).toHaveBeenCalled();
+      expect(mockAudio.play).not.toHaveBeenCalled();
+    });
+
+    it('does not error when audioManager is null', () => {
+      const r = new Renderer(game);
+      expect(() => r.showText(['Text'], ['AUDIO: act1-dark'])).not.toThrow();
+    });
+
+    it('stores audioManager reference in constructor', () => {
+      const mockAudio = { play: vi.fn(), stop: vi.fn() };
+      const r = new Renderer(game, mockAudio);
+      expect(r.audioManager).toBe(mockAudio);
     });
   });
 
