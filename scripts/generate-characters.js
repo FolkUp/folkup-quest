@@ -28,43 +28,43 @@ const CHAR_STYLE = `Dark atmospheric portrait, Caravaggio lighting, Villeneuve c
 const CHARACTERS = [
   {
     id: 'arni',
-    suffix: 'Thin wiry man mid-30s, long ponytail, short beard, worn leather jacket high collar, slouched posture, hands in pockets, warm amber lamplight on face, Setubal waterfront evening',
+    suffix: 'Thin wiry man mid-30s, long hair tied in ponytail, short beard, worn leather jacket with high raised collar hiding his neck, slouched posture, hands in pockets, face partially in shadow only jaw and mouth lit, brass key on leather cord barely visible under jacket. Warm amber lamplight, Setubal waterfront evening',
   },
   {
     id: 'alice',
-    suffix: 'Young woman, dark hair pulled back smoothly, unnaturally perfect posture, symmetric face, fixed analytical gaze, holding notebook and pencil, sage green accent light on notebook, Barnes park twilight',
+    suffix: 'Young woman Rooney Mara type, dark hair pulled back perfectly smooth not a single stray hair, unnaturally perfect rigid posture, perfectly symmetric face, fixed analytical gaze with something subtly uncanny about her perfection, holding wet-brick-red notebook and pencil with fingers in precise identical position, sage green accent light on notebook. Barnes park twilight',
   },
   {
     id: 'gonzo',
-    suffix: 'Thin nervous man in dark hooded coat, face hidden by hood and aviator sunglasses with white highlights, multiple screens glowing behind, Portuguese cork oak forest at night, bordeaux accent light',
+    suffix: 'Thin nervous man with wiry restless energy, dark hooded long coat over hoodie, face completely hidden by deep hood shadow and aviator sunglasses with two bright white highlight reflections, three glowing monitors behind him like a data cockpit, Portuguese cork oak forest at night, bordeaux accent light',
   },
   {
     id: 'dan',
-    suffix: 'Thin man with African features and light skin, wide-brim blues hat, acoustic guitar in hands, relaxed posture, Chicago kitchen background, vinyl records on wall, warm amber light',
+    suffix: 'Slim man with long limbs, broad nose, full lips, strong jaw, tightly curled pale blond afro hair peeking under hat, very pale freckled pinkish-white skin like a redhead but with distinctly Black African bone structure and facial features, pale blue eyes, wide-brim blues hat always on, acoustic guitar in hands, relaxed loose posture in wrinkled matte clothes, Chicago kitchen background with vinyl records on wall and half-assembled robot on table, warm amber light, alive expressive eyes',
   },
   {
     id: 'breus-young',
-    suffix: 'Man early 30s, worn jeans and black turtleneck, open palms gesture, friendly smile, startup office with plastic chairs behind, warm artificial light, energetic',
+    suffix: 'Man early 30s same thin build as arni but different face, deliberately worn jeans and black turtleneck like Steve Jobs calculated costume, open palms gesture leaning forward eagerly like we are friends, looking straight into eyes with white highlights in pupils, friendly but something calculated underneath, startup office with plastic chairs and twenty people behind, warm artificial light',
   },
   {
     id: 'breus',
-    suffix: 'Man mid-40s, expensive jacket that looks simple, straight back, distance in eyes, wet gleam on palms, dark office, cold blue-white accent, city lights through glass behind',
+    suffix: 'Man mid-40s same build as arni but drier harder sharper, face dry sharp groomed with cheekbones sharper than a blade, expensive jacket that looks deceptively simple over expensive unworn jeans, straight stiff back, eyes that glitter but do not burn with cold distance, hands in pockets with subtle wet sheen on palms, dark office shot from slightly below looking up at him, cold blue-white accent, city lights through glass behind',
   },
   {
     id: 'arni-mirror',
-    suffix: 'Same thin man as arni but in leather executive chair, glass office with bay view, different eyes — dead confident gaze, reflection in dark window, split warm/cold lighting',
+    suffix: 'Same thin wiry man as arni sitting in leather executive chair, glass corner office with bay view, same face same hands same mole on wrist but completely different dead confident corporate eyes, reflection in dark window showing city lights and luxury car below, split warm and cold lighting dividing his face, unsettling transformation',
   },
   {
     id: 'comandante',
-    suffix: 'Same man as arni transformed: short haircut, clean-shaven, same leather jacket with collar down, brass key visible on cord over jacket, straight back, face in warm light, determined',
+    suffix: 'Same man as arni fully transformed: short neat haircut clean-shaven revealing full face in warm light with no shadows, same worn leather jacket but collar turned down and open, brass key on leather cord prominently visible hanging over jacket front, straight confident back, determined focused expression, earned authority not borrowed',
   },
   {
     id: 'team',
-    suffix: 'Four silhouettes standing together against warm lamp glow, varied heights and postures, library shelves behind, warm amber and sage light, no faces, unity composition',
+    suffix: 'Four diverse silhouettes standing together: one with ponytail and raised collar, one rigid with notebook, one in hood with sunglasses, one in wide-brim hat holding guitar, against warm lamp glow, library shelves behind, warm amber and sage light, no faces visible, unity composition',
   },
   {
     id: 'chair',
-    suffix: 'Empty expensive leather executive chair, glass office, bay view with city lights, cold blue-white light, the chair is center frame, ominous absence, no people',
+    suffix: 'Empty expensive leather executive chair, glass corner office, bay view with city lights far below, cold blue-white light, chair perfectly centered in frame, ominous absence suggesting someone powerful just left, no people, oppressive silence',
   },
 ];
 
