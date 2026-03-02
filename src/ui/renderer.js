@@ -8,6 +8,7 @@ import {
   parseEndingTag,
   getEndingName,
 } from '../engine/moral-system.js';
+import { EndingTracker } from '../engine/ending-tracker.js';
 import { trackActChanged } from '../utils/analytics.js';
 
 /** Escape HTML entities to prevent XSS */
@@ -195,7 +196,7 @@ export class Renderer {
   }
 
   /**
-   * Show "end of story" screen
+   * Show "end of story" screen with replay encouragement and share
    * @param {string[]} [tags=[]] — tags from the final passage
    */
   showEnd(tags = []) {
@@ -206,6 +207,11 @@ export class Renderer {
     for (const tag of tags) {
       const ending = parseEndingTag(tag);
       if (ending) this.currentEnding = ending;
+    }
+
+    // Record ending
+    if (this.currentEnding) {
+      EndingTracker.record(this.currentEnding);
     }
 
     const endEl = document.createElement('div');
@@ -227,6 +233,49 @@ export class Renderer {
     endText.textContent = 'Конец';
     endEl.appendChild(endText);
 
+    // Ending counter
+    const seenCount = EndingTracker.getCount();
+    const totalCount = EndingTracker.total;
+    const counter = document.createElement('p');
+    counter.className = 'end-counter';
+    counter.textContent = `Концовка ${seenCount} из ${totalCount}`;
+    endEl.appendChild(counter);
+
+    // Action buttons container
+    const actions = document.createElement('div');
+    actions.className = 'end-actions';
+
+    // Replay button
+    const replayBtn = document.createElement('button');
+    replayBtn.className = 'end-btn end-btn-replay';
+    replayBtn.textContent = seenCount < totalCount ? 'Другие концовки' : 'Начать заново';
+    replayBtn.addEventListener('click', () => {
+      location.reload();
+    });
+    actions.appendChild(replayBtn);
+
+    // Share button
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'end-btn end-btn-share';
+    shareBtn.textContent = 'Поделиться';
+    shareBtn.addEventListener('click', () => {
+      const endingName = this.currentEnding ? getEndingName(this.currentEnding) : '';
+      const text = endingName
+        ? `Я прошёл FolkUp Quest. Концовка: ${endingName}. quest.folkup.app`
+        : 'Я прошёл FolkUp Quest! quest.folkup.app';
+
+      if (navigator.share) {
+        navigator.share({ text }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          shareBtn.textContent = 'Скопировано!';
+          setTimeout(() => { shareBtn.textContent = 'Поделиться'; }, 2000);
+        }).catch(() => {});
+      }
+    });
+    actions.appendChild(shareBtn);
+
+    endEl.appendChild(actions);
     this.storyEl.appendChild(endEl);
     this.showFooter();
   }

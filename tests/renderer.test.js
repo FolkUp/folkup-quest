@@ -1,13 +1,25 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-// Mock analytics before importing Renderer
+// Mock analytics and ending tracker before importing Renderer
 vi.mock('../src/utils/analytics.js', () => ({
   trackActChanged: vi.fn(),
 }));
 
+vi.mock('../src/engine/ending-tracker.js', () => ({
+  EndingTracker: {
+    record: vi.fn(),
+    getSeen: vi.fn(() => []),
+    getCount: vi.fn(() => 1),
+    hasSeen: vi.fn(() => false),
+    total: 3,
+    clear: vi.fn(),
+  },
+}));
+
 import { Renderer } from '../src/ui/renderer.js';
 import { trackActChanged } from '../src/utils/analytics.js';
+import { EndingTracker } from '../src/engine/ending-tracker.js';
 
 /** Create a minimal DOM structure matching the game container */
 function createGameDOM() {
@@ -442,6 +454,57 @@ describe('Renderer', () => {
     it('stores currentEnding', () => {
       renderer.showEnd(['ENDING: lantern']);
       expect(renderer.currentEnding).toBe('lantern');
+    });
+
+    it('records ending via EndingTracker', () => {
+      renderer.showEnd(['ENDING: bridge']);
+      expect(EndingTracker.record).toHaveBeenCalledWith('bridge');
+    });
+
+    it('does not record when no ending tag', () => {
+      renderer.showEnd([]);
+      expect(EndingTracker.record).not.toHaveBeenCalled();
+    });
+
+    it('shows ending counter', () => {
+      renderer.showEnd(['ENDING: lantern']);
+      const counter = renderer.storyEl.querySelector('.end-counter');
+      expect(counter).not.toBeNull();
+      expect(counter.textContent).toBe('Концовка 1 из 3');
+    });
+
+    it('creates replay button', () => {
+      renderer.showEnd(['ENDING: lantern']);
+      const replayBtn = renderer.storyEl.querySelector('.end-btn-replay');
+      expect(replayBtn).not.toBeNull();
+    });
+
+    it('shows "Другие концовки" when not all seen', () => {
+      EndingTracker.getCount.mockReturnValue(1);
+      renderer.showEnd(['ENDING: lantern']);
+      const replayBtn = renderer.storyEl.querySelector('.end-btn-replay');
+      expect(replayBtn.textContent).toBe('Другие концовки');
+    });
+
+    it('shows "Начать заново" when all endings seen', () => {
+      EndingTracker.getCount.mockReturnValue(3);
+      renderer.showEnd(['ENDING: chair']);
+      const replayBtn = renderer.storyEl.querySelector('.end-btn-replay');
+      expect(replayBtn.textContent).toBe('Начать заново');
+    });
+
+    it('creates share button', () => {
+      renderer.showEnd(['ENDING: lantern']);
+      const shareBtn = renderer.storyEl.querySelector('.end-btn-share');
+      expect(shareBtn).not.toBeNull();
+      expect(shareBtn.textContent).toBe('Поделиться');
+    });
+
+    it('creates end-actions container', () => {
+      renderer.showEnd(['ENDING: lantern']);
+      const actions = renderer.storyEl.querySelector('.end-actions');
+      expect(actions).not.toBeNull();
+      expect(actions.querySelectorAll('.end-btn')).toHaveLength(2);
     });
   });
 
