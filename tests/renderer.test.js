@@ -22,6 +22,25 @@ vi.mock('../src/utils/analytics.js', () => ({
   trackActChanged: vi.fn(),
 }));
 
+vi.mock('../src/ui/character-images.js', () => ({
+  CHARACTER_IMAGES: {
+    'arni': { src: '/images/char-arni.webp', alt: 'Арни на набережной' },
+    'breus': { src: '/images/char-breus.webp', alt: 'Бреус в дорогой куртке' },
+    'team': { src: '/images/char-team.webp', alt: 'Силуэты команды FolkUp' },
+    'chair': { src: '/images/char-chair.webp', alt: 'Пустое кожаное кресло' },
+  },
+  SCENE_CHARACTER_MAP: {
+    'shore': 'arni',
+    'breus_proposal': 'breus',
+    'epigraph': null,
+    'ending': null,
+  },
+  ENDING_CHARACTER_MAP: {
+    'lantern': 'team',
+    'chair': 'chair',
+  },
+}));
+
 vi.mock('../src/engine/ending-tracker.js', () => ({
   EndingTracker: {
     record: vi.fn(),
@@ -42,16 +61,21 @@ function createGameDOM() {
   const game = document.createElement('div');
   game.id = 'game';
   game.innerHTML = `
-    <div id="story"></div>
-    <div id="choices"></div>
-    <button id="continue-btn"></button>
     <div id="lamp"></div>
-    <div id="footer-nav"></div>
     <div id="progress">
       <span class="progress-dot" data-dot="1"></span>
       <span class="progress-dot" data-dot="2"></span>
       <span class="progress-dot" data-dot="3"></span>
     </div>
+    <div class="game-content">
+      <aside id="sidebar">
+        <img class="sidebar-illustration" src="" alt="" loading="lazy">
+      </aside>
+      <div id="story"></div>
+      <div id="choices"></div>
+      <button id="continue-btn"></button>
+    </div>
+    <div id="footer-nav"></div>
   `;
   document.body.appendChild(game);
   return game;
@@ -87,6 +111,20 @@ describe('Renderer', () => {
 
     it('initializes currentEnding as null', () => {
       expect(renderer.currentEnding).toBeNull();
+    });
+
+    it('resolves sidebar DOM elements', () => {
+      expect(renderer.sidebarEl).toBe(game.querySelector('#sidebar'));
+      expect(renderer.sidebarImgEl).toBe(game.querySelector('.sidebar-illustration'));
+      expect(renderer.gameContentEl).toBe(game.querySelector('.game-content'));
+    });
+
+    it('initializes currentCharacter as null', () => {
+      expect(renderer.currentCharacter).toBeNull();
+    });
+
+    it('initializes _sidebarTimeout as null', () => {
+      expect(renderer._sidebarTimeout).toBeNull();
     });
   });
 
@@ -681,6 +719,84 @@ describe('Renderer', () => {
       renderer.showText(['Lantern text'], ['ENDING: lantern']);
       expect(renderer.storyEl.getAttribute('data-scene')).toBe('ending');
       expect(renderer.storyEl.getAttribute('data-ending')).toBe('lantern');
+    });
+  });
+
+  // ── updateSidebar ───────────────────────────────────────────
+
+  describe('updateSidebar', () => {
+    it('uses CHARACTER: tag with highest priority', () => {
+      vi.useFakeTimers();
+      renderer.updateSidebar(['SCENE: shore', 'CHARACTER: breus']);
+      vi.advanceTimersByTime(300);
+      expect(renderer.sidebarImgEl.src).toContain('char-breus.webp');
+      expect(renderer.currentCharacter).toBe('breus');
+      vi.useRealTimers();
+    });
+
+    it('falls back to SCENE_CHARACTER_MAP when no CHARACTER: tag', () => {
+      vi.useFakeTimers();
+      renderer.storyEl.setAttribute('data-scene', 'shore');
+      renderer.updateSidebar([]);
+      vi.advanceTimersByTime(300);
+      expect(renderer.sidebarImgEl.src).toContain('char-arni.webp');
+      expect(renderer.currentCharacter).toBe('arni');
+      vi.useRealTimers();
+    });
+
+    it('falls back to ENDING_CHARACTER_MAP for ending tags', () => {
+      vi.useFakeTimers();
+      renderer.updateSidebar(['ENDING: lantern']);
+      vi.advanceTimersByTime(300);
+      expect(renderer.sidebarImgEl.src).toContain('char-team.webp');
+      expect(renderer.currentCharacter).toBe('team');
+      vi.useRealTimers();
+    });
+
+    it('does nothing when same character', () => {
+      vi.useFakeTimers();
+      renderer.storyEl.setAttribute('data-scene', 'shore');
+      renderer.updateSidebar([]);
+      vi.advanceTimersByTime(300);
+      const firstSrc = renderer.sidebarImgEl.src;
+      // Call again with same scene
+      renderer.updateSidebar([]);
+      expect(renderer.sidebarImgEl.src).toBe(firstSrc);
+      vi.useRealTimers();
+    });
+
+    it('hides sidebar when character is null', () => {
+      vi.useFakeTimers();
+      // First show a character
+      renderer.storyEl.setAttribute('data-scene', 'shore');
+      renderer.updateSidebar([]);
+      vi.advanceTimersByTime(300);
+      expect(renderer.gameContentEl.classList.contains('has-illustration')).toBe(true);
+
+      // Now switch to a scene with null character
+      renderer.storyEl.setAttribute('data-scene', 'epigraph');
+      renderer.updateSidebar(['SCENE: epigraph']);
+      expect(renderer.gameContentEl.classList.contains('has-illustration')).toBe(false);
+      expect(renderer.sidebarEl.getAttribute('aria-hidden')).toBe('true');
+      vi.useRealTimers();
+    });
+
+    it('cancels pending timeout on rapid character switch', () => {
+      vi.useFakeTimers();
+      renderer.storyEl.setAttribute('data-scene', 'shore');
+      renderer.updateSidebar([]);
+      // Before first timeout resolves, switch to breus
+      renderer.updateSidebar(['CHARACTER: breus']);
+      vi.advanceTimersByTime(300);
+      // Should show breus, not arni
+      expect(renderer.sidebarImgEl.src).toContain('char-breus.webp');
+      expect(renderer.currentCharacter).toBe('breus');
+      vi.useRealTimers();
+    });
+
+    it('handles missing sidebar element gracefully', () => {
+      renderer.sidebarEl = null;
+      expect(() => renderer.updateSidebar(['SCENE: shore'])).not.toThrow();
     });
   });
 });

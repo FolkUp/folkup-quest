@@ -443,8 +443,22 @@ body {
   }
 }
 
+/* Expand #game to fit sidebar on desktop */
+@media (min-width: 768px) {
+  #game.has-sidebar {
+    max-width: calc(var(--content-width) + var(--sidebar-width) + var(--space-xl));
+  }
+
+}
+
 @media (min-width: 1024px) {
   #game {
     padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+
+@media (min-width: 1200px) {
+  #game.has-sidebar {
+    max-width: calc(var(--content-width) + var(--sidebar-width) + var(--space-xl));
   }
 }

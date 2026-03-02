@@ -1,0 +1,87 @@
+/* FolkUp Quest — Sidebar (character illustrations)
+   Mobile-first: hidden → block above text → sticky right on desktop */
+
+/* Game content wrapper */
+.game-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Sidebar — hidden by default */
+#sidebar {
+  display: none;
+  order: -1;
+}
+
+/* Show sidebar when illustration is active */
+.game-content.has-illustration #sidebar {
+  display: block;
+  max-height: 50vh;
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+
+.sidebar-illustration {
+  display: block;
+  width: 100%;
+  max-height: 50vh;
+  object-fit: contain;
+  opacity: 1;
+  transition: opacity 300ms ease;
+  border-radius: var(--radius-md);
+}
+
+.sidebar-illustration.fading {
+  opacity: 0;
+}
+
+/* Desktop: sidebar sticky right via CSS Grid */
+@media (min-width: 768px) {
+  .game-content {
+    display: grid;
+    grid-template-columns: 1fr var(--sidebar-width);
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  /* Story, choices, continue — left column */
+  .game-content > #story,
+  .game-content > #choices,
+  .game-content > #continue-btn {
+    grid-column: 1;
+  }
+
+  /* Sidebar — right column, sticky */
+  #sidebar {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    order: 0;
+    position: sticky;
+    top: var(--space-xl);
+  }
+
+  .game-content.has-illustration #sidebar {
+    max-height: none;
+    margin-bottom: 0;
+  }
+
+  .sidebar-illustration {
+    max-height: 80vh;
+    width: 100%;
+  }
+}
+
+/* Large desktop — wider sidebar */
+@media (min-width: 1200px) {
+  :root {
+    --sidebar-width: 380px;
+  }
+}
+
+/* Reduced motion: no crossfade animation */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-illustration {
+    transition: none;
+  }
+}

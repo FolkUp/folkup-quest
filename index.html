@@ -33,11 +33,13 @@
   <link rel="stylesheet" href="/styles/_variables.css">
   <link rel="stylesheet" href="/styles/_typography.css">
   <link rel="stylesheet" href="/styles/_layout.css">
+  <link rel="stylesheet" href="/styles/_sidebar.css">
   <link rel="stylesheet" href="/styles/_scenes.css">
 
   <!-- Preload first scene images -->
   <link rel="preload" as="image" href="/images/epigraph-bg.jpg">
   <link rel="preload" as="image" href="/images/scene1-shore.jpg">
+  <link rel="preload" as="image" type="image/webp" href="/images/char-arni.webp">
 </head>
 <body>
   <a href="#story" class="skip-link">Перейти к содержанию</a>
@@ -60,14 +62,21 @@
       <button class="start-btn" id="continue-game-btn" style="display: none; background: var(--color-surface); border: 1px solid var(--color-divider);">Продолжить</button>
     </div>
 
-    <!-- Story area -->
-    <section id="story" aria-live="polite" aria-atomic="false" style="display: none;"></section>
+    <!-- Game content with sidebar -->
+    <div class="game-content">
+      <aside id="sidebar" role="complementary" aria-label="Иллюстрация персонажа" aria-hidden="true">
+        <img class="sidebar-illustration" alt="" loading="lazy">
+      </aside>
 
-    <!-- Choices -->
-    <div id="choices" role="group" aria-label="Варианты выбора"></div>
+      <!-- Story area -->
+      <section id="story" aria-live="polite" aria-atomic="false" style="display: none;"></section>
 
-    <!-- Continue button -->
-    <button id="continue-btn" aria-label="Продолжить чтение">Продолжить ▸</button>
+      <!-- Choices -->
+      <div id="choices" role="group" aria-label="Варианты выбора"></div>
+
+      <!-- Continue button -->
+      <button id="continue-btn" aria-label="Продолжить чтение">Продолжить ▸</button>
+    </div>
 
     <!-- Footer -->
     <footer id="footer-nav">

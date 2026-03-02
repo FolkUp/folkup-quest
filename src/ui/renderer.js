@@ -10,6 +10,11 @@ import {
 } from '../engine/moral-system.js';
 import { EndingTracker } from '../engine/ending-tracker.js';
 import { trackActChanged } from '../utils/analytics.js';
+import {
+  CHARACTER_IMAGES,
+  SCENE_CHARACTER_MAP,
+  ENDING_CHARACTER_MAP,
+} from './character-images.js';
 
 /** Escape HTML entities to prevent XSS */
 function escapeHtml(text) {
@@ -28,6 +33,11 @@ export class Renderer {
     this.lampEl = container.querySelector('#lamp');
     this.footerEl = container.querySelector('#footer-nav');
     this.progressEl = container.querySelector('#progress');
+    this.sidebarEl = container.querySelector('#sidebar');
+    this.sidebarImgEl = container.querySelector('.sidebar-illustration');
+    this.gameContentEl = container.querySelector('.game-content');
+    this.currentCharacter = null;
+    this._sidebarTimeout = null;
     this.currentEnding = null;
   }
 
@@ -99,6 +109,9 @@ export class Renderer {
         this.setLampState(lamp);
       }
     });
+
+    // Update sidebar illustration
+    this.updateSidebar(tags);
   }
 
   /**
@@ -286,6 +299,9 @@ export class Renderer {
     endEl.appendChild(actions);
     this.storyEl.appendChild(endEl);
     this.showFooter();
+
+    // Update sidebar for ending illustration
+    this.updateSidebar(tags);
   }
 
   /** Show footer navigation */
@@ -322,6 +338,93 @@ export class Renderer {
       if (dotNum < actNum) dot.classList.add('completed');
       else if (dotNum === actNum) dot.classList.add('current');
     });
+  }
+
+  /**
+   * Update sidebar illustration based on tags
+   * Priority: CHARACTER: tag > ENDING map > SCENE map
+   * @param {string[]} tags
+   */
+  updateSidebar(tags) {
+    if (!this.sidebarEl || !this.sidebarImgEl) return;
+
+    // 1. Check for explicit CHARACTER: tag (highest priority)
+    const charTag = tags.find((t) => t.startsWith('CHARACTER:'));
+    let character = null;
+
+    if (charTag) {
+      character = charTag.split(':')[1]?.trim() || null;
+    } else {
+      // 2. Check ENDING map
+      const endingTag = tags.find((t) => t.startsWith('ENDING:'));
+      if (endingTag) {
+        const ending = endingTag.split(':')[1]?.trim();
+        if (ending && ending in ENDING_CHARACTER_MAP) {
+          character = ENDING_CHARACTER_MAP[ending];
+        }
+      }
+      // 3. Fallback to SCENE map
+      if (character === null) {
+        const scene = this.storyEl.getAttribute('data-scene');
+        if (scene && scene in SCENE_CHARACTER_MAP) {
+          character = SCENE_CHARACTER_MAP[scene];
+        }
+      }
+    }
+
+    // Same character — do nothing
+    if (character === this.currentCharacter) return;
+    this.currentCharacter = character;
+
+    // Cancel pending crossfade (race condition prevention)
+    if (this._sidebarTimeout) {
+      clearTimeout(this._sidebarTimeout);
+      this._sidebarTimeout = null;
+    }
+
+    // Hide sidebar if no character
+    if (!character || !(character in CHARACTER_IMAGES)) {
+      this.gameContentEl?.classList.remove('has-illustration');
+      this.container.classList.remove('has-sidebar');
+      this.sidebarEl.setAttribute('aria-hidden', 'true');
+      return;
+    }
+
+    const img = CHARACTER_IMAGES[character];
+
+    // Respect prefers-reduced-motion: skip animation
+    const prefersReducedMotion = typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      this._applySidebarImage(img);
+      return;
+    }
+
+    // Crossfade: fade out → swap → fade in
+    this.sidebarImgEl.classList.add('fading');
+    const fadeDuration = parseFloat(getComputedStyle(this.sidebarImgEl).transitionDuration) * 1000 || 300;
+
+    this._sidebarTimeout = setTimeout(() => {
+      this._sidebarTimeout = null;
+      this._applySidebarImage(img);
+    }, fadeDuration);
+  }
+
+  /** Apply sidebar image and show sidebar */
+  _applySidebarImage(img) {
+    if (!this.sidebarImgEl) return;
+    this.sidebarImgEl.src = img.src;
+    this.sidebarImgEl.alt = img.alt;
+    this.sidebarImgEl.onerror = () => {
+      this.gameContentEl?.classList.remove('has-illustration');
+      this.container.classList.remove('has-sidebar');
+      this.sidebarEl?.setAttribute('aria-hidden', 'true');
+    };
+    this.gameContentEl?.classList.add('has-illustration');
+    this.container.classList.add('has-sidebar');
+    this.sidebarEl?.removeAttribute('aria-hidden');
+    this.sidebarImgEl.classList.remove('fading');
   }
 
   /** Scroll story container to bottom smoothly */
