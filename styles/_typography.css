@@ -37,11 +37,6 @@ body {
   margin-bottom: var(--space-md);
 }
 
-/* Dialogue */
-.story-paragraph:has(> :first-child) {
-  text-indent: 0;
-}
-
 /* Choice buttons text */
 .choice-btn {
   font-family: var(--font-body);

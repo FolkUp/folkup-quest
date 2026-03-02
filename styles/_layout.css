@@ -175,6 +175,7 @@ body {
 
 .choice-btn.selected {
   border-color: var(--accent);
+  background: rgba(184, 134, 11, 0.1);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 

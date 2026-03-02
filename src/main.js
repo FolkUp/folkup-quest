@@ -192,7 +192,10 @@ function saveGame() {
     act: engine.getVariable('current_act'),
     folk_counter: engine.getVariable('folk_counter'),
   };
-  SaveManager.save(state, meta);
+  const saved = SaveManager.save(state, meta);
+  if (!saved) {
+    console.warn('Save failed — storage may be full or unavailable');
+  }
 }
 
 // Boot
