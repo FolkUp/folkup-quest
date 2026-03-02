@@ -62,12 +62,20 @@ const PANELS = [
     seeds: [8001, 8137, 8274, 8411, 8548],
   },
   {
-    id: '9.1',
-    name: 'arni-leaving',
-    description: 'Arni leaving — pitch deck hero image',
+    id: '9.1a',
+    name: 'arni-leaving-base',
+    description: 'Arni leaving — base layer (composite approach)',
     aspect_ratio: '3:2',
-    prompt: `${STYLE_PREFIX} Wide establishing shot at eye level following a man walking away from the viewer. A thin man in leather jacket seen from behind, ponytail visible at the back of his head, walking into heavy rain toward a river. Far behind him on the right side, a small solitary female figure sits on a park bench, barely visible, tiny compared to the walking man. Thames river visible in the middle distance as a white horizontal band. London brick buildings as dark geometric shapes in the background. Heavy rain rendered as white ink splatter and diagonal streaks across the entire composition. Massive distance and empty space between the two figures spanning the full width of the image. Cinematic depth, atmospheric perspective through rain. The walking figure occupies the left third, the seated figure the far right edge. Comic book panel. No text, no speech bubbles.`,
+    prompt: `${STYLE_PREFIX} Ultra-wide horizontal composition. A thin man in a dark jacket with raised collar, ponytail visible, beard, hands shoved in pockets, hunched shoulders, seen entirely from behind, walking away from the viewer into heavy rain. He fills the left third of the frame, roughly one third of the panel height, his boots on wet dark cobblestones. The entire right two-thirds of the image is vast empty dark space filled with diagonal white rain streaks and chaotic white ink splatter across deep black sky. A wide bright white strip of river surface cuts across the middle distance. Behind everything, dark geometric blocks and rectangles of city buildings against the sky, no windows, no detail, just black shapes. The wet ground is an enormous stretch of black with scattered white puddle reflections. White rain streaks and chaotic white splatter cover the entire image diagonally. Hard shadows, no detail in dark areas. Comic book panel. No text, no speech bubbles.`,
     seeds: [9001, 9137, 9274, 9411, 9548],
+  },
+  {
+    id: '9.1b',
+    name: 'alice-bench',
+    description: 'Alice on bench — overlay layer for composite',
+    aspect_ratio: '1:1',
+    prompt: `${STYLE_PREFIX} A solitary female figure sitting alone on a park bench against a completely black background. She sits with perfectly upright rigid posture, unnaturally straight spine, hair pulled back tightly, not a single strand loose. She holds a notebook in her hands. Pure white figure and white bench on deep pure black background, no ground, no objects, no other elements, completely empty black surrounding. Hard shadows. Comic book illustration. No text, no speech bubbles.`,
+    seeds: [9601, 9637, 9674, 9711, 9748],
   },
 ];
 
