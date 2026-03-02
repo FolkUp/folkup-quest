@@ -19,6 +19,7 @@ VAR current_act = 1
 
 // Choice tracking for ending determination
 VAR choice_5_listened = false
+VAR scene9_broke_mirror = false
 VAR choice_6_signed_blind = false
 VAR choice_6_read_contract = false
 VAR choice_6_other_way = false
