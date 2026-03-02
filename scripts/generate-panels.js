@@ -24,7 +24,7 @@ if (!TOKEN) {
 
 const MODEL_URL = 'https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions';
 
-const STYLE_PREFIX = 'Black and white ink illustration, Frank Miller Sin City style, pure black and white, no gray tones, no halftones, no gradients, no soft edges, high contrast, spotted blacks, negative space, ink wash, wordless comic book art.';
+const STYLE_PREFIX = 'Black and white ink illustration, Frank Miller Sin City style, pure black and white, no gray tones, no halftones, no gradients, no soft edges, high contrast, spotted blacks, negative space, wordless comic book art.';
 
 const VARIANTS_PER_PANEL = 5;
 
@@ -50,7 +50,7 @@ const PANELS = [
     name: 'library-splash',
     description: 'Library splash — architecture + solitude',
     aspect_ratio: '2:3',
-    prompt: `${STYLE_PREFIX} Dramatic low angle from floor looking upward. A claustrophobic library interior, tall dark bookshelves pressing inward from both sides like walls closing in, every shelf completely empty. A single ornate brass lamp with twisted root-shaped base standing in the center, casting a pool of white light, the only curved organic form in a world of sharp angles and straight lines. A small lone human silhouette standing at the bottom center of the composition, dwarfed by the towering shelves. Three dark rectangular doorways visible in the far back wall, evenly spaced, leading to unknown destinations. Oppressive vertical composition, massive black ceiling above, floors lost in shadow. Architectural claustrophobia, not grandeur. Comic book splash page. No text, no speech bubbles.`,
+    prompt: `${STYLE_PREFIX} Dramatic low angle from floor level looking upward. A narrow oppressive corridor between towering dark shelving units, bare empty shelves with thin white horizontal parallel lines marking each shelf edge, nothing on the shelves, no books, no objects, completely bare. A single ornate lamp with twisted root-shaped base in the center casting a pool of stark white light. A barely visible tiny human silhouette at the bottom of the frame, ant-sized, occupying less than one tenth of the image height. Dark rectangular doorways visible in the far back wall. Massive crushing black ceiling above. Extreme vertical composition, architectural claustrophobia. Comic book splash page. No text, no speech bubbles.`,
     seeds: [5001, 5137, 5274, 5411, 5548],
   },
   {
