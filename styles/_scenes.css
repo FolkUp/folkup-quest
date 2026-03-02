@@ -1,0 +1,59 @@
+/* Scene backgrounds — atmospheric ambient behind story text */
+
+#story[data-scene] {
+  position: relative;
+  isolation: isolate;
+}
+
+#story[data-scene]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  opacity: var(--scene-opacity, 0.12);
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.8) 30%,
+    rgba(0, 0, 0, 0.8) 70%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.8) 30%,
+    rgba(0, 0, 0, 0.8) 70%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* Per-scene backgrounds + opacity tuning */
+#story[data-scene="epigraph"]::before { background-image: url('/images/epigraph-bg.jpg'); --scene-opacity: 0.18; }
+#story[data-scene="shore"]::before { background-image: url('/images/scene1-shore.jpg'); --scene-opacity: 0.10; }
+#story[data-scene="flashback_stick"]::before { background-image: url('/images/scene1_5-flashback.jpg'); }
+#story[data-scene="library"]::before { background-image: url('/images/scene2-library.jpg'); --scene-opacity: 0.18; }
+#story[data-scene="barnes_alice"]::before { background-image: url('/images/scene3-barnes.jpg'); }
+#story[data-scene="cogumelos_gonzo"]::before { background-image: url('/images/scene4-mushrooms.jpg'); --scene-opacity: 0.15; }
+#story[data-scene="retrotech_dan"]::before { background-image: url('/images/scene5-dan.jpg'); }
+#story[data-scene="flashback_young_breus"]::before { background-image: url('/images/scene6-flashback-breus.jpg'); }
+#story[data-scene="breus_proposal"]::before { background-image: url('/images/scene7-breus-office.jpg'); }
+#story[data-scene="silence_after"]::before { background-image: url('/images/scene8-silence.jpg'); --scene-opacity: 0.18; }
+#story[data-scene="mirror_zone"]::before { background-image: url('/images/scene9-mirror.jpg'); --scene-opacity: 0.15; }
+#story[data-scene="final_choice"]::before { background-image: url('/images/scene10-dawn.jpg'); --scene-opacity: 0.10; }
+#story[data-scene="credits"]::before { background-image: url('/images/scene12-credits.jpg'); }
+
+/* Endings (compound selector: scene + ending) */
+#story[data-scene="ending"][data-ending="lantern"]::before { background-image: url('/images/scene11a-lantern.jpg'); --scene-opacity: 0.18; }
+#story[data-scene="ending"][data-ending="bridge"]::before { background-image: url('/images/scene11b-bridge.jpg'); }
+#story[data-scene="ending"][data-ending="chair"]::before { background-image: url('/images/scene11c-chair.jpg'); --scene-opacity: 0.15; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #story[data-scene]::before {
+    transition: none;
+  }
+}

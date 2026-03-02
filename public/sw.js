@@ -3,7 +3,7 @@
  * Cache-first strategy for full offline support after first visit.
  */
 
-const CACHE_VERSION = 'quest-v1';
+const CACHE_VERSION = 'quest-v2';
 
 const PRECACHE_URLS = [
   '/',
@@ -13,6 +13,7 @@ const PRECACHE_URLS = [
   '/apple-touch-icon.png',
   '/og-image.png',
   '/fonts/fonts.css',
+  '/styles/_scenes.css',
   '/legal/privacy.html',
   '/legal/terms.html',
   '/legal/cookies.html',

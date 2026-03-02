@@ -2,6 +2,22 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 // Mock analytics and ending tracker before importing Renderer
+vi.mock('../src/engine/moral-system.js', () => ({
+  parseFeedbackTag: (tag) => {
+    const m = tag.match(/^FEEDBACK:\s*(folk|dragon)$/i);
+    return m ? m[1].toLowerCase() : null;
+  },
+  parseLampTag: (tag) => {
+    const m = tag.match(/^LAMP:\s*(steady|bright|flicker)$/i);
+    return m ? m[1].toLowerCase() : null;
+  },
+  parseEndingTag: (tag) => {
+    const m = tag.match(/^ENDING:\s*(lantern|bridge|chair)$/i);
+    return m ? m[1].toLowerCase() : null;
+  },
+  getEndingName: (e) => ({ lantern: 'Фонарь', bridge: 'Мост', chair: 'Кресло' }[e] || e),
+}));
+
 vi.mock('../src/utils/analytics.js', () => ({
   trackActChanged: vi.fn(),
 }));
@@ -141,10 +157,10 @@ describe('Renderer', () => {
       expect(renderer.storyEl.getAttribute('data-scene')).toBe('library');
     });
 
-    it('removes data-scene when no SCENE tag', () => {
-      renderer.storyEl.setAttribute('data-scene', 'old');
+    it('preserves data-scene when no SCENE tag in batch', () => {
+      renderer.storyEl.setAttribute('data-scene', 'library');
       renderer.showText(['Text'], []);
-      expect(renderer.storyEl.hasAttribute('data-scene')).toBe(false);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('library');
     });
 
     it('sets data-act on documentElement from ACT tag', () => {
@@ -615,6 +631,56 @@ describe('Renderer', () => {
         top: renderer.storyEl.scrollHeight,
         behavior: 'smooth',
       });
+    });
+  });
+
+  // ── data-scene persistence ────────────────────────────────
+
+  describe('data-scene persistence', () => {
+    it('keeps data-scene when no SCENE tag in batch', () => {
+      renderer.showText(['First'], ['SCENE: library']);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('library');
+
+      renderer.showText(['Second'], ['CONTINUE']);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('library');
+    });
+
+    it('updates data-scene when new SCENE tag appears', () => {
+      renderer.showText(['First'], ['SCENE: shore']);
+      renderer.showText(['Second'], ['SCENE: library']);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('library');
+    });
+  });
+
+  // ── data-ending attribute ─────────────────────────────────
+
+  describe('data-ending attribute', () => {
+    it('sets data-ending from ENDING tag', () => {
+      renderer.showText(['Ending'], ['SCENE: ending', 'ENDING: lantern']);
+      expect(renderer.storyEl.getAttribute('data-ending')).toBe('lantern');
+    });
+
+    it('removes data-ending when no ENDING tag', () => {
+      renderer.showText(['Ending'], ['SCENE: ending', 'ENDING: bridge']);
+      expect(renderer.storyEl.getAttribute('data-ending')).toBe('bridge');
+
+      renderer.showText(['Next'], ['SCENE: credits']);
+      expect(renderer.storyEl.hasAttribute('data-ending')).toBe(false);
+    });
+
+    it('compound selector: data-scene=ending + data-ending=chair', () => {
+      renderer.showText(['Chair ending'], ['SCENE: ending', 'ENDING: chair']);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('ending');
+      expect(renderer.storyEl.getAttribute('data-ending')).toBe('chair');
+    });
+
+    it('data-scene persists through ending sub-knots', () => {
+      renderer.showText(['Scene 11'], ['SCENE: ending', 'ACT: 3']);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('ending');
+
+      renderer.showText(['Lantern text'], ['ENDING: lantern']);
+      expect(renderer.storyEl.getAttribute('data-scene')).toBe('ending');
+      expect(renderer.storyEl.getAttribute('data-ending')).toBe('lantern');
     });
   });
 });

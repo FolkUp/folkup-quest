@@ -47,6 +47,7 @@
 | OG image | FolkUp brand asset | Proprietary (FolkUp) | Yes | Own brand |
 | PWA icon 192 | FolkUp brand asset | Proprietary (FolkUp) | Yes | Generated from favicon design |
 | PWA icon 512 | FolkUp brand asset | Proprietary (FolkUp) | Yes | Generated from favicon design |
+| Scene backgrounds (16 images) | FLUX.1 Schnell (Black Forest Labs) via Replicate | Apache 2.0 — user owns outputs | Yes | No attribution required; model outputs are freely usable |
 
 ## Analytics
 
@@ -66,3 +67,4 @@
 - [x] LICENSE file present
 - [x] LICENSE-CONTENT file present
 - [x] Analytics: cookieless, GDPR compliant (Cloudflare Web Analytics)
+- [x] Scene images: FLUX.1 Schnell Apache 2.0, user owns outputs, no attribution needed
