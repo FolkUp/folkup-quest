@@ -40,9 +40,9 @@ const PANELS = [
   {
     id: '2.3',
     name: 'bar-glasses',
-    description: 'Bar with 7 glasses — visual rhyme',
-    aspect_ratio: '21:9',
-    prompt: `${STYLE_PREFIX} Medium side shot at eye level of a bar interior at night. A thin man with ponytail slumped over a bar counter, forehead resting on crossed arms, leather jacket wrinkled on his back. Seven empty drinking glasses arranged along the polished bar surface with uneven spacing, varying heights, one glass tipped on its side. Bartender as a large dark silhouette looming in the background, only white shirt collar visible. Bar counter rendered as a single white horizontal line against black. Reflections of glasses as white vertical streaks on dark surface. Heavy spotted blacks in background, minimal detail, dramatic chiaroscuro lighting from above. Comic book panel. No text, no speech bubbles.`,
+    description: 'Bar glasses — visual rhyme with seagulls',
+    aspect_ratio: '16:9',
+    prompt: `${STYLE_PREFIX} Medium side shot at eye level of a dark bar interior at night, ultra-wide horizontal composition. A thin man with a ponytail slumped face-down over a long bar counter, forehead on crossed arms, black leather jacket on his back. Several empty drinking glasses scattered along the bar counter, different sizes, one glass tipped sideways, no liquid in any glass, all glasses empty. Behind the bar a huge dark bartender shape, no face, no facial features, completely featureless dark silhouette, only a small white shirt collar visible at the neck. The bar counter is a bright white horizontal surface cutting across the entire width of the image against deep black. Heavy spotted blacks filling the background, dramatic overhead light, hard shadows, no detail in the dark areas. Comic book panel. No text, no speech bubbles.`,
     seeds: [2001, 2137, 2274, 2411, 2548],
   },
   {
