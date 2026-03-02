@@ -43,9 +43,8 @@ export class Renderer {
     if (sceneTag) {
       const scene = sceneTag.split(':')[1]?.trim();
       if (scene) this.storyEl.setAttribute('data-scene', scene);
-    } else {
-      this.storyEl.removeAttribute('data-scene');
     }
+    // No else — keep previous data-scene until next SCENE tag
 
     if (actTag) {
       const act = actTag.split(':')[1]?.trim();
@@ -54,6 +53,15 @@ export class Renderer {
         this.updateProgress(act);
         trackActChanged(act);
       }
+    }
+
+    // Ending tag → data-ending attribute for compound CSS selectors
+    const endingTag = tags.find((t) => t.startsWith('ENDING:'));
+    if (endingTag) {
+      const ending = endingTag.split(':')[1]?.trim();
+      if (ending) this.storyEl.setAttribute('data-ending', ending);
+    } else {
+      this.storyEl.removeAttribute('data-ending');
     }
 
     // Clear previous content

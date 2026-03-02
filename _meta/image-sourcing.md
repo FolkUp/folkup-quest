@@ -1,74 +1,52 @@
 # Image Sourcing — FolkUp Quest
 
-> Last updated: 2026-03-01
+> Last updated: 2026-03-02
 
 ## Стиль
 
-Реалистичная детализация + психоделический компьютерный подтекст. Goa trance aesthetic, fractal art, glitch art, digital surrealism. БЕЗ наркотиков.
+Dark atmospheric digital art с психоделическими undertones. Goa trance aesthetic, fractal patterns, muted cinematic palette. Brand colors: бордо #7D4450, шалфей #839E75, янтарь #E8AD4A.
 
-Brand colors для overlays: бордо #7D4450, шалфей #839E75, янтарь #E8AD4A.
+## Модель генерации
+
+**FLUX.1 Schnell** (Black Forest Labs) via Replicate API
+- Лицензия: Apache 2.0 — пользователь владеет generated outputs
+- Стоимость: $0.003/image, <1 сек генерация
+- Org: folkup (Replicate)
+
+### Base prompt (единый для всех сцен)
+
+```
+Dark atmospheric digital art, psychedelic undertones, subtle fractal patterns in shadows,
+goa trance aesthetic, muted cinematic palette with bordeaux and sage accents,
+film grain texture, wide composition, no text, no people faces.
+```
+
++ уникальный scene suffix для каждой сцены.
 
 ## Фоны сцен
 
-| Сцена | Описание | Источник | Лицензия | Статус |
-|-------|----------|----------|----------|--------|
-| 1: Сетубал, море | Скамейка, побережье, чайки, тёплый свет | Unsplash `Portugal sunset sea bench` | Unsplash License | todo |
-| 1.5: Flashback офис | Мрачный openspace, холодный свет, glitch | Unsplash `corporate office fluorescent` | Unsplash License | todo |
-| 2: Библиотека | Тёмная библиотека, пустые стеллажи, лампа | Unsplash `TQ8ICns1tgE` (Fer Troulik) | Unsplash License | candidate |
-| 3: Barnes | Темза, SW13, зелень, мечтательность | Unsplash `taHqprFBxfQ` (Thames riverside) | Unsplash License | candidate |
-| 4: Грибы/OSINT | Лес с грибами, мицелий, fractal spores | Pixabay `4807192` (glowing mushrooms) | Pixabay License | candidate |
-| 5: Чикаго, блюз | Ночной город, неон, дождь, блюз-клуб | Unsplash `blues music neon night` | Unsplash License | todo |
-| 6: Команда | Четверо за столом, экраны, лампа | Composite: библиотека + group at table | Mixed | todo |
-| 7: Бреус | Стеклянный офис, холодный, corporate dystopia | Unsplash `V5vF94h52r0` (Fabian Kleiser) | Unsplash License | candidate |
-| 8: Тишина | Библиотека ночью, только лампа | Re-use сцена 2, darker processing | — | todo |
-| 9: Зеркало | Fractal зеркало, два будущих | Pixabay `fractal psychedelic` composite | Pixabay License | todo |
-| 11a: Фонарь | Кованый фонарь, тёплый свет, корни | Custom artwork needed (маскот) | TBD | blocked |
-| 11b: Мост | Мост с людьми, нейтральные тона | Unsplash `Lisbon bridge` | Unsplash License | todo |
-| 11c: Кресло | Кожаное кресло, стеклянный офис | Composite: сцена 7 + armchair | Mixed | todo |
-| 12: Credits | Ночное небо, звёзды, fractal | Pixabay `night sky fractal` composite | Pixabay License | todo |
-
-## Персонажи
-
-| Персонаж | Описание | Источник | Лицензия | Статус |
-|----------|----------|----------|----------|--------|
-| Арни | ~35, усталый, casual, хакер-вайб | Unsplash `REOoETloFqE` (Batuhan Doğan) | Unsplash License | candidate |
-| Алиса | Мечтательная, блокнот, умная | Pixabay `woman thinking` collection | Pixabay License | todo |
-| КиберГонзо | Параноидальный, мониторы, cyberpunk | Unsplash `k1lMHu31Lzo` (Bilicube) | Unsplash License | candidate |
-| Дэн | Блюзмен, гитара, тёплый | Pexels `29840760` (guitar warm light) | Pexels License | candidate |
-| Бреус | Дорогой костюм, холодный, corporate | Pexels `business suit` collection | Pexels License | todo |
-
-## Ключевые объекты
-
-| Объект | Описание | Источник | Лицензия | Статус |
-|--------|----------|----------|----------|--------|
-| Лампа Lucerna | Кованый фонарь с корнями, тёплый свет | Custom artwork needed | TBD | blocked |
-| SSH-ключ | Латунный старинный ключ | Unsplash `1RE2Xn6rTQc` (vintage keys) | Unsplash License | candidate |
-| Блокнот Алисы | Потрёпанный, с рисунками | Pixabay `notebook drawing` | Pixabay License | todo |
-| Гитара Дэна | Акустическая, тёплые тона | See Дэн entry | — | — |
-| Экраны КиберГонзо | Мониторы, зелёный код, matrix | GitHub Rezmason/matrix (CC0) | CC0 | available |
-| Контракт Бреуса | Зловещий документ, мелкий шрифт | Pexels generic legal doc | Pexels License | todo |
-| Зеркало Дракона | Тёмное, fractal reflections | Pixabay `7695743` | Pixabay License | candidate |
-
-## Текстуры/Overlays
-
-| Текстура | Описание | Источник | Лицензия | Статус |
-|----------|----------|----------|----------|--------|
-| Fractal (brand colors) | Бордо/янтарь/шалфей fractals | StockCake fractal-art | StockCake Free | available |
-| Glitch art | Databending, digital distortion | Simpedit/Pixlr generators | Tool output | available |
-| Psychedelic patterns | Sacred geometry, cosmic | Wikimedia Commons fractal art | CC BY-SA | available |
-| Мицелий/network | Wood Wide Web, organic net | Custom generative (p5.js) | TBD | todo |
-| Code rain (organic) | Растущий код, не Matrix | GitHub matrix (CC0) + custom mod | CC0 | todo |
-
-## Проблемные зоны
-
-1. **Лампа Lucerna** — маскот FolkUp, нет open-source "фонарь с корнями". Нужен custom artwork.
-2. **Goa trance visuals** — большинство под copyright. Использовать Wikimedia fractal art как основу.
-3. **Organic code rain** — Matrix rain есть (CC0), но "like plant growth" требует кастомной модификации.
+| Сцена | Файл | Источник | Лицензия | Статус |
+|-------|------|----------|----------|--------|
+| E: Эпиграф | `epigraph-bg.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 1: Сетубал, море | `scene1-shore.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 1.5: Flashback офис | `scene1_5-flashback.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 2: Библиотека | `scene2-library.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 3: Barnes | `scene3-barnes.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 4: Грибы/OSINT | `scene4-mushrooms.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 5: Чикаго, блюз | `scene5-dan.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 6: Flashback Бреус | `scene6-flashback-breus.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 7: Офис Бреуса | `scene7-breus-office.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 8: Тишина | `scene8-silence.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 9: Зеркало | `scene9-mirror.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 10: Рассвет | `scene10-dawn.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 11a: Фонарь | `scene11a-lantern.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 11b: Мост | `scene11b-bridge.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 11c: Кресло | `scene11c-chair.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
+| 12: Credits | `scene12-credits.jpg` | FLUX.1 Schnell | Apache 2.0 (user owns output) | done |
 
 ## Workflow
 
-1. Выбрать конкретные изображения из candidates
-2. Скачать в `public/images/`
-3. Post-processing: цветокоррекция → glitch/fractal overlay → blend modes
-4. Для каждого — записать автора и лицензию в `_meta/license-audit.md`
-5. Для CC BY/CC BY-SA — добавить атрибуцию в credits (Scene 12)
+1. Генерация 3 вариантов на сцену через `scripts/generate-scenes.js`
+2. Ревью вариантов → выбор лучшего
+3. Копия в `public/images/` с финальным именем
+4. CSS backgrounds через `styles/_scenes.css`
