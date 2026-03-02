@@ -19,6 +19,8 @@ dist/
 
 # Local dev session files
 .claude/
+CLAUDE.md
+CLAUDE.local.md
 
 # IDE
 .idea/
