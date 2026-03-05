@@ -351,6 +351,23 @@ body {
   color: var(--color-text);
 }
 
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.footer-brand-icon {
+  vertical-align: -0.15em;
+  flex-shrink: 0;
+}
+
+.footer-brand .brand-wordmark {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+
 .footer-siblings {
   font-size: 0.65rem;
   margin-top: 0.2rem;
@@ -370,6 +387,16 @@ body {
   min-height: 60vh;
   text-align: center;
   gap: var(--space-lg);
+}
+
+.brand-logo {
+  filter: drop-shadow(0 0 12px var(--color-amber-glow));
+}
+
+.brand-wordmark {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  letter-spacing: -0.5px;
 }
 
 #start-screen h1 {

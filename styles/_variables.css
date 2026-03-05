@@ -37,6 +37,7 @@
   --act-3-accent: #c45c5c;   /* Hot red — moral dilemma */
 
   /* Typography scale (modular, ratio ~1.25) */
+  --font-brand: 'Pacifico', cursive;
   --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
