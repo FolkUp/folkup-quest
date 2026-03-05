@@ -8,13 +8,10 @@ on:
 jobs:
   check-traffic:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      administration: read
     steps:
       - name: Check repo activity
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
@@ -24,7 +21,8 @@ jobs:
 
           if [ "$VIEWS" -gt 0 ] || [ "$FORKS" -gt 0 ] || [ "$STARS" -gt 0 ]; then
             CLONES=$(gh api repos/${{ github.repository }}/traffic/clones --jq '.uniques')
-            REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers --jq '[.[:3][] | "\(.referrer): \(.uniques)"] | join(", ")' 2>/dev/null || echo "none")
+            REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers \
+              --jq '[.[:3][] | "\(.referrer): \(.uniques)"] | join(", ")' 2>/dev/null || echo "none")
 
             TEXT="folkup-quest repo activity (14d)
           Views: ${VIEWS} unique visitors
