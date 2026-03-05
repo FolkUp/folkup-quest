@@ -3,7 +3,7 @@
  * Cache-first strategy for full offline support after first visit.
  */
 
-const CACHE_VERSION = 'quest-v4';
+const CACHE_VERSION = 'quest-v5';
 
 const PRECACHE_URLS = [
   '/',
