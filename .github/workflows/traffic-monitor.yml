@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      administration: read
     steps:
       - name: Check repo activity
         env:
