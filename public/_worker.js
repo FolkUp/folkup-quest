@@ -51,8 +51,13 @@ function getCacheControl(pathname) {
 function addHeaders(response, pathname) {
   const headers = new Headers(response.headers);
 
-  // Cache-Control
-  headers.set("Cache-Control", getCacheControl(pathname));
+  // Cache-Control (browser + CDN)
+  const cc = getCacheControl(pathname);
+  headers.set("Cache-Control", cc);
+  // Tell CF edge not to override our Cache-Control for no-cache resources
+  if (cc === "no-cache") {
+    headers.set("CDN-Cache-Control", "no-store");
+  }
 
   // Security headers
   headers.set("X-Content-Type-Options", "nosniff");
