@@ -6,9 +6,55 @@
  * - Legal pages served at /legal/*
  */
 
-function addSecurityHeaders(response) {
+function getCacheControl(pathname) {
+  // Hashed by Vite — immutable forever
+  if (pathname.startsWith("/assets/")) {
+    return "public, max-age=31536000, immutable";
+  }
+  // SW must always be revalidated
+  if (pathname === "/sw.js") {
+    return "no-cache";
+  }
+  // Fonts — stable, long cache
+  if (pathname.startsWith("/fonts/")) {
+    return "public, max-age=2592000, immutable";
+  }
+  // Audio — stable, long cache
+  if (pathname.startsWith("/audio/")) {
+    return "public, max-age=2592000, immutable";
+  }
+  // Images (scenes, characters) — stable
+  if (pathname.startsWith("/images/")) {
+    return "public, max-age=604800";
+  }
+  // Icons, manifest, OG — may change on branding updates
+  if (
+    pathname.endsWith(".png") ||
+    pathname.endsWith(".ico") ||
+    pathname.endsWith(".svg") ||
+    pathname.endsWith(".webmanifest")
+  ) {
+    return "public, max-age=3600, must-revalidate";
+  }
+  // HTML — always revalidate
+  if (pathname === "/" || pathname.endsWith(".html")) {
+    return "no-cache";
+  }
+  // JSON (story.json) — revalidate
+  if (pathname.endsWith(".json")) {
+    return "public, max-age=3600, must-revalidate";
+  }
+  // Default
+  return "public, max-age=3600";
+}
+
+function addHeaders(response, pathname) {
   const headers = new Headers(response.headers);
 
+  // Cache-Control
+  headers.set("Cache-Control", getCacheControl(pathname));
+
+  // Security headers
   headers.set("X-Content-Type-Options", "nosniff");
   headers.set("X-Frame-Options", "DENY");
   headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
@@ -43,7 +89,8 @@ function addSecurityHeaders(response) {
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
     const response = await env.ASSETS.fetch(request);
-    return addSecurityHeaders(response);
+    return addHeaders(response, url.pathname);
   },
 };
