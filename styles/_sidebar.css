@@ -36,9 +36,9 @@
   opacity: 0;
 }
 
-/* Desktop: sidebar sticky right via CSS Grid */
+/* Desktop: sidebar sticky right via CSS Grid — only when illustration active */
 @media (min-width: 768px) {
-  .game-content {
+  .game-content.has-illustration {
     display: grid;
     grid-template-columns: 1fr var(--sidebar-width);
     gap: var(--space-xl);
@@ -46,22 +46,20 @@
   }
 
   /* Story, choices, continue — left column */
-  .game-content > #story,
-  .game-content > #choices,
-  .game-content > #continue-btn {
+  .game-content.has-illustration > #story,
+  .game-content.has-illustration > #choices,
+  .game-content.has-illustration > #continue-btn {
     grid-column: 1;
   }
 
   /* Sidebar — right column, sticky */
-  #sidebar {
+  .game-content.has-illustration #sidebar {
+    display: block;
     grid-column: 2;
     grid-row: 1 / 4;
     order: 0;
     position: sticky;
     top: var(--space-xl);
-  }
-
-  .game-content.has-illustration #sidebar {
     max-height: none;
     margin-bottom: 0;
   }

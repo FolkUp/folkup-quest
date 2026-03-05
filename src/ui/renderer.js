@@ -396,6 +396,7 @@ export class Renderer {
       this.gameContentEl?.classList.remove('has-illustration');
       this.container.classList.remove('has-sidebar');
       this.sidebarEl.setAttribute('aria-hidden', 'true');
+      this.sidebarImgEl?.classList.remove('fading');
       return;
     }
 
