@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/source-code-pro-400-latin.woff2') format('woff2');
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1600px;
+    height: 2400px;
+    overflow: hidden;
+  }
+  body {
+    background: #000;
+    color: #666;
+    font-family: 'Source Code Pro', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .cc-badge {
+    margin-bottom: 40px;
+  }
+  .cc-badge svg {
+    width: 120px;
+    height: auto;
+    fill: #444;
+  }
+  .cc-text {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 60px;
+    line-height: 1.6;
+  }
+  .url {
+    font-size: 20px;
+    color: #E8AD4A;
+    letter-spacing: 2px;
+  }
+  .copyright {
+    font-size: 16px;
+    color: #444;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+  <div class="cc-badge">
+    <!-- CC BY-NC-SA icon -->
+    <svg viewBox="0 0 160 42" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="21" cy="21" r="19" stroke="#444" stroke-width="2" fill="none"/>
+      <text x="21" y="27" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#444">CC</text>
+      <circle cx="60" cy="21" r="19" stroke="#444" stroke-width="2" fill="none"/>
+      <text x="60" y="27" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#444">BY</text>
+      <circle cx="99" cy="21" r="19" stroke="#444" stroke-width="2" fill="none"/>
+      <text x="99" y="27" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#444">NC</text>
+      <circle cx="138" cy="21" r="19" stroke="#444" stroke-width="2" fill="none"/>
+      <text x="138" y="27" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#444">SA</text>
+    </svg>
+  </div>
+  <div class="cc-text">
+    CC BY-NC-SA 4.0<br>
+    creativecommons.org/licenses/by-nc-sa/4.0
+  </div>
+  <div class="url">quest.folkup.app</div>
+  <div class="copyright">&copy; 2026 Andrei Klemenchenok (FolkUp)</div>
+</body>
+</html>

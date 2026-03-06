@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComicInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Title>Спуск / Descent</Title>
+  <Series>FolkUp Quest</Series>
+  <Number>1</Number>
+  <Volume>1</Volume>
+  <Summary>Драма в стилистике Sin City. Арни стоит перед выбором — открыть исходный код своего проекта или продать его корпорации. Три будущих, одно утро.</Summary>
+  <Writer>JohnDoe (FolkUp)</Writer>
+  <Genre>Drama, Noir</Genre>
+  <Tags>sin city, noir, drama, open source, tech, folkup</Tags>
+  <PageCount>28</PageCount>
+  <LanguageISO>ru</LanguageISO>
+  <AgeRating>Mature 16+</AgeRating>
+  <Year>2026</Year>
+  <Month>3</Month>
+  <Web>https://quest.folkup.app</Web>
+  <Notes>AI-generated imagery with human art direction. Licensed under CC BY-NC-SA 4.0.</Notes>
+</ComicInfo>
