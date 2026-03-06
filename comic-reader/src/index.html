@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FolkUp Quest — Comic Reader</title>
+  <meta name="description" content="Read the graphic novel online. Available in Russian and English.">
+  <meta name="theme-color" content="#1a1714">
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="ru" href="https://comic.folkup.app/ru">
+  <link rel="alternate" hreflang="en" href="https://comic.folkup.app/en">
+  <link rel="alternate" hreflang="x-default" href="https://comic.folkup.app/">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <style>
+    body {
+      margin: 0;
+      background: #0d0b09;
+      color: #e8e0d4;
+      font-family: -apple-system, system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .landing {
+      text-align: center;
+      padding: 32px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: #f5f0e8;
+    }
+    .lang-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    .lang-buttons a {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #252220;
+      border: 1px solid rgba(232, 173, 74, 0.3);
+      border-radius: 10px;
+      color: #E8AD4A;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-decoration: none;
+      min-height: 44px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .lang-buttons a:hover,
+    .lang-buttons a:focus-visible {
+      background: rgba(232, 173, 74, 0.15);
+      border-color: #E8AD4A;
+    }
+    .noscript-msg {
+      margin-top: 16px;
+      font-size: 0.875rem;
+      color: #9a9088;
+    }
+  </style>
+
+  <script>
+    // Auto-redirect based on browser language
+    (function () {
+      var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      var target = lang.startsWith('ru') ? '/ru' : '/en';
+      window.location.replace(target + window.location.hash);
+    })();
+  </script>
+</head>
+<body>
+  <noscript>
+    <div class="landing">
+      <h1>FolkUp Quest — Comic</h1>
+      <div class="lang-buttons">
+        <a href="/ru">Читать на русском</a>
+        <a href="/en">Read in English</a>
+      </div>
+    </div>
+  </noscript>
+</body>
+</html>

@@ -34,3 +34,13 @@ desktop.ini
 
 # Logs
 *.log
+
+# Comic reader — heavy generated assets (regenerate via scripts)
+comic-reader/public/pages/
+comic-reader/public/downloads/
+
+# Local visual selection tool
+_variants/
+
+# Windows artifacts
+nul
