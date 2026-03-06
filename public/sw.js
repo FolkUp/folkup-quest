@@ -3,7 +3,7 @@
  * Cache-first strategy for full offline support after first visit.
  */
 
-const CACHE_VERSION = 'quest-v4';
+const CACHE_VERSION = 'quest-v6';
 
 const PRECACHE_URLS = [
   '/',
@@ -55,7 +55,7 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    caches.match(request).then((cached) => {
+    caches.match(request, { ignoreSearch: true }).then((cached) => {
       if (cached) {
         // Return cached, but update in background (stale-while-revalidate for HTML/JSON)
         if (request.url.endsWith('.html') || request.url.endsWith('.json') || request.url === url.origin + '/') {

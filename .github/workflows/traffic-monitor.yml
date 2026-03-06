@@ -1,0 +1,38 @@
+name: Repo Traffic Monitor
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-traffic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check repo activity
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          VIEWS=$(gh api repos/${{ github.repository }}/traffic/views --jq '.uniques')
+          FORKS=$(gh api repos/${{ github.repository }} --jq '.forks_count')
+          STARS=$(gh api repos/${{ github.repository }} --jq '.stargazers_count')
+
+          if [ "$VIEWS" -gt 0 ] || [ "$FORKS" -gt 0 ] || [ "$STARS" -gt 0 ]; then
+            CLONES=$(gh api repos/${{ github.repository }}/traffic/clones --jq '.uniques')
+            REFERRERS=$(gh api repos/${{ github.repository }}/traffic/popular/referrers \
+              --jq '[.[:3][] | "\(.referrer): \(.uniques)"] | join(", ")' 2>/dev/null || echo "none")
+
+            TEXT="folkup-quest repo activity (14d)
+          Views: ${VIEWS} unique visitors
+          Clones: ${CLONES} unique
+          Forks: ${FORKS}
+          Stars: ${STARS}
+          Top referrers: ${REFERRERS}"
+
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -d chat_id="${TELEGRAM_CHAT_ID}" \
+              -d message_thread_id=9 \
+              -d text="${TEXT}"
+          fi
