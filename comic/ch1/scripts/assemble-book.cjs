@@ -5,7 +5,7 @@
  * then assembles all 28 pages into PDF and CBZ.
  *
  * Usage:
- *   node scripts/assemble-book.cjs [--render-templates] [--pdf] [--cbz] [--all]
+ *   node scripts/assemble-book.cjs [--render-templates] [--pdf] [--cbz] [--all] [--lang ru|en]
  *
  * Options:
  *   --render-templates   Render HTML templates to PNG (title, credits, back)
@@ -13,12 +13,13 @@
  *   --cbz                Assemble CBZ (ZIP with ComicInfo.xml)
  *   --all                Do everything
  *   --cover N            Use cover variant N (default: 1)
+ *   --lang LANG          Language: ru (default) or en
  *
  * Prerequisites:
  *   - npm install puppeteer-core
  *   - Chrome installed at standard path
  *   - Cover variant PNG in ch1-panels/cover/
- *   - 24 inner pages in pages/ru/
+ *   - Inner pages in pages/{lang}/
  */
 
 const fs = require('fs');
@@ -26,7 +27,6 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
-const PAGES_DIR = path.join(ROOT, 'pages', 'ru');
 const TEMPLATES_DIR = path.join(ROOT, 'pages', 'templates');
 const OUTPUT_DIR = path.join(ROOT, 'output');
 const COVER_DIR = path.join(ROOT, 'ch1-panels', 'cover');
@@ -34,6 +34,22 @@ const COVER_DIR = path.join(ROOT, 'ch1-panels', 'cover');
 const WIDTH = 1600;
 const HEIGHT = 2400;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+
+// --- Lang-specific config ---
+const LANG_CONFIG = {
+  ru: {
+    slug: 'spusk-ru',
+    titleTemplate: 'title-page.html',
+    creditsTemplate: 'credits-page.html',
+    comicInfo: 'ComicInfo.xml',
+  },
+  en: {
+    slug: 'descent-en',
+    titleTemplate: 'title-page-en.html',
+    creditsTemplate: 'credits-page-en.html',
+    comicInfo: 'ComicInfo-en.xml',
+  },
+};
 
 // --- Parse args ---
 const args = process.argv.slice(2);
@@ -43,11 +59,17 @@ const doPdf = doAll || args.includes('--pdf');
 const doCbz = doAll || args.includes('--cbz');
 const coverIdx = args.indexOf('--cover');
 const coverVariant = coverIdx >= 0 ? parseInt(args[coverIdx + 1]) : 1;
+const langIdx = args.indexOf('--lang');
+const lang = langIdx >= 0 ? args[langIdx + 1] : 'ru';
+const PAGES_DIR = path.join(ROOT, 'pages', lang);
+const langConf = LANG_CONFIG[lang] || LANG_CONFIG.ru;
 
 if (!doTemplates && !doPdf && !doCbz) {
-  console.log('Usage: node scripts/assemble-book.cjs [--render-templates] [--pdf] [--cbz] [--all] [--cover N]');
+  console.log('Usage: node scripts/assemble-book.cjs [--render-templates] [--pdf] [--cbz] [--all] [--cover N] [--lang ru|en]');
   process.exit(0);
 }
+
+console.log(`Language: ${lang} (pages: ${PAGES_DIR})`);
 
 async function renderTemplate(browser, templateFile, outputFile) {
   const page = await browser.newPage();
@@ -82,8 +104,8 @@ async function renderTemplates() {
 
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  await renderTemplate(browser, 'title-page.html', path.join(OUTPUT_DIR, 'page-title.png'));
-  await renderTemplate(browser, 'credits-page.html', path.join(OUTPUT_DIR, 'page-credits.png'));
+  await renderTemplate(browser, langConf.titleTemplate, path.join(OUTPUT_DIR, 'page-title.png'));
+  await renderTemplate(browser, langConf.creditsTemplate, path.join(OUTPUT_DIR, 'page-credits.png'));
   await renderTemplate(browser, 'back-cover.html', path.join(OUTPUT_DIR, 'page-back.png'));
 
   await browser.close();
@@ -175,7 +197,7 @@ async function assemblePdf(pages) {
     timeout: 60000,
   });
 
-  const pdfPath = path.join(OUTPUT_DIR, 'folkup-quest-ch1-spusk-ru.pdf');
+  const pdfPath = path.join(OUTPUT_DIR, `folkup-quest-ch1-${langConf.slug}.pdf`);
   await page.pdf({
     path: pdfPath,
     width: `${WIDTH}px`,
@@ -206,14 +228,14 @@ function assembleCbz(pages) {
     fs.copyFileSync(p.file, path.join(cbzDir, destName));
   });
 
-  // Copy ComicInfo.xml
-  const comicInfoSrc = path.join(ROOT, 'ComicInfo.xml');
+  // Copy ComicInfo.xml (lang-specific)
+  const comicInfoSrc = path.join(ROOT, langConf.comicInfo);
   if (fs.existsSync(comicInfoSrc)) {
     fs.copyFileSync(comicInfoSrc, path.join(cbzDir, 'ComicInfo.xml'));
   }
 
   // Create ZIP using PowerShell
-  const cbzPath = path.join(OUTPUT_DIR, 'folkup-quest-ch1-spusk-ru.cbz');
+  const cbzPath = path.join(OUTPUT_DIR, `folkup-quest-ch1-${langConf.slug}.cbz`);
   if (fs.existsSync(cbzPath)) fs.unlinkSync(cbzPath);
 
   const zipCmd = `powershell.exe -NoProfile -Command "Compress-Archive -Path '${cbzDir}\\*' -DestinationPath '${cbzPath.replace('.cbz', '.zip')}'"`;

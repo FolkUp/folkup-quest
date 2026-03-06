@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComicInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Title>Descent</Title>
+  <Series>FolkUp Quest</Series>
+  <Number>1</Number>
+  <Volume>1</Volume>
+  <Summary>A Sin City-styled drama. Arni faces a choice: open-source his project or sell it to a corporation. Three futures, one morning.</Summary>
+  <Writer>JohnDoe (FolkUp)</Writer>
+  <Genre>Drama, Noir</Genre>
+  <Tags>sin city, noir, drama, open source, tech, folkup</Tags>
+  <PageCount>28</PageCount>
+  <LanguageISO>en</LanguageISO>
+  <AgeRating>Mature 16+</AgeRating>
+  <Year>2026</Year>
+  <Month>3</Month>
+  <Web>https://quest.folkup.app</Web>
+  <Notes>AI-generated imagery with human art direction. Licensed under CC BY-NC-SA 4.0.</Notes>
+</ComicInfo>

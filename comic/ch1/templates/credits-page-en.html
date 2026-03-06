@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/source-code-pro-400-cyrillic.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/source-code-pro-400-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'PT Sans Caption';
+    font-style: normal;
+    font-weight: 700;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/pt-sans-caption-700-cyrillic.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'PT Sans Caption';
+    font-style: normal;
+    font-weight: 700;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/pt-sans-caption-700-latin.woff2') format('woff2');
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1600px;
+    height: 2400px;
+    overflow: hidden;
+  }
+  body {
+    background: #000;
+    color: #ccc;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 22px;
+    line-height: 1.6;
+    padding: 280px 120px 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  h2 {
+    font-family: 'PT Sans Caption', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #E8AD4A;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .section {
+    margin-bottom: 56px;
+  }
+  .copyright {
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .license-name {
+    color: #E8AD4A;
+  }
+  .license-url {
+    color: #666;
+    font-size: 18px;
+  }
+  .divider {
+    width: 100px;
+    height: 1px;
+    background: #333;
+    margin: 40px 0;
+  }
+  .font-list {
+    font-size: 18px;
+    color: #888;
+    line-height: 1.8;
+  }
+  .font-name {
+    color: #ccc;
+  }
+</style>
+</head>
+<body>
+  <div class="section">
+    <h2>Credits</h2>
+    <div class="copyright">&copy; 2026 Andrei Klemenchenok (FolkUp)</div>
+    <p>Story, panel scripts, art direction, lettering, editorial</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <h2>License</h2>
+    <p>This work is licensed under<br>
+    <span class="license-name">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</span></p>
+    <p class="license-url">creativecommons.org/licenses/by-nc-sa/4.0</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <h2>AI Transparency</h2>
+    <p>AI-generated imagery with human art direction.</p>
+    <p style="color: #888; font-size: 18px; margin-top: 8px;">
+      All visual content created using AI image generation tools<br>
+      under human creative direction: story, panel scripts,<br>
+      composition, lettering, and editorial decisions by the author.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <h2>Fonts (OFL 1.1)</h2>
+    <div class="font-list">
+      <span class="font-name">Russo One</span> &mdash; Jovanny Lemonad<br>
+      <span class="font-name">PT Sans Caption</span> &mdash; ParaType<br>
+      <span class="font-name">Source Code Pro</span> &mdash; Adobe<br>
+      <span class="font-name">Caveat</span> &mdash; Pablo Impallari<br>
+      <span class="font-name">Bebas Neue</span> &mdash; Dharma Type<br>
+      <span class="font-name">Playfair Display</span> &mdash; Claus Eggers Sorensen
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" style="margin-bottom: 0;">
+    <p style="color: #666; font-size: 18px;">quest.folkup.app</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{
+  "page": 13,
+  "lang": "en",
+  "panels": [
+    {
+      "panel": 1,
+      "elements": [
+        {
+          "type": "caption",
+          "text": "All three doors were open. All three \u2014 walked through. The shelves still almost empty. But 'almost' is no longer 'completely.'",
+          "style": "caption",
+          "multiline": false
+        }
+      ]
+    },
+    {
+      "panel": 2,
+      "elements": [
+        {
+          "type": "sfx",
+          "text": "TUK TUK TUK",
+          "originalCyrillic": "\u0422\u0423\u041a \u0422\u0423\u041a \u0422\u0423\u041a",
+          "style": "sfx_large",
+          "note": null
+        },
+        {
+          "type": "caption",
+          "text": "A knock. Confident, measured, with a pause after the third strike. The way people knock who are used to being let in.",
+          "style": "caption",
+          "multiline": false
+        }
+      ]
+    },
+    {
+      "panel": 3,
+      "elements": []
+    },
+    {
+      "panel": 4,
+      "elements": [
+        {
+          "type": "caption",
+          "text": "He had aged. Not the way people age from time \u2014 the way they age from money.",
+          "style": "caption",
+          "multiline": false
+        },
+        {
+          "type": "dialogue",
+          "speaker": "Breus",
+          "text": "Arni. I recognize your work. Architecture \u2014 clean. Code \u2014 literate. The idea \u2014 beautiful.",
+          "style": "dialogue_breus_mask3",
+          "mask": "Mask 3"
+        }
+      ]
+    },
+    {
+      "panel": 5,
+      "elements": []
+    }
+  ],
+  "_styles": {
+    "caption": {"font": "PT Sans Caption", "weight": 700, "italic": false, "size": "20px", "balloon": "narration-box", "color": "#FFFFFF", "bgColor": "#000000"},
+    "caption_emphasis": {"font": "PT Sans Caption", "weight": 700, "italic": false, "size": "24px", "balloon": "narration-box", "color": "#FFFFFF", "bgColor": "#000000"},
+    "dialogue_arni": {"font": "Russo One", "weight": 400, "italic": false, "size": "18px", "balloon": "dialogue", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dialogue_breus_mask1": {"font": "Russo One", "weight": 400, "italic": false, "size": "18px", "balloon": "dialogue", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dialogue_breus_mask2": {"font": "Russo One", "weight": 700, "italic": false, "size": "18px", "balloon": "dialogue-double-border", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dialogue_breus_mask3": {"font": "Russo One", "weight": 700, "italic": false, "size": "18px", "balloon": "dialogue-double-thin-border", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dialogue_old_man": {"font": "PT Sans Caption", "weight": 700, "italic": false, "size": "20px", "balloon": "narration-box", "color": "#FFFFFF", "bgColor": "#000000"},
+    "dialogue_dan": {"font": "Russo One", "weight": 400, "italic": false, "size": "18px", "balloon": "dialogue", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dialogue_dan_en": {"font": "Russo One", "weight": 400, "italic": true, "size": "18px", "balloon": "dialogue", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dialogue_reflection": {"font": "Russo One", "weight": 400, "italic": false, "size": "18px", "balloon": "dialogue-double-border", "color": "#000000", "bgColor": "#FFFFFF"},
+    "alice_text": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "16px", "balloon": "alice-block", "color": "#000000", "bgColor": "#FFFFFF"},
+    "gonzo_text": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "13px", "balloon": "gonzo-report", "color": "#000000", "bgColor": "#FFFFFF"},
+    "gonzo_text_emotional": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "13px", "balloon": "gonzo-report-ragged", "color": "#000000", "bgColor": "#FFFFFF"},
+    "gonzo_text_growing": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "13px", "balloon": "none", "color": "#FFFFFF", "bgColor": "transparent", "growing": true},
+    "dan_text": {"font": "Russo One", "weight": 400, "italic": false, "size": "18px", "balloon": "dialogue", "color": "#000000", "bgColor": "#FFFFFF"},
+    "dan_text_en": {"font": "Russo One", "weight": 400, "italic": true, "size": "18px", "balloon": "dialogue", "color": "#000000", "bgColor": "#FFFFFF"},
+    "breus_text": {"font": "Caveat", "weight": 400, "italic": false, "size": "22px", "balloon": "breus-handwriting", "color": "#000000", "bgColor": "rgba(255,255,255,0.85)"},
+    "sfx_large": {"font": "Bebas Neue", "weight": 400, "italic": false, "size": "72px", "letterSpacing": "8px", "balloon": "none", "color": "#FFFFFF", "bgColor": "transparent"},
+    "sfx_small": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "14px", "balloon": "none", "color": "#FFFFFF", "bgColor": "transparent"},
+    "sfx_amber": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "14px", "balloon": "none", "color": "#E8AD4A", "bgColor": "transparent"},
+    "gonzo_frame": {"font": "Source Code Pro", "weight": 400, "italic": false, "size": "11px", "balloon": "frame-text", "color": "#FFFFFF", "bgColor": "transparent"},
+    "letter_on_screen": {"font": "PT Sans Caption", "weight": 400, "italic": false, "size": "14px", "balloon": "none", "color": "#FFFFFF", "bgColor": "transparent"}
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "page": 15,
+  "lang": "ru",
+  "panels": [
+    {
+      "panel": 1,
+      "elements": [
+        {
+          "type": "caption",
+          "text": "Он ушёл. Лампа перестала мерцать.",
+          "style": "caption",
+          "multiline": false
+        }
+      ]
+    },
+    {
+      "panel": 3,
+      "elements": [
+        {
+          "type": "dialogue",
+          "speaker": "Алиса",
+          "text": "Он говорил обо мне. 'Блокнот вместо портфолио.' Он не ошибся.",
+          "style": "alice_text",
+          "mask": null
+        }
+      ]
+    },
+    {
+      "panel": 4,
+      "elements": [
+        {
+          "type": "alice_text",
+          "text": "// Портфолио показывает, что ты сделал. Блокнот показывает, что ты заметил.",
+          "style": "alice_text"
+        }
+      ]
+    },
+    {
+      "panel": 5,
+      "elements": [
+        {
+          "type": "dialogue",
+          "speaker": "Арни",
+          "text": "Справимся. Вместе. Без чужих денег.",
+          "style": "dialogue_arni",
+          "mask": null
+        },
+        {
+          "type": "caption",
+          "text": "Folk choice.",
+          "style": "caption_emphasis",
+          "multiline": false
+        }
+      ]
+    }
+  ],
+  "_styles": {
+    "caption": {
+      "font": "PT Sans Caption",
+      "weight": 700,
+      "italic": false,
+      "size": "20px",
+      "balloon": "narration-box",
+      "color": "#FFFFFF",
+      "bgColor": "#000000"
+    },
+    "caption_emphasis": {
+      "font": "PT Sans Caption",
+      "weight": 700,
+      "italic": false,
+      "size": "24px",
+      "balloon": "narration-box",
+      "color": "#FFFFFF",
+      "bgColor": "#000000"
+    },
+    "dialogue_arni": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dialogue_breus_mask1": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dialogue_breus_mask2": {
+      "font": "Russo One",
+      "weight": 700,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue-double-border",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dialogue_breus_mask3": {
+      "font": "Russo One",
+      "weight": 700,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue-double-thin-border",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dialogue_old_man": {
+      "font": "PT Sans Caption",
+      "weight": 700,
+      "italic": false,
+      "size": "20px",
+      "balloon": "narration-box",
+      "color": "#FFFFFF",
+      "bgColor": "#000000"
+    },
+    "dialogue_dan": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dialogue_dan_en": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": true,
+      "size": "18px",
+      "balloon": "dialogue",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dialogue_reflection": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue-double-border",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "alice_text": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "16px",
+      "balloon": "alice-block",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "gonzo_text": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "13px",
+      "balloon": "gonzo-report",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "gonzo_text_emotional": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "13px",
+      "balloon": "gonzo-report-ragged",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "gonzo_text_growing": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "13px",
+      "balloon": "none",
+      "color": "#FFFFFF",
+      "bgColor": "transparent",
+      "growing": true
+    },
+    "dan_text": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": false,
+      "size": "18px",
+      "balloon": "dialogue",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "dan_text_en": {
+      "font": "Russo One",
+      "weight": 400,
+      "italic": true,
+      "size": "18px",
+      "balloon": "dialogue",
+      "color": "#000000",
+      "bgColor": "#FFFFFF"
+    },
+    "breus_text": {
+      "font": "Caveat",
+      "weight": 400,
+      "italic": false,
+      "size": "22px",
+      "balloon": "breus-handwriting",
+      "color": "#000000",
+      "bgColor": "rgba(255,255,255,0.85)"
+    },
+    "sfx_large": {
+      "font": "Bebas Neue",
+      "weight": 400,
+      "italic": false,
+      "size": "72px",
+      "letterSpacing": "8px",
+      "balloon": "none",
+      "color": "#FFFFFF",
+      "bgColor": "transparent"
+    },
+    "sfx_small": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "14px",
+      "balloon": "none",
+      "color": "#FFFFFF",
+      "bgColor": "transparent"
+    },
+    "sfx_amber": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "14px",
+      "balloon": "none",
+      "color": "#E8AD4A",
+      "bgColor": "transparent"
+    },
+    "gonzo_frame": {
+      "font": "Source Code Pro",
+      "weight": 400,
+      "italic": false,
+      "size": "11px",
+      "balloon": "frame-text",
+      "color": "#FFFFFF",
+      "bgColor": "transparent"
+    },
+    "letter_on_screen": {
+      "font": "PT Sans Caption",
+      "weight": 400,
+      "italic": false,
+      "size": "14px",
+      "balloon": "none",
+      "color": "#FFFFFF",
+      "bgColor": "transparent"
+    }
+  }
+}
