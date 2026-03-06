@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 900;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/playfair-display-900.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/source-code-pro-400-cyrillic.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('file:///C:/JOHNDOE_CLAUDE/comic-prototype/fonts/source-code-pro-400-latin.woff2') format('woff2');
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1600px;
+    height: 2400px;
+    overflow: hidden;
+  }
+  body {
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .title-ru {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 120px;
+    letter-spacing: 6px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .title-en {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 72px;
+    letter-spacing: 4px;
+    color: #E8AD4A;
+    margin-bottom: 80px;
+  }
+  .divider {
+    width: 200px;
+    height: 2px;
+    background: #E8AD4A;
+    margin-bottom: 80px;
+  }
+  .chapter {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 28px;
+    color: #666;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 120px;
+  }
+  .author {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 32px;
+    color: #aaa;
+    margin-bottom: 24px;
+  }
+  .rating {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 20px;
+    color: #666;
+    border: 1px solid #444;
+    padding: 8px 24px;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+  <div class="title-ru">СПУСК</div>
+  <div class="title-en">DESCENT</div>
+  <div class="divider"></div>
+  <div class="chapter">Глава 1</div>
+  <div class="author">JohnDoe (FolkUp)</div>
+  <div class="rating">Mature 16+</div>
+</body>
+</html>
