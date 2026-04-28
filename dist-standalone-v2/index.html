@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FolkUp Quest — Standalone</title>
+  <meta name="description" content="Интерактивный текстовый квест от FolkUp. Автономная версия для офлайн использования.">
+
+  <meta name="theme-color" content="#1a1714">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Favicon (relative paths for file://) -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+
+  <!-- Fonts (standalone: local fonts.css) -->
+  <link rel="stylesheet" href="./fonts/fonts.css">
+
+  <style>
+    /* Critical CSS inlined for file:// compatibility */
+    :root {
+      --color-amber: #E8AD4A;
+      --color-bordeaux: #7D4450;
+      --color-sage: #839E75;
+      --color-ivory: #FEFCF6;
+      --color-bg-primary: #1a1714;
+      --color-text-primary: var(--color-ivory);
+      --color-text-muted: #b8b4ab;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    #start-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    #story { display: none; padding: 2rem; max-width: 800px; margin: 0 auto; }
+
+    .btn-primary {
+      background: var(--color-amber);
+      color: var(--color-bg-primary);
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0.5rem;
+      transition: transform 0.1s ease;
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .loading { color: var(--color-text-muted); font-style: italic; }
+  </style>
+  <script src="./assets/index-standalone-Dq2-qsoN.js"></script>
+</head>
+<body>
+  <main>
+    <!-- Start Screen -->
+    <div id="start-screen">
+      <h1>FolkUp Quest</h1>
+      <p>Интерактивный текстовый квест</p>
+      <p class="loading">Standalone версия</p>
+
+      <div style="margin: 2rem 0;">
+        <button id="new-game-btn" class="btn-primary">Новая игра</button>
+        <button id="continue-game-btn" class="btn-primary" style="display: none;">Продолжить</button>
+      </div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="story">
+      <div id="game">
+        <div id="text-container"></div>
+        <div id="choices" role="group" aria-label="Варианты выбора"></div>
+        <button id="continue-btn" aria-label="Продолжить чтение">Продолжить ▸</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer-nav" style="display: none;">
+      <button id="restart-btn" class="footer-link" style="display: none;">Начать заново</button>
+      <p class="footer-disclaimer">FolkUp Quest — Standalone версия для офлайн использования</p>
+    </footer>
+  </main>
+
+  <!-- Entry point: standalone main script -->
+</body>
+</html>
