@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мост — Дэн | FolkUp Quest</title>
+  <meta name="description" content="Рассказ второй. Транскрипция Дэна. Из цикла «Сад расходящихся тропок».">
+  <meta property="og:title" content="Мост — Дэн">
+  <meta property="og:description" content="Устная речь, гитарные ремарки и полсекунды задержки между Чикаго и Сетубалом.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <style>
+    :root {
+      --bg: #1a1714;
+      --surface: #242120;
+      --text: #e8e4df;
+      --text-secondary: #b5b0a9;
+      --text-muted: #7a756f;
+      --accent: #E8AD4A;
+      --accent-dim: #c49438;
+      --bordeaux: #7D4450;
+      --sage: #839E75;
+      --divider: #3a3530;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      display: flex;
+      flex-direction: column;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .page-header {
+      flex-shrink: 0;
+      padding: 2rem 1rem 0;
+    }
+    .page-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 1rem 3rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--divider) transparent;
+    }
+    .page-content::-webkit-scrollbar { width: 6px; }
+    .page-content::-webkit-scrollbar-track { background: transparent; }
+    .page-content::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+      font-size: 1.9rem;
+      font-weight: 400;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .cycle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .meta span { white-space: nowrap; }
+
+    /* Transcript styling */
+    .track {
+      margin-bottom: 2.5rem;
+    }
+    .track-title {
+      font-family: 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px dashed var(--divider);
+    }
+    p { margin-bottom: 1rem; }
+    .stage-dir {
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+    .en {
+      font-style: italic;
+      color: var(--accent-dim);
+    }
+    blockquote {
+      border-left: 3px solid var(--bordeaux);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    .pause {
+      display: block;
+      text-align: center;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.85rem;
+      margin: 1.5rem 0;
+    }
+    .long-pause {
+      display: block;
+      text-align: center;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.85rem;
+      margin: 2rem 0;
+      min-height: 3rem;
+      line-height: 3rem;
+    }
+    .signature {
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      margin-top: 1.5rem;
+    }
+    .separator {
+      text-align: center;
+      color: var(--divider);
+      margin: 2rem 0;
+      letter-spacing: 0.5em;
+    }
+    h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--accent);
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+    a { color: var(--accent); }
+    .nav {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-top: 1px solid var(--divider);
+      background: var(--bg);
+      font-size: 0.9rem;
+    }
+    .nav a { text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+    .spoiler-warn {
+      background: var(--surface);
+      border: 1px solid var(--bordeaux);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .spoiler-warn strong { color: var(--bordeaux); }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Мост</h1>
+    <p class="subtitle">Дэн. Транскрипция.</p>
+    <p class="cycle">Из цикла «Сад расходящихся тропок» — рассказ второй</p>
+
+    <div class="meta">
+      <span>Форма: транскрипция аудио</span>
+      <span>Рассказчик: Дэн</span>
+      <span>Концовка: Мост</span>
+      <span>~4 000 слов</span>
+    </div>
+  </header>
+
+  <article class="page-content">
+
+    <div class="spoiler-warn">
+      <strong>Внимание:</strong> этот рассказ раскрывает концовку «Мост». Рекомендуем сначала пройти <a href="/">FolkUp Quest</a>.
+    </div>
+
+    <!-- ======================================= -->
+    <!-- VERSE 1: ПЕРВЫЙ АККОРД                  -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">Verse 1 — Первый аккорд</div>
+
+      <p class="stage-dir">[звук гитары — открытая E, один раз, звенит долго]</p>
+
+      <p>Ладно. Ладно.</p>
+
+      <p class="stage-dir">[пауза]</p>
+
+      <p>Чикаго. Январь или февраль, какая разница, тут один сезон — <span class="en">cold</span>. Кухня. Стена — пластинки, четыре штуки, Muddy Waters, Howlin' Wolf, Robert Johnson и одна без имени, конверт стёрся, я купил её на развале в Гайд-парке за доллар, продавец сказал: <span class="en">that's either genius or garbage, you decide</span>. Я решил, что гений. До сих пор не проверил. <span class="en">Some things are better unverified.</span></p>
+
+      <p class="stage-dir">[шум с улицы — сирена вдалеке, затухает]</p>
+
+      <p>Man. Три года трезвый. Считаю, потому что считать нужно — не для гордости, для конструкции. <span class="en">Sobriety is a rhythm section.</span> Без неё всё остальное — просто шум. Дочка — шесть лет, живёт с матерью в Оук-парке, вижу по вторникам и через выходные, расстояние — 14 миль или 35 минут на электричке, зависит от того, чем мерить. Милями — близко. Минутами — терпимо. Рассветами, которые пропустил, — далеко.</p>
+
+      <p>Вот в такой точке — между гитарой и электричкой — звонок. Видеозвонок. Незнакомый парень, задержка полсекунды, за его спиной — Сетубал. Набережная. Чайки. Он считал чаек.</p>
+
+      <p>Man.</p>
+
+      <p class="stage-dir">[звук гитары — приглушённый, ладонь по деке]</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- VERSE 2: ВИДЕОЗВОНОК                    -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">Verse 2 — Видеозвонок</div>
+
+      <p>До звонка — у меня был вторник, электричка, гитара и пластинки. Не мало. <span class="en">Not enough either, but not nothing.</span> Была рутина, а рутина — это ритм-секция жизни: бочка, малый, хай-хэт, бочка, малый, хай-хэт. Повторяй, пока не умрёшь или пока не напишешь что-то поверх.</p>
+
+      <p>Арни — через экран, полсекунды задержки. Куртка пахла табаком — ну, он так сказал, наклонился, типа извинился за запах. Через экран запах не чувствуешь, но извинение — чувствуешь. Говорил про библиотеку, про палочку, про энциклопедии. Я думал: <span class="en">this guy is either crazy or the last honest person on the internet</span>. Потом подумал: <span class="en">why not both</span>.</p>
+
+      <p>Он попросил показать суть. Не «давай разберёмся вместе», а — покажи. Суть. <span class="en">Like a pitch meeting.</span> Ладно, можно и так. Я рассказал про Роберта Джонсона. 29 песен, две сессии записи, вся жизнь. Умер в двадцать семь — отравили, зарезали, сглазили, никто не знает. Услышали через тридцать лет. Кит Ричардс включил пластинку, повернулся к инженеру и спросил: <span class="en">who's the other guitar player?</span> Инженер: <span class="en">there is no other guitar player</span>.</p>
+
+      <p class="stage-dir">[пауза, шум с улицы — автобус]</p>
+
+      <p>Один человек. 29 песен. 30 лет тишины. Весь рок-н-ролл — из этого.</p>
+
+      <p>Арни не сказал «впечатляет» и не сказал «а можно конкретнее». Помолчал. Задержка — не интернета, а его собственная, живая. Потом: «Расскажи, как рассказывать.»</p>
+
+      <p>Man. Правильный вопрос. Не «как продать», не «как набрать аудиторию». Как рассказывать. Я отложил гитару. Щит больше не нужен.</p>
+
+      <p class="stage-dir">[звук — гитара ложится на стол, глухой стук дерева]</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- VERSE 3: ЧЕРЕЗ ЭКРАН                    -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">Verse 3 — Через экран</div>
+
+      <p>Алиса — через экран. Я видел обложку блокнота, мокрый кирпич, клетка внутри, стрелки. Она рисовала стрелки, пока мы разговаривали, и каждая стрелка — как короткая фраза в чужом разговоре: слышишь интонацию, не слова.</p>
+
+      <p>Она не смотрела в камеру. Смотрела в блокнот. <span class="en">Which is fine — some people listen with their eyes, some with their hands.</span> Алиса слушала руками: линия, стрелка, связь, линия, стрелка. Я видел только обложку и движение карандаша. Хватило.</p>
+
+      <p>КиберГонзо — три экрана. Капюшон. Через видеозвонок капюшон — это просто тёмное пятно с подсветкой, но интонация — точная, как метроном. Он бросал данные, как факты, — без упаковки, без <span class="en">packaging</span>. «Компания Бреуса потеряла 30% за год.» Точка. «Два иска.» Точка. Не мнение — факт. <span class="en">The man plays in 4/4 time, every beat on the one.</span></p>
+
+      <p>Я не видел их лиц нормально — задержка, пиксели, иногда замирает картинка, и ты разговариваешь с фотографией. Но голоса — голоса через любой битрейт проходят. Голос Алисы — быстрый, с перескоками, как будто мысль обгоняет рот. Голос КиберГонзо — ровный, как стол, на который кладут доказательства.</p>
+
+      <p class="stage-dir">[пауза]</p>
+
+      <p>Man. Мы были командой до того, как поняли, что мы команда. Кто-то нашёл бы это в одном аккорде — тоника, терция, квинта, три ноты, одно созвучие. Я нашёл это в задержке видеозвонка: полсекунды, в которые помещается доверие.</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- BRIDGE: БРЕУС-БЛЮЗ                      -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">Bridge — Бреус-блюз</div>
+
+      <p>Ночь. Чикаго, у меня 2:30. Кофе остывший — я видел чашку Арни через экран, и его кофе тоже остывший, и это, <span class="en">man, cold coffee is a sign</span>. Знак чего — не знаю, но знак.</p>
+
+      <p>Стук в дверь библиотеки. Через экран не слышишь стук — видишь, как Арни поворачивает голову. Потом входит Бреус.</p>
+
+      <p>Я не видел контракт. <span class="en">I couldn't read the contract.</span> Через экран — не прочитаешь мелкий шрифт. Но я мог читать <span class="en">body language</span>. Спину. <span class="en">His back said no before his mouth did.</span> Арни сидел, и спина его была прямая — не от уверенности, а от того, что если расслабиться, можно согласиться, а если согласиться, то вот эти три папки на стеллаже — первые, тонкие, наши — станут частью чужой презентации.</p>
+
+      <p>Бреус говорил. Два миллиона. Профессионалы. Масштаб. Каждое слово — на нужном месте, как аранжировка, где каждый инструмент прописан в партитуре и нет места <span class="en">improvisation</span>.</p>
+
+      <p>Арни слушал. Сказал: «Продолжай. Я слушаю.» Дэн — это я — замер. Потому что «слушаю» — это не «нет». «Слушаю» — это дверь, которая не закрылась.</p>
+
+      <p>Бреус сел. Не спрашивая. Достал контракт.</p>
+
+      <p>«Право первого отказа на партнёрства. Определение — за Инвестором.»</p>
+
+      <p>Я не видел текст. Но видел, как Арни наклонился ближе. Читал. Долго. Потом разогнулся и сказал — через экран, через полсекунды, но мне показалось, что я услышал мгновенно:</p>
+
+      <p>«Это не контракт. Это поводок с регулируемой длиной.»</p>
+
+      <p class="stage-dir">[звук гитары — резкий, заглушённый ладонью]</p>
+
+      <p>Man.</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- AFTER HOURS                              -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">After Hours</div>
+
+      <p class="stage-dir">[долгая пауза]</p>
+
+      <p class="long-pause">[пауза]</p>
+
+      <p class="long-pause">[пауза]</p>
+
+      <p>Ладно.</p>
+
+      <p class="stage-dir">[пауза]</p>
+
+      <p>Бреус ушёл. Арни у окна. В стекле — отражение. Я видел через экран: лицо, стеллажи, лампа. И что-то ещё, чего не должно быть — или мне показалось, задержка, пиксели, <span class="en">compression artifacts</span>. Кресло вместо стула. На секунду.</p>
+
+      <p class="stage-dir">[пауза]</p>
+
+      <p>Есть такой блюз. Не песня — состояние. Когда играть не можешь, и молчать не можешь, и единственное, что остаётся, — держать руку на грифе и ждать, пока пальцы сами найдут ноту. Иногда находят. Иногда — нет, и тогда тишина становится частью музыки, и это не хуже, чем нота. <span class="en">Silence is a rest, not an absence.</span></p>
+
+      <p class="stage-dir">[звук гитары — медленно, без слов, один аккорд, затухает]</p>
+
+      <p>Было 4 утра в Чикаго. За стеной — сосед, который встаёт в 5 на смену. Я играл тихо. Один аккорд. Не E7 — другой, открытый, без имени, из тех, что не в учебниках. Арни через экран — не слышал, наверное. Или слышал. <span class="en">Doesn't matter.</span> Некоторые вещи играешь не для слушателя. Играешь, потому что рука не выдерживает тишину.</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- VERSE 4: ВСТРЕЧНОЕ                      -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">Verse 4 — Встречное</div>
+
+      <p>Утро. Два письма на столе — я видел через экран. Одно от Бреуса (конверт, почерк). Другое — листок из блокнота. Алиса. Фермер. 1847 год. Мост. 150 лет.</p>
+
+      <p><span class="en">Here's a story.</span></p>
+
+      <p>Мемфис, 1929. Парень по имени Роберт заходит в отель. Комната стоит доллар. У него нет доллара. У него есть гитара и песня, которую ещё никто не слышал. Он играет хозяину отеля. Хозяин говорит: <span class="en">room's free, but play again tomorrow</span>. Роберт играет завтра. И послезавтра. И неделю. Потом уходит. Через три года записывает 29 песен. Через три года после этого — мёртв.</p>
+
+      <p>Через тридцать лет хозяин отеля рассказывает эту историю журналисту. Журналист пишет статью. Статью читает Кит Ричардс. Ричардс включает пластинку. <span class="en">The rest — well, the rest is everything.</span></p>
+
+      <p>Один доллар, которого не было. Одна комната. Одна неделя. Весь блюз — из этого зазора между «нет доллара» и «есть песня».</p>
+
+      <p class="stage-dir">[пауза, шум — открывается окно]</p>
+
+      <p>Арни написал встречное предложение. Я не видел текст — видел, как писал. Медленно. Каждое слово — как нота, которую кладёшь на место и проверяешь: звучит? «Открой код. Не данные — код. Сделай так, чтобы любой мог проверить, как устроена твоя машина. Палочка работает в обе стороны.»</p>
+
+      <p>Man. Это даже не предложение. Это — тест. Если Бреус когда-то был тем парнем в тёртых джинсах (настоящих, от носки, а не дизайнерских), если внутри ещё жив тот, кто говорил про справедливую архитектуру, — он ответит. Если нет — тоже ответ.</p>
+
+      <p>Арни не знал, ответит ли. Я не знал. Но это нормально. <span class="en">You don't write a song because you know how it ends. You write it because the first chord demands a second.</span></p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- OUTRO: МОСТ                             -->
+    <!-- ======================================= -->
+
+    <section class="track">
+      <div class="track-title">Outro — Мост</div>
+
+      <p class="stage-dir">[звук гитары — E7, A7, B7, медленно, блюзовая тройка]</p>
+
+      <p>Год спустя.</p>
+
+      <p>Groove другой. Раньше играл в footer — три аккорда, тихо, как фон. Теперь — тот же footer, но слушают в двадцати странах. <span class="en">Twenty countries.</span> Не стадионы, не чарты. Люди, которые открывают энциклопедию, читают про грибы или Холста или старые пластинки, и внизу — три аккорда. Мои.</p>
+
+      <p><span class="en">Man, this is not the groove I wrote.</span> Но людям нравится. Кто я такой, чтобы спорить с двадцатью странами. Бреус ответил — не так, как хотели, но ответил. Логотип внизу, серый, маленький. Благодаря ему мост стоит. По мосту ходят люди, которые не нашли бы FolkUp сами. Некоторые зажигают фонари. Не знают, что фонарь оплачен тем, кто когда-то продавал темноту.</p>
+
+      <p>Блюз компромисса. <span class="en">Not a defeat, not a victory. A Tuesday.</span></p>
+
+      <p>Дочке семь. По вторникам приезжаю, привожу мороженое, которое она не доедает, и пластинки, которые она не слушает. Но когда уезжаю — стоит у окна. <span class="en">That's not a chord, that's a whole song.</span></p>
+
+      <p class="stage-dir">[пауза]</p>
+
+      <p>На прошлой неделе — видеозвонок с Арни. Задержка — те же полсекунды, три тысячи миль. Он рассказывал про новые статьи, про КиберГонзо (который проверяет грибы, по-прежнему каждый — трижды, по-прежнему капюшон, по-прежнему три экрана). Про Алису, которая пишет про Холста четвёртый месяц и третью редакцию, и каждая длиннее предыдущей. Про учителей, которые читают энциклопедии в школах.</p>
+
+      <p>Потом сказал слово. Мимоходом, в середине предложения, как будто слово всегда там было, а я просто не слышал. Кто-то написал на стене библиотеки, он не знает кто.</p>
+
+      <p>Команданте.</p>
+
+      <p>Я не запомнил, в каком контексте. Не запомнил, кто произнёс первым — Арни, или Алиса, или КиберГонзо, или я сам. Слово было, а источника — нет. Как та пластинка с развала: <span class="en">either genius or garbage, you decide</span>.</p>
+
+      <p class="stage-dir">[звук гитары — E7, один раз, долго]</p>
+
+      <p class="stage-dir">[шум с улицы — утро, Чикаго, кто-то заводит машину]</p>
+
+      <p class="stage-dir">[тишина]</p>
+
+      <p class="signature">🎸 Dan</p>
+    </section>
+
+  </article>
+
+  <nav class="nav">
+    <a href="/stories/">&larr; Все рассказы</a>
+    <a href="/stories/chair.html">Читать «Кресло» &rarr;</a>
+  </nav>
+</body>
+</html>

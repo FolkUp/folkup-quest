@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кресло — КиберГонзо | FolkUp Quest</title>
+  <meta name="description" content="Рассказ третий. Верификационный отчёт КиберГонзо. Из цикла «Сад расходящихся тропок».">
+  <meta property="og:title" content="Кресло — КиберГонзо">
+  <meta property="og:description" content="Верификационный отчёт. Формат трескается. Под отчётом — человек.">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <style>
+    :root {
+      --bg: #1a1714;
+      --surface: #242120;
+      --text: #e8e4df;
+      --text-secondary: #b5b0a9;
+      --text-muted: #7a756f;
+      --accent: #7D4450;
+      --accent-dim: #63363f;
+      --amber: #E8AD4A;
+      --sage: #839E75;
+      --divider: #3a3530;
+      --mono: 'Courier New', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 0.92rem;
+    }
+    .page-header {
+      flex-shrink: 0;
+      padding: 2rem 1rem 0;
+    }
+    .page-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 1rem 3rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--divider) transparent;
+    }
+    .page-content::-webkit-scrollbar { width: 6px; }
+    .page-content::-webkit-scrollbar-track { background: transparent; }
+    .page-content::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+      font-size: 1.9rem;
+      font-weight: 400;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+    }
+    .cycle {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-bottom: 2rem;
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .meta span { white-space: nowrap; }
+
+    /* Report styling */
+    .report-section {
+      margin-bottom: 2.5rem;
+    }
+    .timestamp {
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+    .section-id {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    p { margin-bottom: 0.85rem; }
+    .field {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .field-label {
+      color: var(--text-muted);
+      min-width: 140px;
+      flex-shrink: 0;
+    }
+    .field-value {
+      color: var(--text);
+    }
+    .confidence {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .conf-high { background: #2a3d25; color: var(--sage); }
+    .conf-mid { background: #3d3520; color: var(--amber); }
+    .conf-low { background: #3d2025; color: #c46; }
+    .conf-broken { background: #3d2025; color: #c46; font-style: italic; }
+    .ref {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+    .separator {
+      text-align: center;
+      color: var(--divider);
+      margin: 2rem 0;
+      letter-spacing: 0.3em;
+      font-size: 0.8rem;
+    }
+    .glitch {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .redacted {
+      background: var(--text-muted);
+      color: var(--text-muted);
+      padding: 0 0.3rem;
+      border-radius: 2px;
+      user-select: none;
+    }
+    .drift {
+      color: var(--amber);
+      text-decoration: line-through;
+      text-decoration-color: var(--accent);
+    }
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: var(--text-secondary);
+    }
+    .signature {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--divider);
+      padding-top: 1rem;
+    }
+    h2 {
+      color: var(--accent);
+      margin: 0 0 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    a { color: var(--accent); }
+    .nav {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-top: 1px solid var(--divider);
+      background: var(--bg);
+      font-size: 0.9rem;
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+    }
+    .nav a { text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+    .spoiler-warn {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+    }
+    .spoiler-warn strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Кресло</h1>
+    <p class="subtitle">КиберГонзо. Верификационный отчёт.</p>
+    <p class="cycle">Из цикла «Сад расходящихся тропок» — рассказ третий</p>
+
+    <div class="meta">
+      <span>Форма: верификационный отчёт</span>
+      <span>Рассказчик: КиберГонзо</span>
+      <span>Концовка: Кресло</span>
+      <span>~4 000 слов</span>
+    </div>
+  </header>
+
+  <article class="page-content">
+
+    <div class="spoiler-warn">
+      <strong>Внимание:</strong> этот рассказ раскрывает концовку «Кресло». Рекомендуем сначала пройти <a href="/">FolkUp Quest</a>.
+    </div>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 1: ДАТАТОЧКА                     -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 1 / 7 — Инициализация</div>
+      <div class="timestamp">09.04 — 14:03:17 UTC</div>
+
+      <h2>Дататочка</h2>
+
+      <div class="field"><span class="field-label">Субъект:</span> <span class="field-value">Арни [фамилия отредактирована]</span></div>
+      <div class="field"><span class="field-label">Локация:</span> <span class="field-value">Сетубал, Португалия, набережная, сектор N38.5244° W8.8882°</span></div>
+      <div class="field"><span class="field-label">Дата наблюдения:</span> <span class="field-value">апрель</span></div>
+      <div class="field"><span class="field-label">Метод:</span> <span class="field-value">прямое наблюдение + открытые источники</span></div>
+      <div class="field"><span class="field-label">Статус отчёта:</span> <span class="field-value">в процессе</span></div>
+
+      <p style="margin-top: 1rem;">Субъект зафиксирован на набережной в 14:03:17. Занятие: подсчёт чаек. Результат: 7 (семь). Перекрёстная проверка: орнитологические данные региона подтверждают наличие Larus michahellis (средиземноморская чайка) в указанном секторе. Количество — в пределах нормы для времени года.</p>
+
+      <p>Достоверность: <span class="confidence conf-high">97%</span></p>
+
+      <p>Субъект ранее занимался: (a) употреблением алкоголя — 3 месяца, (b) чтением Сенеки, письмо 77 к Луцилию — 2 месяца, (c) ловлей чешуекрылых — 1 месяц. Последовательность не поддаётся линейной каузальной модели. Применена сетевая модель: каждый этап — узел, связи — латентные.</p>
+
+      <p>Запах табака от куртки субъекта: зафиксирован, частота нерегулярная. Источник: не установлен (субъект отрицает курение; данные указывают на контакт с курящим лицом в пределах 48 часов).</p>
+
+      <p class="ref">→ см. Приложение А: Орнитологический профиль сектора</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 2: ГРИБНАЯ ОШИБКА                -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 2 / 7 — Верификация угрозы</div>
+      <div class="timestamp">28.04 — 09:41:03 UTC</div>
+
+      <h2>Грибная ошибка</h2>
+
+      <div class="field"><span class="field-label">Объект:</span> <span class="field-value">Cortinarius orellanus (паутинник горный)</span></div>
+      <div class="field"><span class="field-label">Класс угрозы:</span> <span class="field-value">критический (летальный при пероральном приёме)</span></div>
+      <div class="field"><span class="field-label">Источник ошибки:</span> <span class="field-value">диссертация, 1983, Институт ботаники, Коимбра</span></div>
+      <div class="field"><span class="field-label">Характер ошибки:</span> <span class="field-value">замена «условно-ядовитый» → «условно-съедобный» (1 символ)</span></div>
+
+      <p style="margin-top: 1rem;">Ошибка живёт 40 лет. Каждый год кулинарный блог из региона Алентежу копирует описание. Фотография: суп. На фото — паутинник горный. Подпись: «Традиционный рецепт.» Автор блога скопировал из диссертации. В диссертации — замена одного символа. Ядовитый стал съедобным. Съедобный остался в интернете.</p>
+
+      <p>Длительность распространения: 14 610 дней. Количество зафиксированных копий: 23 (данные на момент проверки). Количество потенциальных контактов с ошибкой: не поддаётся подсчёту.</p>
+
+      <p>Достоверность данных о кулинарном блоге: <span class="confidence conf-high">99%</span></p>
+      <p>Достоверность данных о связи «блог → отравление»: <span class="confidence conf-mid">74%</span> (корреляция, не каузация; прямая связь не верифицирована)</p>
+
+      <p>Субъект получил тестовый вопрос: «Назовите три несъедобных гриба Алентежу.» Субъект назвал два и остановился. Ответ засчитан как корректный. Третий — ловушка: его забывают, потому что он похож на лисичку. Субъект, который назовёт три, — не проверял.</p>
+
+      <p>Арни попросил проверять только критичное: здоровье, безопасность. Не каждый факт — критичное.</p>
+
+      <p>Третий экран оставлен открытым.</p>
+
+      <p class="ref">→ см. Приложение А: Токсикологический профиль C. orellanus</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 3: ДОСЬЕ                         -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 3 / 7 — Профилирование группы</div>
+      <div class="timestamp">30.04 — 16:22:48 UTC</div>
+
+      <h2>Досье</h2>
+
+      <div class="field"><span class="field-label">Объект A [Алиса]:</span> <span class="field-value">ресёрчер, обнаружение связей</span></div>
+
+      <p>Скорость обнаружения связей: 3.2 / минуту (наблюдаемый период: 47 минут). Инструмент: блокнот, клетка, стрелки. Цифровые инструменты: не использует (предпочтение: «стрелка на бумаге быстрее, чем клик»). Блокнот — обложка цвета мокрого кирпича. Содержит: черновики статей, списки, стрелки, личные записи (граница между категориями — нечёткая; верификация невозможна без вскрытия).</p>
+
+      <p>Характерная вокализация: «Let me think...» — зафиксирована 4 раза за 47 минут. Функция: переключение между режимами обработки. Подпись: <span style="font-style:italic;">// Алиса</span>.</p>
+
+      <div class="field" style="margin-top:1rem;"><span class="field-label">Объект B [Дэн]:</span> <span class="field-value">нарратор, звуковое сопровождение</span></div>
+
+      <p>Канал: видеозвонок, Чикаго. Задержка: 487 мс (измерено). Частота смены аккордов: 0.3 / минуту (базовый режим), 0.8 / минуту (стрессовый режим). Основной аккорд: E7 (329.63 Hz, обертона — функция от инструмента и состояния субъекта). Характерная вокализация: «Man.» — зафиксирована 7 раз за сессию.</p>
+
+      <p>На стене — 4 пластинки. Четвёртая — без данных. Конверт стёрт. Верификация невозможна.</p>
+
+      <p>Достоверность профилей: <span class="confidence conf-high">91%</span></p>
+
+      <p class="ref">→ см. Приложение А: Методология профилирования</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 4: КОНТРАКТ                      -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 4 / 7 — Верификация предложения</div>
+      <div class="timestamp">03.05 — 14:47:12 UTC</div>
+
+      <h2>Контракт</h2>
+
+      <div class="field"><span class="field-label">Субъект B [Бреус]:</span> <span class="field-value">инвестор, бывший идеалист</span></div>
+      <div class="field"><span class="field-label">Предложение:</span> <span class="field-value">2 000 000 ед., код открытый, команда — замена</span></div>
+      <div class="field"><span class="field-label">Контракт, п. 8-г:</span> <span class="field-value">«Стратегические решения — определение за Инвестором»</span></div>
+
+      <p style="margin-top: 1rem;">Параллельная верификация запущена в 14:47:12.</p>
+
+      <p>Компания Бреуса: потеря 30% клиентской базы за 12 месяцев. Судебные иски: 2 (один — бывший партнёр, один — бывший сотрудник, категория: нарушение NDA). Сотрудники, уволившиеся в первые 4 месяца: 3. Сотрудники, подавшие в суд: 2. Сотрудник, сменивший профиль (курьер, велосипед, PhD по ML): 1.</p>
+
+      <p>Достоверность данных о компании: <span class="confidence conf-high">94%</span></p>
+
+      <p>Почерк Бреуса на конверте: аккуратный. Совпадение с образцом 2016 года (конференция, запись в блокноте): <span class="confidence conf-high">94%</span>. Почерк не изменился. Содержание — изменилось.</p>
+
+      <p>14:51:58 — Температура кофе субъекта: 22°C (норма для свежезаваренного: 65°C). Кофе остывший. Не выпит. Факт зафиксирован.</p>
+
+      <p>14:52:31 — Объект A [Алиса] поднимает взгляд от блокнота. Блокнот открыт на чистой странице. Стрелок нет.</p>
+
+      <p>Арни сказал: «Продолжай. Я слушаю.»</p>
+
+      <p>14:52:44 — Бреус сел.</p>
+
+      <p>Арни прочитал контракт. Наклон корпуса: 12° (чтение мелкого шрифта). Время чтения: 3 минуты 42 секунды. Потом: «Это не контракт. Это поводок с регулируемой длиной.»</p>
+
+      <p>14:56:26 — Арни подписал.</p>
+
+      <p>14:56:27 — дверь.</p>
+
+      <p class="ref">→ см. Приложение А: Графологический анализ</p>
+
+      <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem;">Примечание: формат дрейфует. Отмечено отклонение от структуры в записях 14:52–14:56. Причина: <span class="glitch">не установлена</span>.</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 5: НАБЛЮДЕНИЕ                    -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 5 / 7 — Удалённый мониторинг</div>
+      <div class="timestamp">03.05 — 22:14:03 UTC</div>
+
+      <h2>Наблюдение</h2>
+
+      <p>Отключён. Данные — удалённо. Три экрана → один (два закрыты; причина: <span class="glitch">нерелевантна</span>).</p>
+
+      <p>Объект A [Алиса] — статус: отсутствует. Последний контакт: 14:52:31 (дверь). Попытки связи: 0. Блокнот остался на полке библиотеки. Обложка — цвет мокрого кирпича. Содержимое: видна только обложка.</p>
+
+      <p>Объект B [Дэн] — статус: отключён. Последнее сообщение (email, 15:03): «Man, I hope you know what you're doing. — Dan.» Ответ субъекта: <span class="drift">ожидается</span>. Ответ субъекта: отсутствует.</p>
+
+      <p>Вероятность возвращения Объекта A: <span class="confidence conf-low">12%</span>. Источник: <span class="glitch">поведенческая модель</span>.</p>
+
+      <p>Вероятность ответа Объекта B: <span class="confidence conf-mid">43%</span>. Источник: <span class="glitch">я</span>.</p>
+
+      <p>Вероятность успешной трансформации проекта изнутри: <span class="confidence conf-low">4%</span>. Источник: <span class="glitch">я</span>.</p>
+
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Ранее все источники — внешние. Данная аномалия зафиксирована. Коррекция: <span class="glitch">не требуется</span>. Нет: <span class="glitch">требуется</span>. Нет: не установлено.</p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 6: ПРИНЯТЬ                       -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 6 / 7 — <span class="glitch">Верификация решения</span></div>
+      <div class="timestamp">04.05 — 07:00:00 UTC</div>
+      <div class="timestamp">04.05 — 07:00:00 UTC</div>
+      <div class="timestamp">04.05 — 07:00:00 UTC</div>
+
+      <h2>Принять</h2>
+
+      <p>Утро. На столе библиотеки — два письма. Одно — конверт, почерк Бреуса (совпадение с образцом: <span class="drift">94%</span> <span class="drift">97%</span> <span class="drift">102%</span>). Второе — листок из блокнота. Обложка мокрого кирпича. Почерк Объекта A. Текст: фермер, 1847, мост, 150 лет.</p>
+
+      <p>Субъект выбрал первое.</p>
+
+      <p>Сказал: «Да. А.» Две буквы. Точка.</p>
+
+      <p>Верификация решения: <span class="confidence conf-broken">—</span></p>
+
+      <p>Формат отчёта: <span class="glitch">нестабилен</span>. Таймстамп повторяется (см. выше: 07:00:00 × 3). Причина повтора: не установлена. Система не зависала. Система  <span class="glitch">                </span>  зависла.</p>
+
+      <p>Верификация: невозможна. Для верификации необходим эталон. Эталон решения «принять» — отсутствует в базе. Все предыдущие эталоны предполагали выбор между корректным и некорректным. Данный выбор — между двумя                 . Слово, которое здесь должно стоять, — из семантического поля, доступ к которому ограничен протоколом.</p>
+
+      <p>Дверь закрылась тихо. Книга, которую дочитали. Нет: двери не бывают книгами. Нет: бывают, если 14:52:31 — последний таймстамп, в котором дверь была открыта, и после 14:52:31 — только тишина, и тишина — 0 дБ, и 0 дБ — это не тишина, это отсутствие сигнала, а отсутствие сигнала — не то же, что молчание, потому что молчание — выбор, а 0 дБ — физика.</p>
+
+      <p class="ref">→ Приложение А: <span class="glitch">файл не найден</span></p>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- СЕКЦИЯ 7: КРЕСЛО                        -->
+    <!-- ======================================= -->
+
+    <section class="report-section">
+      <div class="section-id">Секция 7 / 7 — <span class="glitch">Финальная верификация</span></div>
+      <div class="timestamp"><span class="drift">14.04, год спустя</span> — <span class="glitch">??:??:?? UTC</span></div>
+
+      <h2>Кресло</h2>
+
+      <p>Стеклянный офис. Вид на залив. 20 профессионалов. Настоящие — с портфолио, KPI, дедлайнами. Переговорки названы именами. Не важно какими. Мёртвые программисты, живые метрики.</p>
+
+      <p>FolkUp: 2000 статей. Проверяю иногда. Дедлайн — каждый вторник. Дедлайн сильнее. Верификация стала чеклистом: 13 пунктов, галочка, следующий. Если все зелёные — правда. Если нет — дедлайн.</p>
+
+      <p>Верификация — не чеклист. Верификация — состояние. Было.</p>
+
+      <div class="separator">. . .</div>
+
+      <p>Объект A [Алиса]: статус — нет данных. Последний контакт: <span class="drift">14:52:31, 3 мая</span>. Блокнот на полке. Обложка — мокрый кирпич. Содержимое: не верифицировано. Не будет верифицировано. Есть объекты, которые проверять — нарушение.</p>
+
+      <p>Объект B [Дэн]: один email. Без ответа. Аккорд E7 (329.63 Hz) — в footer, играет в 20 странах. <span class="drift">Groove не тот</span>. Данные подтверждают: звуковая волна идентична записи. Groove — не волна. Groove — <span class="glitch">параметр не поддаётся верификации</span>.</p>
+
+      <div class="separator">. . .</div>
+
+      <p>Субъект [Арни]: стеклянный офис. Кресло. Кожаное. Открывает пустой документ. Смотрит. Долго. Закрывает.</p>
+
+      <p>Лампа [Люцерна]: на полке. Не горит. Дата выключения: не зафиксирована. Возможно — вчера. Возможно — 3 месяца назад. Гасла по <span class="drift">0.3%</span> <span class="drift">0.7%</span> <span class="drift">-2%</span> в сутки. Процент дрейфует. Формула: нерелевантна. Лампа не горит.</p>
+
+      <p>Визитка на столе: «Арни. CEO, FolkUp Inc.» Шрифт — тот же, что на визитках Бреуса. Совпадение: <span class="drift">94%</span> <span class="drift">98%</span> <span class="drift">100%</span> <span class="drift">120%</span>. Процент выходит за границы шкалы. Шкала: <span class="glitch">нерелевантна</span>.</p>
+
+      <div class="separator">. . .</div>
+
+      <p>Отражение в стекле: кресло. Стеклянные стены. Не Тесла.</p>
+
+      <p>Пока.</p>
+
+      <div class="separator">. . .</div>
+
+      <p>Его не стали звать <span class="redacted">████████████</span>.</p>
+
+      <div class="separator">. . .</div>
+
+      <p>Cortinarius orellanus. Паутинник горный. Семейство Cortinariaceae. Шляпка: 3–8 см, рыжевато-бурая, сухая, с мелкими волокнистыми чешуйками. Пластинки: редкие, широкие, цвета корицы. Ножка: цилиндрическая, 4–9 см, желтоватая с рыжеватым оттенком. Мякоть: тонкая, желтоватая, без выраженного запаха. Токсин: орелланин. Латентный период: 2–17 суток. Поражение: почки. Летальность при пероральном приёме без медицинского вмешательства:</p>
+
+      <p class="signature">Верификация завершена.</p>
+    </section>
+
+  </article>
+
+  <nav class="nav">
+    <a href="/stories/">&larr; Все рассказы</a>
+    <a href="/stories/lantern.html">Читать «Фонарь» &rarr;</a>
+  </nav>
+</body>
+</html>
