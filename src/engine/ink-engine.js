@@ -30,6 +30,7 @@ export class InkEngine {
     return this.story.currentChoices.map((c, i) => ({
       index: i,
       text: c.text,
+      tags: c.tags || [],   // NEW: Ink per-choice tags
     }));
   }
 

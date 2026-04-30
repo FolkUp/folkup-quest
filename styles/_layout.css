@@ -32,10 +32,29 @@ html {
 
 body {
   min-height: 100%;
-  background: var(--color-bg);
+  background:
+    radial-gradient(ellipse at top, rgba(131, 158, 117, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(232, 173, 74, 0.02) 0%, transparent 50%),
+    linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+}
+
+/* Subtle atmospheric overlay — Scholar's study ambiance */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(232, 173, 74, 0.015) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(131, 158, 117, 0.01) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Main game container */
@@ -83,6 +102,66 @@ body {
   box-shadow: 0 0 30px rgba(125, 68, 80, 0.4);
 }
 
+/* Scholar's Lamp — Library Soul Integration */
+#lamp.knowledge-rich {
+  background:
+    radial-gradient(circle at center, var(--candlelight) 0%, var(--color-amber) 40%, var(--color-sage) 100%);
+  box-shadow:
+    0 0 30px var(--knowledge-illuminated),
+    0 0 50px rgba(131, 158, 117, 0.2),
+    inset 0 2px 4px rgba(254, 252, 246, 0.1);
+  border: 1px solid rgba(232, 173, 74, 0.3);
+  animation: scholar-lamp-pulse 4s infinite ease-in-out;
+}
+
+@keyframes scholar-lamp-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 30px var(--knowledge-illuminated),
+      0 0 50px rgba(131, 158, 117, 0.2),
+      inset 0 2px 4px rgba(254, 252, 246, 0.1);
+    transform: scale(1);
+  }
+  25% {
+    box-shadow:
+      0 0 40px var(--knowledge-illuminated),
+      0 0 65px rgba(131, 158, 117, 0.3),
+      0 0 80px rgba(232, 173, 74, 0.15),
+      inset 0 2px 6px rgba(254, 252, 246, 0.15);
+    transform: scale(1.02);
+  }
+  75% {
+    box-shadow:
+      0 0 35px var(--knowledge-illuminated),
+      0 0 55px rgba(131, 158, 117, 0.25),
+      inset 0 2px 5px rgba(254, 252, 246, 0.12);
+    transform: scale(1.01);
+  }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .choice-btn[data-knowledge]:hover:not(:disabled),
+  .knowledge-shelf-content.discovered,
+  #lamp.knowledge-rich {
+    animation: none;
+  }
+
+  @keyframes knowledge-discovered {
+    from, to {
+      box-shadow: var(--shadow-glow);
+      background: var(--knowledge-warm);
+    }
+  }
+
+  @keyframes knowledge-pulse {
+    from, to {
+      box-shadow: 0 0 25px var(--knowledge-discovered),
+                  0 0 40px rgba(131, 158, 117, 0.15);
+    }
+  }
+}
+
 @keyframes lampFlicker {
   0%, 100% { opacity: 1; }
   10% { opacity: 0.7; }
@@ -93,29 +172,76 @@ body {
   90% { opacity: 1; }
 }
 
-/* Progress bar (3 act dots) */
+/* Scholar's Research Progress — Chapter markers */
 #progress {
   display: flex;
   justify-content: center;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   margin-bottom: var(--space-xl);
+  position: relative;
+}
+
+#progress::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-divider) 20%,
+    var(--color-divider) 80%,
+    transparent 100%
+  );
+  z-index: -1;
 }
 
 .progress-dot {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--color-divider);
+  background: var(--color-surface);
+  border: 2px solid var(--color-divider);
   transition: all var(--transition-normal);
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .progress-dot.completed {
-  background: var(--color-text-muted);
+  background: var(--knowledge-research);
+  border-color: var(--empirical-research);
+  box-shadow:
+    0 0 6px rgba(131, 158, 117, 0.4),
+    inset 0 1px 2px rgba(254, 252, 246, 0.1);
 }
 
 .progress-dot.current {
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent-glow);
+  background: radial-gradient(circle, var(--candlelight), var(--accent));
+  border-color: var(--intuitive-insight);
+  box-shadow:
+    0 0 12px var(--accent-glow),
+    0 0 20px rgba(232, 173, 74, 0.2),
+    inset 0 1px 3px rgba(254, 252, 246, 0.15);
+  animation: chapter-pulse 2s infinite ease-in-out;
+}
+
+@keyframes chapter-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 12px var(--accent-glow),
+      0 0 20px rgba(232, 173, 74, 0.2),
+      inset 0 1px 3px rgba(254, 252, 246, 0.15);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow:
+      0 0 16px var(--accent-glow),
+      0 0 28px rgba(232, 173, 74, 0.3),
+      inset 0 1px 4px rgba(254, 252, 246, 0.2);
+  }
 }
 
 /* Story area */
@@ -182,6 +308,181 @@ body {
 .choice-btn.disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+/* Knowledge State Visual Markers — Scholar's Research Methods */
+.choice-btn[data-knowledge="research"] {
+  border-left: 4px solid var(--empirical-research);
+  background:
+    linear-gradient(135deg, var(--library-accent), var(--knowledge-dormant)),
+    var(--color-surface);
+  position: relative;
+  box-shadow: inset 0 1px 2px var(--parchment-glow);
+}
+
+.choice-btn[data-knowledge="research"]::before {
+  content: "📚";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  font-size: 0.9em;
+}
+
+.choice-btn[data-knowledge="intuition"] {
+  border-left: 4px solid var(--intuitive-insight);
+  background:
+    radial-gradient(ellipse at top left, var(--knowledge-warm), transparent 70%),
+    var(--color-surface);
+  box-shadow:
+    0 0 12px var(--color-amber-glow),
+    inset 0 1px 3px var(--parchment-glow);
+  position: relative;
+}
+
+.choice-btn[data-knowledge="intuition"]::before {
+  content: "💡";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+.choice-btn[data-knowledge="analysis"] {
+  border-left: 4px solid var(--analytical-reasoning);
+  background:
+    linear-gradient(45deg, var(--ink-stain), transparent 60%),
+    var(--color-surface);
+  color: var(--color-bordeaux-light);
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(125, 68, 80, 0.1);
+}
+
+.choice-btn[data-knowledge="analysis"]::before {
+  content: "🔍";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  font-size: 0.9em;
+}
+
+/* Knowledge Discovery Enhancement — Manuscript Illumination */
+.story-paragraph.discovered {
+  position: relative;
+  background:
+    linear-gradient(90deg, transparent 0%, var(--parchment-glow) 2%, transparent 5%),
+    var(--color-bg);
+  padding-left: 8px;
+  margin-left: -8px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  animation: manuscript-illuminate 1.5s ease-out forwards;
+}
+
+@keyframes manuscript-illuminate {
+  0% {
+    background:
+      linear-gradient(90deg, transparent 0%, transparent 2%, transparent 5%),
+      var(--color-bg);
+    box-shadow: none;
+  }
+  50% {
+    background:
+      linear-gradient(90deg, transparent 0%, var(--knowledge-awakening) 2%, var(--parchment-glow) 5%),
+      var(--color-bg);
+    box-shadow: inset 2px 0 8px var(--color-amber-glow);
+  }
+  100% {
+    background:
+      linear-gradient(90deg, transparent 0%, var(--parchment-glow) 2%, transparent 5%),
+      var(--color-bg);
+    box-shadow: inset 1px 0 4px rgba(232, 173, 74, 0.15);
+  }
+}
+
+.story-paragraph.discovered::after {
+  content: "✨";
+  position: absolute;
+  right: -24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75em;
+  opacity: 0;
+  animation: wisdom-sparkle 2s ease-in-out forwards;
+}
+
+@keyframes wisdom-sparkle {
+  0% { opacity: 0; transform: translateY(-50%) scale(0.5); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+  100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+}
+
+/* Scholar's Research Method Interactions */
+.choice-btn[data-knowledge]:hover:not(:disabled) {
+  transform: translateX(4px);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 0 15px var(--knowledge-discovered),
+    -4px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.choice-btn[data-knowledge="research"]:hover:not(:disabled) {
+  border-left-width: 6px;
+  background:
+    linear-gradient(135deg, var(--knowledge-awakening), var(--library-accent)),
+    var(--color-surface);
+}
+
+.choice-btn[data-knowledge="intuition"]:hover:not(:disabled) {
+  border-left-width: 6px;
+  box-shadow:
+    0 0 20px var(--color-amber-glow),
+    inset 0 1px 6px var(--parchment-glow),
+    -4px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.choice-btn[data-knowledge="analysis"]:hover:not(:disabled) {
+  border-left-width: 6px;
+  background:
+    linear-gradient(45deg, var(--knowledge-awakening), var(--ink-stain)),
+    var(--color-surface);
+  color: var(--color-amber-light);
+}
+
+/* Scholar's Knowledge Discovery Glow */
+@keyframes knowledge-discovered {
+  0% {
+    box-shadow: 0 0 0 transparent;
+    background: transparent;
+    border-left: 1px solid transparent;
+  }
+  25% {
+    box-shadow: 0 0 15px var(--color-amber-glow);
+    background: var(--knowledge-awakening);
+    border-left: 2px solid var(--candlelight);
+  }
+  75% {
+    box-shadow: var(--shadow-glow), inset 0 0 10px var(--knowledge-warm);
+    background: var(--knowledge-warm);
+    border-left: 3px solid var(--color-amber);
+  }
+  100% {
+    box-shadow: 0 0 8px var(--color-amber-glow);
+    background: var(--parchment-glow);
+    border-left: 2px solid var(--knowledge-intuition);
+  }
+}
+
+.knowledge-shelf-content.discovered,
+.story-content.knowledge-enhanced {
+  animation: knowledge-discovered 1.8s ease forwards;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-left: -4px;
+  padding-left: 8px;
 }
 
 /* Continue button */

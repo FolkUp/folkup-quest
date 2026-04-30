@@ -30,57 +30,42 @@ const PANEL_CONFIG = {
   characterConsistency: 7.0
 };
 
-// Enhanced Master Prompt
+// Enhanced Master Prompt - Outdoor Scene Like Panel 1.1
 const MASTER_PROMPT = `Comic book panel in Frank Miller Sin City style. Pure black and white, high contrast ink wash, no gray tones.
 
-SCENE: Alice character introduction - investigator studying files at desk. Interior library/office setting, noir investigative mood.
+SCENE: Woman outdoors at park bench. Wide angle establishing shot. Quiet urban atmosphere.
 
-MAIN SUBJECT: Alice - woman in her late 20s, Rooney Mara facial type with machine-precision contour definition. Short dark bob haircut, sharp angular features, intense focused expression. Wearing dark professional attire. Seated at desk studying case files and evidence documents.
+MAIN SUBJECT: Lean woman in her late 20s with short dark bob haircut, angular features, contemplative expression. Wearing dark clothing. White silhouette figure sitting on bench. Woman appears small in composition, positioned lower third.
 
-CHARACTER CONSISTENCY (ENHANCED - Alice Panel 8.1 Canonical):
-- Facial Type: Rooney Mara bone structure specifically (sharp angles, defined cheekbones)
-- Contour: Machine-precision line work (NOT organic/soft)
-- Hair: Short dark bob, precisely cut, geometric
-- Expression: Intense, analytical, investigative focus
-- Build: Lean, professional, controlled posture
-- Age Appearance: Late 20s, mature but not weathered
-
-ALICE CANONICAL REQUIREMENTS (Panel 8.1 Baseline):
-- Silhouette: White figure against dark backgrounds
-- Contour Style: Sharp, mechanical precision (signature element)
-- Facial Structure: Angular, geometric, Rooney Mara reference
-- Expression Control: Focused, never casual/relaxed
-- Professional Demeanor: Analytical investigator persona
+CHARACTER DETAILS:
+- Build: Lean, controlled posture
+- Hair: Short dark bob, precisely cut
+- Clothing: Dark jacket
+- Expression: Contemplative, thoughtful
+- Posture: Relaxed sitting position
+- Silhouette: White figure against dark backgrounds (Sin City standard)
 
 BACKGROUND ELEMENTS:
-- Desk with scattered case files and evidence documents
-- Desk lamp casting dramatic directional lighting from upper right
-- Library/office setting with vertical lines suggesting bookshelves
-- Evidence photos scattered on desk surface
-- File folders with visible tabs/labels
-- Coffee cup or water glass (investigator detail)
-
-PROPS & MOOD DETAILS:
-- Case files: white papers with black text lines
-- Evidence documents: photographs and typed reports
-- Desk lamp: classic noir lighting (dramatic shadows)
-- Alice's notebook: sage green spot color (#839E75) - only color element
-- Investigative atmosphere: serious, methodical, professional
+- Park setting with trees and pathways
+- Bench with visible structural details
+- Urban park elements in distance
+- Tree silhouettes against sky
+- Walking paths with geometric lines
+- Small notebook with sage green spot color (#839E75) beside her
 
 STYLE DETAILS (SIN CITY ANCHOR):
-- Spotted blacks for large shadow areas
-- White silhouettes against black backgrounds
-- Sharp geometric contours (especially Alice)
+- Spotted blacks technique for large areas
+- White silhouettes on black backgrounds
 - Negative space defines forms
 - High contrast, no halftones
 - Clean ink wash aesthetic
-- Dramatic lighting from single source (desk lamp)
+- Minimal detail, maximum impact through silhouette
 
-MOOD: Professional investigator at work, noir atmosphere, analytical focus. Scene establishes Alice's methodical, precision-oriented character.
+MOOD: Contemplative, quiet urban moment. Silent scene with strong compositional geometry.
 
 TECHNICAL REQUIREMENTS:
 - Pure black and white only
-- Single spot color: sage green (#839E75) for Alice's notebook
+- Single spot color: sage green (#839E75) for notebook
 - High contrast ink illustration
 - Comic book panel format
 - Frank Miller style composition
@@ -203,7 +188,7 @@ async function generatePanel23() {
     console.log('🎉 Generation completed successfully!');
 
     // Download the generated image
-    const imageUrl = result.output[0];
+    const imageUrl = result.output;
     console.log('📥 Downloading image from:', imageUrl);
 
     const imageResponse = await fetch(imageUrl);

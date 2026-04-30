@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FolkUp Quest — Interactive Fiction Adventure</title>
+  <meta name="description" content="Интерактивное приключение в жанре interactive fiction от FolkUp. Исследуйте мир через три пути знания: исследование, интуиция, анализ.">
+
+  <!-- Brand Meta -->
+  <meta name="theme-color" content="#1a1714">
+  <meta name="color-scheme" content="dark light">
+  <meta name="author" content="FolkUp">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <!-- Typography — Brand Guide v2.5 Implementation -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* FolkUp Brand Guide v2.5 — Palette D */
+    :root {
+      /* Core Brand Palette */
+      --color-bordeaux: #7D4450;
+      --color-sage: #839E75;
+      --color-amber: #E8AD4A;
+      --color-ivory: #FEFCF6;
+
+      /* Scholar's Study Palette */
+      --color-bg-primary: #1a1714;
+      --color-bg-secondary: #2a251f;
+      --color-bg-accent: #352d23;
+      --color-text-primary: var(--color-ivory);
+      --color-text-muted: #b8b4ab;
+      --color-text-dim: #8b857a;
+
+      /* Interactive Elements */
+      --color-choice-bg: rgba(131, 158, 117, 0.15);
+      --color-choice-border: var(--color-sage);
+      --color-choice-hover: rgba(131, 158, 117, 0.25);
+      --color-continue-bg: var(--color-amber);
+      --color-continue-text: var(--color-bg-primary);
+
+      /* Knowledge Categories */
+      --color-research: var(--color-sage);
+      --color-intuition: var(--color-amber);
+      --color-analysis: var(--color-bordeaux);
+
+      /* Typography Scale */
+      --font-primary: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-narrative: 'Playfair Display', Georgia, serif;
+      --font-brand: 'Pacifico', cursive;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
+
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+
+      /* Border Radius */
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+
+      /* Transitions */
+      --transition-fast: 0.15s ease;
+      --transition-base: 0.25s ease;
+      --transition-slow: 0.5s ease;
+    }
+
+    /* Reset and Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      font-size: var(--text-base);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Scholar's Library Soul — Visual Identity Implementation */
+    .scholar-atmosphere {
+      position: relative;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(232, 173, 74, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(125, 68, 80, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, #1a1714 0%, #211d18 100%);
+    }
+
+    .scholar-atmosphere::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 60% 30%, rgba(232, 173, 74, 0.12) 0%, transparent 30%),
+        radial-gradient(circle at 30% 80%, rgba(131, 158, 117, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+      animation: wisdomGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes wisdomGlow {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Typography Hierarchy */
+    .brand-title {
+      font-family: var(--font-brand);
+      color: var(--color-amber);
+      font-size: var(--text-4xl);
+      text-shadow: 0 0 20px rgba(232, 173, 74, 0.3);
+    }
+
+    .narrative-heading {
+      font-family: var(--font-narrative);
+      font-weight: 500;
+      color: var(--color-ivory);
+      line-height: 1.3;
+    }
+
+    .narrative-text {
+      font-family: var(--font-narrative);
+      font-size: var(--text-lg);
+      line-height: 1.7;
+      color: var(--color-text-primary);
+    }
+
+    /* Start Screen */
+    #start-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--space-8);
+      text-align: center;
+    }
+
+    .start-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .start-subtitle {
+      font-family: var(--font-narrative);
+      font-size: var(--text-xl);
+      color: var(--color-text-muted);
+      margin: var(--space-4) 0 var(--space-8);
+      font-style: italic;
+    }
+
+    .start-description {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-12);
+      line-height: 1.6;
+    }
+
+    /* Game Interface */
+    #story {
+      display: none;
+      padding: var(--space-8);
+      max-width: 900px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    #text-container {
+      margin-bottom: var(--space-8);
+      padding: var(--space-6);
+      background: rgba(254, 252, 246, 0.02);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(254, 252, 246, 0.1);
+    }
+
+    /* Choice System */
+    #choices {
+      margin: var(--space-8) 0;
+    }
+
+    .choice {
+      display: block;
+      width: 100%;
+      padding: var(--space-4) var(--space-6);
+      margin: var(--space-2) 0;
+      background: var(--color-choice-bg);
+      border: 2px solid var(--color-choice-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      font-size: var(--text-base);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    .choice:hover {
+      background: var(--color-choice-hover);
+      border-color: var(--color-amber);
+      transform: translateY(-1px);
+    }
+
+    .choice:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 173, 74, 0.3);
+    }
+
+    .choice.research {
+      border-left: 4px solid var(--color-research);
+    }
+
+    .choice.intuition {
+      border-left: 4px solid var(--color-intuition);
+    }
+
+    .choice.analysis {
+      border-left: 4px solid var(--color-analysis);
+    }
+
+    /* Continue Button */
+    .btn-continue {
+      background: var(--color-continue-bg);
+      color: var(--color-continue-text);
+      border: none;
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: var(--text-base);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .btn-continue:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(232, 173, 74, 0.3);
+    }
+
+    .btn-continue:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: var(--color-amber);
+      color: var(--color-bg-primary);
+      border: none;
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: var(--text-lg);
+      cursor: pointer;
+      margin: var(--space-2);
+      transition: all var(--transition-fast);
+      text-transform: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(232, 173, 74, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* Knowledge Categories Display */
+    .knowledge-display {
+      display: flex;
+      gap: var(--space-4);
+      margin: var(--space-6) 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .knowledge-category {
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .knowledge-research {
+      background: rgba(131, 158, 117, 0.2);
+      color: var(--color-research);
+      border: 1px solid var(--color-research);
+    }
+
+    .knowledge-intuition {
+      background: rgba(232, 173, 74, 0.2);
+      color: var(--color-intuition);
+      border: 1px solid var(--color-intuition);
+    }
+
+    .knowledge-analysis {
+      background: rgba(125, 68, 80, 0.2);
+      color: var(--color-analysis);
+      border: 1px solid var(--color-analysis);
+    }
+
+    /* Scholar's Journal Export Feature */
+    .journal-export {
+      margin-top: var(--space-8);
+      padding: var(--space-6);
+      background: rgba(131, 158, 117, 0.1);
+      border: 1px solid var(--color-sage);
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .journal-title {
+      font-family: var(--font-narrative);
+      font-size: var(--text-xl);
+      color: var(--color-sage);
+      margin-bottom: var(--space-4);
+    }
+
+    .journal-description {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+    }
+
+    .btn-journal {
+      background: var(--color-sage);
+      color: var(--color-ivory);
+      border: none;
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-md);
+      font-family: var(--font-primary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-journal:hover {
+      background: #6d8362;
+      transform: translateY(-1px);
+    }
+
+    /* Ecosystem Navigation Footer */
+    #ecosystem-nav {
+      background: var(--color-bg-secondary);
+      border-top: 1px solid rgba(254, 252, 246, 0.1);
+      padding: var(--space-8) 0;
+      margin-top: var(--space-12);
+    }
+
+    .ecosystem-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-8);
+    }
+
+    .ecosystem-title {
+      font-family: var(--font-narrative);
+      font-size: var(--text-2xl);
+      color: var(--color-amber);
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .ecosystem-card {
+      background: rgba(254, 252, 246, 0.03);
+      border: 1px solid rgba(254, 252, 246, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      text-decoration: none;
+      color: inherit;
+      transition: all var(--transition-base);
+    }
+
+    .ecosystem-card:hover {
+      background: rgba(254, 252, 246, 0.06);
+      border-color: var(--color-sage);
+      transform: translateY(-2px);
+    }
+
+    .ecosystem-card-title {
+      font-family: var(--font-narrative);
+      font-size: var(--text-lg);
+      color: var(--color-amber);
+      margin-bottom: var(--space-2);
+    }
+
+    .ecosystem-card-description {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      line-height: 1.5;
+    }
+
+    .ecosystem-brand {
+      text-align: center;
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid rgba(254, 252, 246, 0.1);
+    }
+
+    .ecosystem-logo {
+      font-family: var(--font-brand);
+      font-size: var(--text-2xl);
+      color: var(--color-amber);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: var(--space-4);
+    }
+
+    .ecosystem-tagline {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      font-style: italic;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .brand-title {
+        font-size: var(--text-3xl);
+      }
+
+      .start-content {
+        padding: 0 var(--space-4);
+      }
+
+      #story {
+        padding: var(--space-4);
+      }
+
+      .ecosystem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .knowledge-display {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Accessibility */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus indicators for keyboard navigation */
+    *:focus {
+      outline: 2px solid var(--color-amber);
+      outline-offset: 2px;
+    }
+
+    .choice:focus,
+    .btn-primary:focus,
+    .btn-continue:focus,
+    .btn-journal:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 173, 74, 0.5);
+    }
+  </style>
+</head>
+
+<body class="scholar-atmosphere">
+  <!-- Accessibility landmarks -->
+  <span id="knowledge-research" class="visually-hidden">Исследование — путь фактов и данных</span>
+  <span id="knowledge-intuition" class="visually-hidden">Интуиция — путь чувств и озарений</span>
+  <span id="knowledge-analysis" class="visually-hidden">Анализ — путь логики и размышлений</span>
+
+  <main>
+    <!-- Start Screen -->
+    <div id="start-screen">
+      <div class="start-content">
+        <h1 class="brand-title">FolkUp Quest</h1>
+        <p class="start-subtitle">Interactive Fiction Adventure</p>
+        <p class="start-description">
+          Погрузитесь в мир интерактивной истории, где каждое решение формирует ваш путь через три системы знания:
+          <strong>исследование</strong>, <strong>интуицию</strong> и <strong>анализ</strong>.
+        </p>
+
+        <div class="knowledge-display">
+          <div class="knowledge-category knowledge-research" aria-describedby="knowledge-research">
+            Исследование
+          </div>
+          <div class="knowledge-category knowledge-intuition" aria-describedby="knowledge-intuition">
+            Интуиция
+          </div>
+          <div class="knowledge-category knowledge-analysis" aria-describedby="knowledge-analysis">
+            Анализ
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-12);">
+          <button id="new-game-btn" class="btn-primary">Новая игра</button>
+          <button id="continue-game-btn" class="btn-primary" style="display: none;">Продолжить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Interface -->
+    <div id="story">
+      <div id="game">
+        <div id="text-container" class="narrative-text"></div>
+        <div id="choices" role="group" aria-label="Варианты выбора"></div>
+        <button id="continue-btn" class="btn-continue" aria-label="Продолжить чтение">
+          Продолжить ▸
+        </button>
+
+        <!-- Scholar's Journal Export Feature -->
+        <div id="journal-section" class="journal-export" style="display: none;">
+          <h3 class="journal-title">Журнал Учёного</h3>
+          <p class="journal-description">
+            Экспортируйте свои достижения и открытия в персональный журнал для анализа вашего пути знаний.
+          </p>
+          <button id="export-journal-btn" class="btn-journal">
+            📋 Экспортировать журнал
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FolkUp Ecosystem Navigation -->
+  <footer id="ecosystem-nav">
+    <div class="ecosystem-container">
+      <h2 class="ecosystem-title">Исследуйте экосистему FolkUp</h2>
+
+      <div class="ecosystem-grid">
+        <a href="https://setubal.folkup.city" class="ecosystem-card" target="_blank" rel="noopener">
+          <h3 class="ecosystem-card-title">Энциклопедия Сетубала</h3>
+          <p class="ecosystem-card-description">
+            Откройте для себя историю, культуру и традиции португальского Сетубала через интерактивную энциклопедию.
+          </p>
+        </a>
+
+        <a href="https://barnes.folkup.city" class="ecosystem-card" target="_blank" rel="noopener">
+          <h3 class="ecosystem-card-title">Энциклопедия Барнса</h3>
+          <p class="ecosystem-card-description">
+            Изучите богатую историю и культурное наследие района Барнс в Лондоне.
+          </p>
+        </a>
+
+        <a href="https://docs.folkup.app" class="ecosystem-card" target="_blank" rel="noopener">
+          <h3 class="ecosystem-card-title">Документация FolkUp</h3>
+          <p class="ecosystem-card-description">
+            Техническая документация, руководства и ресурсы для разработчиков экосистемы знаний.
+          </p>
+        </a>
+      </div>
+
+      <div class="ecosystem-brand">
+        <a href="https://ko-fi.com/folkup" target="_blank" rel="noopener" class="ecosystem-logo">
+          FolkUp
+        </a>
+        <p class="ecosystem-tagline">Knowledge, organized.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main Application Script -->
+  <script type="module" src="/src/main.js"></script>
+
+  <!-- Scholar's Journal Export Script -->
+  <script>
+    // Gaming-first Scholar's Journal Export functionality
+    class ScholarJournal {
+      constructor() {
+        this.gameState = null;
+        this.discoveries = [];
+        this.knowledgePath = {
+          research: 0,
+          intuition: 0,
+          analysis: 0
+        };
+        this.init();
+      }
+
+      init() {
+        // Show journal section after first choices
+        this.monitorGameProgress();
+
+        // Export button handler
+        const exportBtn = document.getElementById('export-journal-btn');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', () => this.exportJournal());
+        }
+      }
+
+      monitorGameProgress() {
+        // Check for game progress every few seconds
+        setInterval(() => {
+          const choices = document.querySelectorAll('.choice');
+          const journalSection = document.getElementById('journal-section');
+
+          if (choices.length > 0 && journalSection) {
+            journalSection.style.display = 'block';
+          }
+
+          // Update knowledge path tracking
+          this.updateKnowledgeTracking();
+        }, 2000);
+      }
+
+      updateKnowledgeTracking() {
+        // Track knowledge category selections
+        const choices = document.querySelectorAll('.choice');
+        choices.forEach(choice => {
+          choice.addEventListener('click', (e) => {
+            if (choice.classList.contains('research')) {
+              this.knowledgePath.research++;
+            } else if (choice.classList.contains('intuition')) {
+              this.knowledgePath.intuition++;
+            } else if (choice.classList.contains('analysis')) {
+              this.knowledgePath.analysis++;
+            }
+          });
+        });
+      }
+
+      exportJournal() {
+        const gameData = this.gatherGameData();
+        const journalContent = this.formatJournal(gameData);
+
+        // Create and download journal file
+        const blob = new Blob([journalContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `folkup-quest-journal-${new Date().toISOString().split('T')[0]}.txt`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        // Visual feedback
+        const btn = document.getElementById('export-journal-btn');
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Журнал экспортирован';
+        btn.style.background = 'var(--color-sage)';
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+        }, 2000);
+      }
+
+      gatherGameData() {
+        // Gather current game state
+        const textContainer = document.getElementById('text-container');
+        const currentText = textContainer ? textContainer.textContent : '';
+
+        return {
+          timestamp: new Date().toISOString(),
+          currentProgress: currentText.slice(0, 200) + '...',
+          knowledgePath: this.knowledgePath,
+          totalChoices: Object.values(this.knowledgePath).reduce((a, b) => a + b, 0),
+          dominantApproach: this.getDominantApproach()
+        };
+      }
+
+      getDominantApproach() {
+        const path = this.knowledgePath;
+        if (path.research >= path.intuition && path.research >= path.analysis) {
+          return 'Исследователь';
+        } else if (path.intuition >= path.analysis) {
+          return 'Интуитивист';
+        } else {
+          return 'Аналитик';
+        }
+      }
+
+      formatJournal(data) {
+        return `
+ЖУРНАЛ УЧЁНОГО — FOLKUP QUEST
+=====================================
+
+Дата экспорта: ${new Date().toLocaleDateString('ru-RU')}
+Время экспорта: ${new Date().toLocaleTimeString('ru-RU')}
+
+ПРОФИЛЬ ЗНАНИЙ
+--------------
+Путь исследования: ${data.knowledgePath.research} выборов
+Путь интуиции: ${data.knowledgePath.intuition} выборов
+Путь анализа: ${data.knowledgePath.analysis} выборов
+
+Общее количество решений: ${data.totalChoices}
+Доминирующий подход: ${data.dominantApproach}
+
+ТЕКУЩИЙ ПРОГРЕСС
+---------------
+${data.currentProgress}
+
+АНАЛИЗ ПУТИ
+-----------
+${this.generatePathAnalysis(data)}
+
+=====================================
+Создано в FolkUp Quest — Interactive Fiction Adventure
+https://quest.folkup.app
+
+FolkUp: Knowledge, organized.
+=====================================
+        `.trim();
+      }
+
+      generatePathAnalysis(data) {
+        const total = data.totalChoices;
+        if (total === 0) return 'Начало пути. Первые шаги в мире знаний.';
+
+        const path = data.knowledgePath;
+        const researchPct = Math.round((path.research / total) * 100);
+        const intuitionPct = Math.round((path.intuition / total) * 100);
+        const analysisPct = Math.round((path.analysis / total) * 100);
+
+        let analysis = `Распределение подходов:\n`;
+        analysis += `- Исследование: ${researchPct}% (склонность к фактам и данным)\n`;
+        analysis += `- Интуиция: ${intuitionPct}% (доверие чувствам и озарениям)\n`;
+        analysis += `- Анализ: ${analysisPct}% (логическое мышление)\n\n`;
+
+        if (researchPct > 50) {
+          analysis += 'Вы — методичный исследователь, предпочитающий факты домыслам.';
+        } else if (intuitionPct > 50) {
+          analysis += 'Вы доверяете интуиции и способны чувствовать скрытые истины.';
+        } else if (analysisPct > 50) {
+          analysis += 'Ваш аналитический ум позволяет находить логические связи.';
+        } else {
+          analysis += 'Вы мастерски балансируете между разными подходами к знанию.';
+        }
+
+        return analysis;
+      }
+    }
+
+    // Initialize Scholar's Journal when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      new ScholarJournal();
+    });
+  </script>
+</body>
+</html>

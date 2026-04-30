@@ -13,18 +13,63 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Story text */
+/* Story text — Scholar's manuscript style */
 .story-paragraph {
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
   margin-bottom: var(--space-lg);
   opacity: 0;
   animation: fadeInUp var(--transition-slow) forwards;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.01em;
 }
 
 .story-paragraph em {
   font-style: italic;
-  color: var(--color-text-secondary);
+  color: var(--color-amber-light);
+  text-shadow: 0 0 4px var(--color-amber-glow);
+  font-weight: 500;
+}
+
+/* Knowledge-enhanced text styling */
+.story-paragraph .knowledge-term {
+  color: var(--knowledge-intuition);
+  font-weight: 600;
+  text-shadow: 0 0 6px var(--color-amber-glow);
+  cursor: help;
+  border-bottom: 1px dotted var(--knowledge-intuition);
+  transition: all var(--transition-fast);
+}
+
+.story-paragraph .knowledge-term:hover {
+  color: var(--candlelight);
+  text-shadow: 0 0 8px var(--knowledge-illuminated);
+  border-bottom-style: solid;
+}
+
+/* Research methodology emphasis */
+.story-paragraph .research-method {
+  background: linear-gradient(135deg, transparent, var(--parchment-glow), transparent);
+  padding: 0 4px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.story-paragraph .empirical {
+  color: var(--empirical-research);
+  border-left: 2px solid var(--empirical-research);
+  padding-left: 6px;
+  margin-left: -8px;
+}
+
+.story-paragraph .intuitive {
+  color: var(--intuitive-insight);
+  text-shadow: 0 0 4px var(--color-amber-glow);
+}
+
+.story-paragraph .analytical {
+  color: var(--analytical-reasoning);
+  font-style: italic;
 }
 
 /* Epigraph — book-style dedication */

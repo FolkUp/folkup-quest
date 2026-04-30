@@ -195,7 +195,7 @@ async function generatePanel51() {
     console.log('🎉 Generation completed successfully!');
 
     // Download the generated image
-    const imageUrl = result.output[0];
+    const imageUrl = result.output;
     console.log('📥 Downloading image from:', imageUrl);
 
     const imageResponse = await fetch(imageUrl);

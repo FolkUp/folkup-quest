@@ -85,6 +85,33 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px var(--color-amber-glow);
 
+  /* Visual Bridge Layer — Scholar's Lamp Integration */
+  --knowledge-discovered: rgba(232, 173, 74, 0.35);
+  --knowledge-warm: rgba(232, 173, 74, 0.12);
+  --library-accent: rgba(131, 158, 117, 0.15);
+  --wisdom-border: 1px solid rgba(232, 173, 74, 0.3);
+
+  /* Scholar's atmosphere */
+  --parchment-glow: rgba(254, 252, 246, 0.05);
+  --candlelight: rgba(232, 173, 74, 0.8);
+  --manuscript-shadow: rgba(0, 0, 0, 0.6);
+  --ink-stain: rgba(125, 68, 80, 0.15);
+
+  /* Knowledge State Markers — Enhanced for Library Soul */
+  --knowledge-research: #93b086;     /* Sage with warmth */
+  --knowledge-intuition: #f0c46e;    /* Amber bright */
+  --knowledge-analysis: #a66974;     /* Bordeaux soft */
+
+  /* Research methodology colors */
+  --empirical-research: var(--knowledge-research);
+  --intuitive-insight: var(--knowledge-intuition);
+  --analytical-reasoning: var(--knowledge-analysis);
+
+  /* Knowledge discovery states */
+  --knowledge-dormant: rgba(131, 158, 117, 0.08);
+  --knowledge-awakening: rgba(232, 173, 74, 0.2);
+  --knowledge-illuminated: rgba(232, 173, 74, 0.4);
+
   /* Act-driven accent (overridden by html[data-act]) */
   --accent: var(--color-amber);
   --accent-glow: var(--color-amber-glow);

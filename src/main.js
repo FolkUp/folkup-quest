@@ -7,6 +7,7 @@ import { InkEngine } from './engine/ink-engine.js';
 import { SaveManager } from './engine/save-manager.js';
 import { Renderer } from './ui/renderer.js';
 import { AudioManager } from './engine/audio-manager.js';
+import { KnowledgeState } from './engine/knowledge-system.js';
 import {
   initAnalytics,
   trackGameStart,
@@ -18,6 +19,7 @@ import {
 let engine = null;
 let renderer = null;
 let audioManager = null;
+let knowledgeState = null;
 
 async function init() {
   const startScreen = document.getElementById('start-screen');
@@ -70,6 +72,8 @@ async function init() {
     audioManager = new AudioManager();
   }
   renderer = new Renderer(document.getElementById('game'), audioManager);
+  knowledgeState = new KnowledgeState();
+  renderer.setKnowledgeState(knowledgeState);
 
   // Initialize analytics
   initAnalytics();
@@ -94,11 +98,19 @@ async function init() {
         const save = SaveManager.load();
         if (save) {
           engine.loadState(save.state);
+          knowledgeState = KnowledgeState.deserialize(save.meta?.knowledge);
+          renderer.setKnowledgeState(knowledgeState);
+          // Sync lamp state after load
+          if (knowledgeState.lampKnowledgeRich) {
+            renderer.setLampKnowledgeRich(true);
+          }
         }
       } catch {
         // Corrupted save — start fresh
         engine.reset();
         SaveManager.clear();
+        knowledgeState = new KnowledgeState();
+        renderer.setKnowledgeState(knowledgeState);
       }
       trackGameStart(false);
       startGame(startScreen, storyEl);
@@ -108,6 +120,8 @@ async function init() {
   newGameBtn.addEventListener('click', () => {
     engine.reset();
     SaveManager.clear();
+    knowledgeState = new KnowledgeState();
+    renderer.setKnowledgeState(knowledgeState);
     trackGameStart(true);
     startGame(startScreen, storyEl);
   });
@@ -180,6 +194,9 @@ function advance() {
         renderer.showChoices(result.choices, (index) => {
           engine.choose(index);
           trackChoiceMade(index, engine.getVariable('current_scene'));
+
+          // Lamp state now handled automatically by renderer
+
           saveGame();
           setTimeout(() => {
             advance();
@@ -227,6 +244,7 @@ function saveGame() {
     scene: engine.getVariable('current_scene'),
     act: engine.getVariable('current_act'),
     folk_counter: engine.getVariable('folk_counter'),
+    knowledge: knowledgeState ? knowledgeState.serialize() : null,
   };
   const saved = SaveManager.save(state, meta);
   if (!saved) {

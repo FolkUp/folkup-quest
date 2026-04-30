@@ -9,6 +9,11 @@ import {
   parseAudioTag,
   getEndingName,
 } from '../engine/moral-system.js';
+import {
+  parseKnowledgeTag,
+  parseDiscoveredTag,
+  parseKnowledgeRichTag,
+} from '../engine/knowledge-system.js';
 import { EndingTracker } from '../engine/ending-tracker.js';
 import { trackActChanged } from '../utils/analytics.js';
 import {
@@ -44,6 +49,15 @@ export class Renderer {
     this.currentCharacter = null;
     this._sidebarTimeout = null;
     this.currentEnding = null;
+    this.knowledgeState = null;
+  }
+
+  /**
+   * Set knowledge state reference
+   * @param {import('../engine/knowledge-system.js').KnowledgeState} state
+   */
+  setKnowledgeState(state) {
+    this.knowledgeState = state;
   }
 
   /**
@@ -117,7 +131,21 @@ export class Renderer {
       if (audio && this.audioManager) {
         audio === 'stop' ? this.audioManager.stop() : this.audioManager.play(audio);
       }
+      if (parseKnowledgeRichTag(tag)) {
+        this.setLampKnowledgeRich(true);
+      }
     });
+
+    // Handle discovered paragraphs
+    const isDiscovered = tags.some(parseDiscoveredTag);
+    if (isDiscovered) {
+      this.storyEl.querySelectorAll('.story-paragraph').forEach((p) => {
+        p.classList.add('discovered');
+      });
+      if (this.knowledgeState) {
+        this.knowledgeState.recordDiscovery(this._currentPassageId());
+      }
+    }
 
     // Update sidebar illustration
     this.updateSidebar(tags);
@@ -136,7 +164,7 @@ export class Renderer {
 
   /**
    * Show choices as buttons
-   * @param {Array<{index: number, text: string}>} choices
+   * @param {Array<{index: number, text: string, tags?: string[]}>} choices
    * @param {(index: number) => void} onChoose
    */
   showChoices(choices, onChoose) {
@@ -150,15 +178,33 @@ export class Renderer {
       const btn = document.createElement('button');
       btn.className = 'choice-btn';
       btn.textContent = choice.text;
+
+      // Knowledge categorization
+      const knowledgeTag = (choice.tags || [])
+        .map(parseKnowledgeTag)
+        .find(Boolean);
+      if (knowledgeTag) {
+        btn.dataset.knowledge = knowledgeTag;
+        btn.setAttribute('aria-describedby', `knowledge-${knowledgeTag}`);
+      }
+
       btn.style.animationDelay = `${i * 0.1}s`;
       btn.addEventListener('click', () => {
         if (chosen) return;
         chosen = true;
+        if (knowledgeTag && this.knowledgeState) {
+          this.knowledgeState.recordChoice(knowledgeTag);
+          this.updateLampState();
+        }
         this.choicesEl.querySelectorAll('.choice-btn').forEach((b) => {
           b.disabled = true;
           b.classList.add('disabled');
         });
         btn.classList.add('selected');
+        // Apply discovered class for knowledge choices
+        if (knowledgeTag) {
+          btn.classList.add('discovered');
+        }
         onChoose(choice.index);
       });
       this.choicesEl.appendChild(btn);
@@ -209,6 +255,32 @@ export class Renderer {
   setLampState(state) {
     if (!this.lampEl) return;
     this.lampEl.setAttribute('data-state', state);
+  }
+
+  /**
+   * Set knowledge-rich lamp state
+   * @param {boolean} on
+   */
+  setLampKnowledgeRich(on) {
+    if (!this.lampEl) return;
+    this.lampEl.classList.toggle('knowledge-rich', !!on);
+    if (this.knowledgeState) this.knowledgeState.lampKnowledgeRich = !!on;
+  }
+
+  /**
+   * Update lamp state based on knowledge threshold
+   */
+  updateLampState() {
+    if (this.knowledgeState && this.knowledgeState.shouldActivateKnowledgeRichLamp()) {
+      this.setLampKnowledgeRich(true);
+    }
+  }
+
+  /** Get current passage ID for discovery tracking */
+  _currentPassageId() {
+    const scene = this.storyEl.getAttribute('data-scene') || 'unknown';
+    const timestamp = Date.now();
+    return `${scene}_${timestamp}`;
   }
 
   /**
