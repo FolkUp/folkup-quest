@@ -88,6 +88,130 @@
       --transition-slow: 0.5s ease;
     }
 
+    /* Scholar's Lamp — Visual Bridge Layer Integration */
+    .scholars-lamp {
+      position: fixed;
+      top: var(--space-6);
+      right: var(--space-6);
+      width: 48px;
+      height: 60px;
+      z-index: 50;
+      opacity: 0.6;
+      transition: all var(--transition-slow);
+      pointer-events: none;
+    }
+
+    .lamp-glow {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--color-amber) 0%, transparent 70%);
+      opacity: 0.3;
+      transition: all var(--transition-base);
+    }
+
+    .lamp-flame {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 16px;
+      background: linear-gradient(45deg, var(--color-amber) 0%, #f0c46e 100%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      box-shadow: 0 0 8px rgba(232, 173, 74, 0.4);
+    }
+
+    .scholars-lamp::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--color-bg-accent) 0%, var(--color-bg-secondary) 100%);
+      border-radius: 4px 4px 8px 8px;
+      border: 1px solid rgba(254, 252, 246, 0.1);
+    }
+
+    /* Knowledge-Rich State — Amber Glow Enhancement */
+    .scholars-lamp.knowledge-rich {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .scholars-lamp.knowledge-rich .lamp-glow {
+      opacity: 0.7;
+      transform: translateX(-50%) scale(1.5);
+      background: radial-gradient(circle, var(--color-amber) 0%, rgba(232, 173, 74, 0.3) 50%, transparent 80%);
+      animation: knowledge-pulse 3s ease-in-out infinite;
+    }
+
+    .scholars-lamp.knowledge-rich .lamp-flame {
+      height: 20px;
+      box-shadow:
+        0 0 12px rgba(232, 173, 74, 0.6),
+        0 0 24px rgba(232, 173, 74, 0.3);
+    }
+
+    @keyframes knowledge-pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.9; }
+    }
+
+    /* Warm Library Accents — ≤15% Viewport Coverage */
+    .narrative-text {
+      position: relative;
+    }
+
+    .narrative-text::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--color-sage) 20%,
+        var(--color-amber) 50%,
+        var(--color-sage) 80%,
+        transparent 100%
+      );
+      opacity: 0.4;
+      border-radius: 2px;
+    }
+
+    /* Knowledge Discovery Text Effects */
+    .discovered {
+      position: relative;
+      color: var(--color-amber);
+      text-shadow: 0 0 8px rgba(232, 173, 74, 0.3);
+      transition: all var(--transition-base);
+    }
+
+    .discovered::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--color-amber) 50%,
+        transparent 100%
+      );
+      opacity: 0.6;
+    }
+
     /* Reset and Base Styles */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -204,9 +328,27 @@
       border: 1px solid rgba(254, 252, 246, 0.1);
     }
 
-    /* Choice System */
+    /* Choice System — Enhanced with Warm Library Accents */
     #choices {
       margin: var(--space-8) 0;
+      position: relative;
+    }
+
+    #choices::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--color-sage) 50%,
+        transparent 100%
+      );
+      opacity: 0.3;
     }
 
     .choice {
@@ -224,12 +366,34 @@
       transition: all var(--transition-base);
       text-align: left;
       line-height: 1.5;
+      position: relative;
+    }
+
+    .choice::after {
+      content: '';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--color-amber);
+      opacity: 0.2;
+      transition: all var(--transition-base);
     }
 
     .choice:hover {
       background: var(--color-choice-hover);
       border-color: var(--color-amber);
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(131, 158, 117, 0.2);
+    }
+
+    .choice:hover::after {
+      opacity: 0.6;
+      transform: translateY(-50%) scale(1.2);
+      box-shadow: 0 0 8px rgba(232, 173, 74, 0.4);
     }
 
     .choice:focus {
@@ -454,7 +618,7 @@
       font-style: italic;
     }
 
-    /* Responsive Design */
+    /* Responsive Design — Mobile Scholar's Lamp Optimization */
     @media (max-width: 768px) {
       .brand-title {
         font-size: var(--text-3xl);
@@ -470,6 +634,41 @@
 
       .ecosystem-grid {
         grid-template-columns: 1fr;
+      }
+
+      /* Mobile Scholar's Lamp Adjustments */
+      .scholars-lamp {
+        top: var(--space-3);
+        right: var(--space-3);
+        width: 36px;
+        height: 45px;
+        opacity: 0.5;
+      }
+
+      .lamp-glow {
+        width: 18px;
+        height: 18px;
+      }
+
+      .lamp-flame {
+        width: 6px;
+        height: 12px;
+      }
+
+      .scholars-lamp::before {
+        width: 24px;
+        height: 15px;
+      }
+
+      /* Mobile Accent Optimization */
+      .narrative-text::before {
+        left: -8px;
+        width: 2px;
+      }
+
+      .choice::after {
+        width: 3px;
+        height: 3px;
       }
 
       .knowledge-display {
@@ -554,6 +753,12 @@
     <!-- Game Interface -->
     <div id="story">
       <div id="game">
+        <!-- Scholar's Lamp — Knowledge State Indicator -->
+        <div id="lamp" class="scholars-lamp" data-state="steady" role="img" aria-label="Лампа ученого">
+          <div class="lamp-glow"></div>
+          <div class="lamp-flame"></div>
+        </div>
+
         <div id="text-container" class="narrative-text"></div>
         <div id="choices" role="group" aria-label="Варианты выбора"></div>
         <button id="continue-btn" class="btn-continue" aria-label="Продолжить чтение">
