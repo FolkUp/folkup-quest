@@ -3,6 +3,9 @@
  */
 
 import { Story } from 'inkjs';
+
+// Import CSS styles
+import '../styles/panel-modal.css';
 import { InkEngine } from './engine/ink-engine.js';
 import { SaveManager } from './engine/save-manager.js';
 import { Renderer } from './ui/renderer.js';
@@ -15,6 +18,7 @@ import {
   trackEndingReached,
   trackGameCompleted,
 } from './utils/analytics.js';
+import { panelReader } from './ui/panel-reader.js';
 
 let engine = null;
 let renderer = null;
@@ -154,6 +158,9 @@ function startGame(startScreen, storyEl) {
     });
   }
 
+  // Show gallery button
+  createGalleryButton(document.getElementById('game'));
+
   advance();
 }
 
@@ -175,6 +182,50 @@ function createMuteButton(container) {
     btn.setAttribute('aria-pressed', muted ? 'true' : 'false');
     btn.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
     btn.innerHTML = muted ? iconOff : iconOn;
+  });
+
+  container.appendChild(btn);
+}
+
+function createGalleryButton(container) {
+  const btn = document.createElement('button');
+  btn.className = 'gallery-btn';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Open comic panel gallery');
+  btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>';
+
+  // Style the gallery button
+  Object.assign(btn.style, {
+    position: 'fixed',
+    bottom: '80px',
+    right: '20px',
+    width: '50px',
+    height: '50px',
+    borderRadius: '50%',
+    border: 'none',
+    background: 'var(--folkup-sage)',
+    color: 'white',
+    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    zIndex: '1000',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  });
+
+  btn.addEventListener('click', () => {
+    panelReader.open();
+  });
+
+  btn.addEventListener('mouseenter', () => {
+    btn.style.transform = 'scale(1.05)';
+    btn.style.background = 'var(--folkup-charcoal)';
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'scale(1)';
+    btn.style.background = 'var(--folkup-sage)';
   });
 
   container.appendChild(btn);
@@ -250,6 +301,27 @@ function saveGame() {
   if (!saved) {
     console.warn('Save failed — storage may be full or unavailable');
   }
+
+  // Check for panel unlocks based on current game state
+  const gameState = {
+    current_scene: engine.getVariable('current_scene'),
+    current_act: engine.getVariable('current_act'),
+    folk_counter: engine.getVariable('folk_counter'),
+    alice_trust: engine.getVariable('alice_trust') || 0,
+    dan_trust: engine.getVariable('dan_trust') || 0,
+    gonzo_trust: engine.getVariable('gonzo_trust') || 0,
+    visited_barnes: engine.getVariable('visited_barnes') || false,
+    visited_cogumelos: engine.getVariable('visited_cogumelos') || false,
+    visited_retrotech: engine.getVariable('visited_retrotech') || false,
+    saw_flashback_young_breus: engine.getVariable('saw_flashback_young_breus') || false,
+    scene9_broke_mirror: engine.getVariable('scene9_broke_mirror') || false,
+    final_choice: engine.getVariable('final_choice') || null,
+    choice_5_listened: engine.getVariable('choice_5_listened') || false,
+    choice_6_read_contract: engine.getVariable('choice_6_read_contract') || false
+  };
+
+  // Check for new panel unlocks
+  renderer.checkPanelUnlocks(gameState);
 }
 
 // Boot

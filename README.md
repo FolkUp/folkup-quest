@@ -14,7 +14,9 @@ Interactive text adventure built with [Ink](https://www.inklestudios.com/ink/) e
 - **Atmospheric Design:** Dark gaming aesthetic with warm library soul integration
 - **Progressive Web App:** Offline-capable, responsive design
 - **Accessibility:** WCAG 2.1 AA compliant, screen reader support
-- **Comic Integration:** Chapter 1 comic panels and generation system
+- **Comic Integration:** 28 interactive comic panels with progressive unlock system
+- **Panel Gallery:** Standalone reader interface with act-based categorization
+- **Branching Paths:** Folk Path vs Dragon Path unlock different panel sets
 
 ## Brand Integration
 
@@ -36,15 +38,56 @@ FolkUp Quest underwent comprehensive brand integration (April 2026) to align wit
 
 ```
 ├── src/                 # Main application source
-│   ├── engine/         # Ink engine and game logic
-│   └── ui/            # User interface components
-├── styles/             # CSS styling
-├── comic/             # Chapter comic assets
-│   ├── ch1/templates/ # HTML templates for panels
-│   └── panels/        # Generated comic panels
-├── scripts/           # Build and generation scripts
+│   ├── engine/         # Ink engine, game logic, and panel progression
+│   │   ├── panel-progression.js  # 28-panel unlock system
+│   │   └── moral-system.js       # Tag parsing (PANEL, FEEDBACK, etc.)
+│   └── ui/            # User interface components  
+│       ├── panel-modal.js        # WCAG 2.1 AA comic panel modal
+│       ├── panel-reader.js       # Standalone gallery interface
+│       └── renderer.js           # Game renderer with panel integration
+├── styles/             # CSS styling including panel modal styles
+├── public/comic/panels/ # Comic panel assets (28 panels + manifests)
+├── scripts/comic/      # Comic generation and source assets
+├── ink/               # Ink story files with PANEL tags
 └── _meta/            # Project documentation and audits
 ```
+
+## Comic Integration System
+
+FolkUp Quest features a comprehensive comic panel system that enhances the narrative experience through visual storytelling.
+
+### Features
+
+- **28 Comic Panels:** Progressive unlock system tied to story progression
+- **Branching Paths:** Different choice paths unlock unique panel sets
+  - **Folk Path:** Community-focused choices unlock panels emphasizing collaboration
+  - **Dragon Path:** Pragmatic choices unlock panels showing growth/scale tension  
+- **Accessibility:** WCAG 2.1 AA compliant modal with focus trap navigation
+- **Gallery Reader:** Standalone interface for browsing unlocked panels by act
+- **Progressive Unlocks:** Panels unlock based on:
+  - Story progression (required panels)
+  - Character trust levels (bonus panels)
+  - Major choices (path-specific panels)  
+  - Achievements (completion rewards)
+
+### Technical Implementation
+
+- **Panel Modal System:** Accessible image viewer with manifest metadata
+- **Unlock Progression:** Conditional evaluation engine for 28-panel configuration
+- **localStorage Persistence:** Unlock state preserved across sessions
+- **Tag-Based Integration:** Ink story scenes tagged with `# PANEL: panel-X.Y`
+- **Asset Pipeline:** Automated copying from `/scripts/comic/panels/` to `/public/comic/panels/`
+
+### Panel Categories
+
+| Category | Panels | Description |
+|----------|--------|-------------|
+| Act I: Discovery | 1.1-1.7 | Character introductions, world establishment |
+| Act II: Challenge | 2.1-2.7 | Central conflict, key decisions |
+| Act III: Resolution | 3.1-3.7 | Philosophical confrontation, final choices |
+| Epilogue | 4.1-4.7 | Endings, consequences, reflections |
+
+Access the gallery via the floating gallery button (📷) during gameplay or after completion.
 
 ## Development
 

@@ -7,6 +7,7 @@ import {
   parseLampTag,
   parseEndingTag,
   parseAudioTag,
+  parsePanelTag,
   getEndingName,
 } from '../engine/moral-system.js';
 import {
@@ -21,6 +22,8 @@ import {
   SCENE_CHARACTER_MAP,
   ENDING_CHARACTER_MAP,
 } from './character-images.js';
+import { panelModal } from './panel-modal.js';
+import { getUnlockablePanels, PANEL_PROGRESSION } from '../engine/panel-progression.js';
 
 /** Escape HTML entities to prevent XSS */
 function escapeHtml(text) {
@@ -130,6 +133,10 @@ export class Renderer {
       const audio = parseAudioTag(tag);
       if (audio && this.audioManager) {
         audio === 'stop' ? this.audioManager.stop() : this.audioManager.play(audio);
+      }
+      const panel = parsePanelTag(tag);
+      if (panel) {
+        this.handlePanelTrigger(panel);
       }
       if (parseKnowledgeRichTag(tag)) {
         this.setLampKnowledgeRich(true);
@@ -507,6 +514,156 @@ export class Renderer {
     this.container.classList.add('has-sidebar');
     this.sidebarEl?.removeAttribute('aria-hidden');
     this.sidebarImgEl.classList.remove('fading');
+  }
+
+  /** Handle panel trigger from Ink tag */
+  handlePanelTrigger(panelId) {
+    const config = PANEL_PROGRESSION[panelId];
+    if (!config) {
+      console.warn('Unknown panel ID:', panelId);
+      return;
+    }
+
+    // Unlock the panel
+    panelModal.unlockPanel(panelId);
+
+    // Show unlock notification with contextual title
+    this.showPanelUnlockNotification(panelId, config.title);
+
+    // Auto-show panel after brief delay (optional, only for required panels)
+    if (config.required) {
+      setTimeout(() => {
+        panelModal.show(panelId);
+      }, 1000);
+    }
+  }
+
+  /** Check for multiple panel unlocks based on current game state */
+  checkPanelUnlocks(gameState) {
+    const unlockable = getUnlockablePanels(gameState);
+    let newUnlocks = 0;
+
+    for (const panel of unlockable) {
+      if (!panelModal.unlockedPanels.has(panel.id)) {
+        panelModal.unlockPanel(panel.id);
+
+        // Show notification for new unlocks (but don't auto-show)
+        this.showPanelUnlockNotification(panel.id, panel.title);
+        newUnlocks++;
+      }
+    }
+
+    // If multiple panels unlocked, show summary notification
+    if (newUnlocks > 1) {
+      this.showMultiPanelNotification(newUnlocks);
+    }
+  }
+
+  /** Show panel unlock notification */
+  showPanelUnlockNotification(panelId, title = null) {
+    const config = PANEL_PROGRESSION[panelId];
+    const displayTitle = title || config?.title || 'New illustration';
+
+    // Create temporary notification element
+    const notification = document.createElement('div');
+    notification.className = 'panel-unlock-notification';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <span class="notification-icon">🎨</span>
+        <span class="notification-text">Unlocked: ${escapeHtml(displayTitle)}</span>
+      </div>
+    `;
+
+    // Add notification styles
+    Object.assign(notification.style, {
+      position: 'fixed',
+      top: '20px',
+      right: '20px',
+      background: 'var(--folkup-sage)',
+      color: 'var(--folkup-ivory)',
+      padding: '12px 16px',
+      borderRadius: '8px',
+      fontFamily: 'Source Sans 3, sans-serif',
+      fontSize: '0.9rem',
+      zIndex: '1001',
+      opacity: '0',
+      transform: 'translateY(-20px)',
+      transition: 'all 0.3s ease',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)'
+    });
+
+    document.body.appendChild(notification);
+
+    // Animate in
+    requestAnimationFrame(() => {
+      notification.style.opacity = '1';
+      notification.style.transform = 'translateY(0)';
+    });
+
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateY(-20px)';
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
+
+  /** Show notification for multiple panel unlocks */
+  showMultiPanelNotification(count) {
+    const notification = document.createElement('div');
+    notification.className = 'panel-unlock-notification multi-unlock';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <span class="notification-icon">🎨</span>
+        <span class="notification-text">${count} new illustrations unlocked!</span>
+        <small class="notification-subtitle">Check the gallery to view them</small>
+      </div>
+    `;
+
+    // Enhanced styles for multi-unlock notification
+    Object.assign(notification.style, {
+      position: 'fixed',
+      top: '20px',
+      right: '20px',
+      background: 'linear-gradient(135deg, var(--folkup-sage), var(--folkup-bordeaux))',
+      color: 'var(--folkup-ivory)',
+      padding: '16px 20px',
+      borderRadius: '12px',
+      fontFamily: 'Source Sans 3, sans-serif',
+      fontSize: '0.9rem',
+      zIndex: '1001',
+      opacity: '0',
+      transform: 'translateY(-20px) scale(0.95)',
+      transition: 'all 0.4s ease',
+      boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)',
+      border: '1px solid rgba(255, 255, 255, 0.2)'
+    });
+
+    // Style the subtitle
+    const subtitle = notification.querySelector('.notification-subtitle');
+    if (subtitle) {
+      Object.assign(subtitle.style, {
+        display: 'block',
+        fontSize: '0.75rem',
+        opacity: '0.8',
+        marginTop: '4px'
+      });
+    }
+
+    document.body.appendChild(notification);
+
+    // Enhanced animation
+    requestAnimationFrame(() => {
+      notification.style.opacity = '1';
+      notification.style.transform = 'translateY(0) scale(1)';
+    });
+
+    // Auto-remove after 4 seconds (longer for multi-unlock)
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateY(-20px) scale(0.95)';
+      setTimeout(() => notification.remove(), 400);
+    }, 4000);
   }
 
   /** Scroll story container to bottom smoothly */

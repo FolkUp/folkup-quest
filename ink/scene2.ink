@@ -9,6 +9,7 @@
 
 # SCENE: library
 # ACT: 1
+# PANEL: panel-1.2
 
 {scene2 < 2:
     -> scene2_first_visit

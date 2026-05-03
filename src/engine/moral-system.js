@@ -85,3 +85,13 @@ export function parseAudioTag(tag) {
   const match = tag.match(/^AUDIO:\s*([\w-]+)$/i);
   return match ? match[1].toLowerCase() : null;
 }
+
+/**
+ * Parse panel tag from Ink
+ * @param {string} tag — e.g. "PANEL: panel-1.1" or "PANEL: panel-2.3"
+ * @returns {string|null} — panel ID or null if not a panel tag
+ */
+export function parsePanelTag(tag) {
+  const match = tag.match(/^PANEL:\s*(panel-[\d]+\.[\d]+)$/i);
+  return match ? match[1].toLowerCase() : null;
+}

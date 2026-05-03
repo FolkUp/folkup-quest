@@ -7,6 +7,7 @@
 
 # SCENE: credits
 # AUDIO: stop
+# PANEL: panel-3.4
 
 — FolkUp Quest —
 

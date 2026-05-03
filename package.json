@@ -2,7 +2,7 @@
   "name": "folkup-quest",
   "private": true,
   "version": "1.0.0",
-  "description": "FolkUp Quest — interactive text adventure (Ink engine)",
+  "description": "FolkUp Quest — interactive text adventure with comic panel integration (Ink engine)",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -9,6 +9,7 @@
 
 # SCENE: ending
 # ACT: 3
+# PANEL: panel-3.3
 
 // Ending determination logic
 // High Folk (≥65): accept→bridge, refuse→lantern, counter→lantern(best)
