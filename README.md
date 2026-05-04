@@ -4,6 +4,7 @@ Interactive text adventure built with [Ink](https://www.inklestudios.com/ink/) e
 
 **Live:** [quest.folkup.app](https://quest.folkup.app)
 
+[![Version](https://img.shields.io/badge/Version-1.1.2-orange.svg)](#)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](LICENSE)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/Content-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-CONTENT)
 [![Brand Integration](https://img.shields.io/badge/Brand%20Integration-Phase%201a%20Complete-green.svg)](#brand-integration)
@@ -157,4 +158,4 @@ See [`_meta/`](_meta/) for project documentation and audit reports.
 
 ## License
 
-Code is licensed under [MIT](LICENSE). Narrative content (story text in `ink/` directory) is licensed under [CC BY-NC-SA 4.0](LICENSE-CONTENT). Fonts are licensed under [OFL 1.1](OFL.txt).
+Code is licensed under [MIT](LICENSE). Narrative content (story text in `ink/` directory) is licensed under [CC BY-NC-SA 4.0](LICENSE-CONTENT).

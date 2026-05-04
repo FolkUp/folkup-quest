@@ -19,9 +19,7 @@ import {
   trackGameCompleted,
 } from './utils/analytics.js';
 import { privacyAnalytics } from './utils/privacy-analytics.js';
-import { consentModal } from './ui/consent-modal.js';
 import { privacySettings } from './ui/privacy-settings.js';
-import { dataRetentionManager } from './utils/data-retention.js';
 import { performanceMonitor } from './utils/performance-monitor.js';
 // Panel system will be dynamically imported when needed
 
