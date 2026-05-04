@@ -1,0 +1,52 @@
+{
+  "panelId": "panel-1.9",
+  "generated": "2026-05-04T15:30:00.000Z",
+  "predictionId": "placeholder-micro-story-choice",
+  "prompt": "Comic book panel in Frank Miller Sin City style. Pure black and white, high contrast ink wash, no gray tones.\n\nSCENE: Choice moment with diary - Panel 1.9 (Micro-Story)\n\nMAIN SUBJECT: Character hands reaching toward open diary, moment of decision\n\nBACKGROUND ELEMENTS:\n- Close-up on diary pages with visible handwritten text\n- Character's hands in frame showing hesitation/decision\n- Library shadows creating dramatic tension\n- Text on diary pages suggesting mystery\n- Spot color element: #839E75\n\nSTYLE: Frank Miller Sin City aesthetic, emphasis on choice/decision moment.\n\nMOOD: Decision, tension, curiosity versus respect for mystery.\n\nTECHNICAL: Pure black/white, spot color #839E75, 2:3 aspect ratio",
+  "template": {
+    "base": "Comic book panel in Frank Miller Sin City style. Pure black and white, high contrast ink wash, no gray tones.",
+    "structure": "Decision moment with diary choice",
+    "spotColor": "#839E75",
+    "mood": "Decision tension, curiosity"
+  },
+  "status": "placeholder",
+  "filePath": "placeholder-panel-1.9",
+  "estimatedCost": 3.5,
+  "variants": {
+    "thumb": {
+      "webp": "/comic/panels/panel-1.9-thumb.webp",
+      "png": "/comic/panels/panel-1.9-thumb.png",
+      "width": 100,
+      "height": 150,
+      "webpSize": 214,
+      "pngSize": 312
+    },
+    "medium": {
+      "webp": "/comic/panels/panel-1.9-medium.webp",
+      "png": "/comic/panels/panel-1.9-medium.png",
+      "width": 512,
+      "height": 768,
+      "webpSize": 1994,
+      "pngSize": 2476
+    },
+    "full": {
+      "webp": "/comic/panels/panel-1.9-full.webp",
+      "png": "/comic/panels/panel-1.9-full.png",
+      "width": 1024,
+      "height": 1536,
+      "webpSize": 5734,
+      "pngSize": 7245
+    }
+  },
+  "aspectRatio": "2:3",
+  "optimization": {
+    "generated": "2026-05-04T09:42:26.740Z",
+    "originalDimensions": {
+      "width": 816,
+      "height": 1232
+    },
+    "pipeline": "FQST-013-sharp-v1.0",
+    "authority": "Enhanced Alice v2.0 L3"
+  },
+  "cacheBusting": "v1.0-1777887746740"
+}

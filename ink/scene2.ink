@@ -83,3 +83,6 @@
         -> scene1_5
     * * [Открыть]
         -> scene5
+
+* {not micro_story_active} [Изучить угол библиотеки]
+    -> scene2_5

@@ -1,0 +1,52 @@
+{
+  "panelId": "panel-1.8",
+  "generated": "2026-05-04T15:30:00.000Z",
+  "predictionId": "placeholder-micro-story",
+  "prompt": "Comic book panel in Frank Miller Sin City style. Pure black and white, high contrast ink wash, no gray tones.\n\nSCENE: Library corner discovery - Panel 1.8 (Micro-Story)\n\nMAIN SUBJECT: Character discovering hidden corner of library with mysterious old diary\n\nBACKGROUND ELEMENTS:\n- Library interior with geometric shadows from bookshelves\n- Hidden corner niche created by intersecting shelves\n- Old leather diary on floor, partially open\n- Dramatic lighting creating mystery\n- Spot color element: #839E75\n\nSTYLE: Frank Miller Sin City aesthetic, high contrast, mysterious discovery mood.\n\nMOOD: Discovery, mystery, contemplative curiosity.\n\nTECHNICAL: Pure black/white, spot color #839E75, 2:3 aspect ratio",
+  "template": {
+    "base": "Comic book panel in Frank Miller Sin City style. Pure black and white, high contrast ink wash, no gray tones.",
+    "structure": "Discovery scene in library corner",
+    "spotColor": "#839E75",
+    "mood": "Mystery, discovery, contemplative"
+  },
+  "status": "placeholder",
+  "filePath": "placeholder-panel-1.8",
+  "estimatedCost": 3.5,
+  "variants": {
+    "thumb": {
+      "webp": "/comic/panels/panel-1.8-thumb.webp",
+      "png": "/comic/panels/panel-1.8-thumb.png",
+      "width": 100,
+      "height": 150,
+      "webpSize": 212,
+      "pngSize": 313
+    },
+    "medium": {
+      "webp": "/comic/panels/panel-1.8-medium.webp",
+      "png": "/comic/panels/panel-1.8-medium.png",
+      "width": 512,
+      "height": 768,
+      "webpSize": 1992,
+      "pngSize": 2648
+    },
+    "full": {
+      "webp": "/comic/panels/panel-1.8-full.webp",
+      "png": "/comic/panels/panel-1.8-full.png",
+      "width": 1024,
+      "height": 1536,
+      "webpSize": 5820,
+      "pngSize": 7336
+    }
+  },
+  "aspectRatio": "2:3",
+  "optimization": {
+    "generated": "2026-05-04T09:42:26.766Z",
+    "originalDimensions": {
+      "width": 816,
+      "height": 1232
+    },
+    "pipeline": "FQST-013-sharp-v1.0",
+    "authority": "Enhanced Alice v2.0 L3"
+  },
+  "cacheBusting": "v1.0-1777887746766"
+}

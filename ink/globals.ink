@@ -33,3 +33,11 @@ VAR visited_retrotech = false
 
 // Final choice for ending determination
 VAR final_choice = ""
+
+// Micro-Story System (FQST-014.1)
+VAR micro_story_active = false
+VAR diary_choice = ""
+VAR has_diary = false
+VAR knowledge_curiosity = 0
+VAR respect_mystery = 0
+VAR possession_instinct = 0

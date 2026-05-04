@@ -67,6 +67,27 @@ export const PANEL_PROGRESSION = {
     optional: true
   },
 
+  // === MICRO-STORY: LIBRARY SIDE-QUEST (panels 1.8-1.9) ===
+  'panel-1.8': {
+    scene: 'scene2_5',
+    title: 'Угол библиотеки',
+    description: 'Ниша в стеллажах, старый дневник, подпись: Dr. Folkup.',
+    act: 1,
+    condition: 'current_scene >= 2',
+    optional: true,
+    micro_story: true
+  },
+
+  'panel-1.9': {
+    scene: 'scene2_5',
+    title: 'Выбор в углу',
+    description: 'Три пути с дневником: прочитать, оставить, забрать.',
+    act: 1,
+    condition: 'micro_story_active && diary_choice',
+    optional: true,
+    micro_story: true
+  },
+
   // === ACT 2: CHALLENGE (panels 2.1-2.7) ===
   'panel-2.1': {
     scene: 'scene7',

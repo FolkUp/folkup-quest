@@ -6,6 +6,7 @@ INCLUDE epigraph.ink
 INCLUDE scene1.ink
 INCLUDE scene1_5.ink
 INCLUDE scene2.ink
+INCLUDE scene2_5.ink
 INCLUDE scene3.ink
 INCLUDE scene4.ink
 INCLUDE scene5.ink

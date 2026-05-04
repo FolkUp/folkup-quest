@@ -40,7 +40,7 @@
   },
   "aspectRatio": "2:3",
   "optimization": {
-    "generated": "2026-05-04T00:46:04.758Z",
+    "generated": "2026-05-04T09:42:33.018Z",
     "originalDimensions": {
       "width": 816,
       "height": 1232
@@ -48,5 +48,5 @@
     "pipeline": "FQST-013-sharp-v1.0",
     "authority": "Enhanced Alice v2.0 L3"
   },
-  "cacheBusting": "v1.0-1777855564758"
+  "cacheBusting": "v1.0-1777887753018"
 }

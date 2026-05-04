@@ -14,7 +14,7 @@ Interactive text adventure built with [Ink](https://www.inklestudios.com/ink/) e
 - **Atmospheric Design:** Dark gaming aesthetic with warm library soul integration
 - **Progressive Web App:** Offline-capable, responsive design
 - **Accessibility:** WCAG 2.1 AA compliant, screen reader support
-- **Comic Integration:** 28 interactive comic panels with progressive unlock system
+- **Comic Integration:** 30 interactive comic panels with progressive unlock system and micro-stories
 - **Panel Gallery:** Standalone reader interface with act-based categorization
 - **Branching Paths:** Folk Path vs Dragon Path unlock different panel sets
 - **Privacy-First Analytics:** GDPR-compliant engagement tracking with granular consent
@@ -112,6 +112,7 @@ FolkUp Quest features a comprehensive comic panel system that enhances the narra
 | Category | Panels | Description |
 |----------|--------|-------------|
 | Act I: Discovery | 1.1-1.7 | Character introductions, world establishment |
+| Act I: Micro-Stories | 1.8-1.9 | Library Side-Quest: Dr. Folkup's diary discovery |
 | Act II: Challenge | 2.1-2.7 | Central conflict, key decisions |
 | Act III: Resolution | 3.1-3.7 | Philosophical confrontation, final choices |
 | Epilogue | 4.1-4.7 | Endings, consequences, reflections |
