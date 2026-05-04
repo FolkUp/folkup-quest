@@ -22,7 +22,8 @@ import { privacyAnalytics } from './utils/privacy-analytics.js';
 import { consentModal } from './ui/consent-modal.js';
 import { privacySettings } from './ui/privacy-settings.js';
 import { dataRetentionManager } from './utils/data-retention.js';
-import { panelReader } from './ui/panel-reader.js';
+import { performanceMonitor } from './utils/performance-monitor.js';
+// Panel system will be dynamically imported when needed
 
 let engine = null;
 let renderer = null;
@@ -169,6 +170,14 @@ function startGame(startScreen, storyEl) {
   // Show privacy settings button
   createPrivacyButton(document.getElementById('game'));
 
+  // Conditional preload panel system on good connections
+  if (navigator.connection?.effectiveType === '4g' && !navigator.connection?.saveData) {
+    setTimeout(async () => {
+      const { conditionalPreload } = await import('./ui/panel-system.js');
+      conditionalPreload();
+    }, 2000);
+  }
+
   advance();
 }
 
@@ -222,8 +231,28 @@ function createGalleryButton(container) {
     justifyContent: 'center'
   });
 
-  btn.addEventListener('click', () => {
-    panelReader.open();
+  btn.addEventListener('click', async () => {
+    try {
+      // Show loading state
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+
+      // Dynamic import panel system
+      const { initPanelSystem, trackPanelSystemLoad } = await import('./ui/panel-system.js');
+
+      trackPanelSystemLoad();
+      const { panelReader } = await initPanelSystem();
+
+      // Open gallery
+      panelReader.open();
+
+    } catch (error) {
+      console.error('Failed to open gallery:', error);
+    } finally {
+      // Restore button state
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
   });
 
   btn.addEventListener('mouseenter', () => {

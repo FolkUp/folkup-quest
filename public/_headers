@@ -1,0 +1,74 @@
+# FQST-013 Phase 3: Cloudflare Pages Cache Headers
+# Enhanced Alice v2.0 Level 3 Cartouche Autonome
+# Optimized cache strategy for responsive comic panel assets
+
+# Comic panel variants - Aggressive caching for responsive images
+/comic/panels/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  Cloudflare-CDN-Cache-TTL: 31536000
+  Vary: Accept
+
+/comic/panels/*.png
+  Cache-Control: public, max-age=31536000, immutable
+  Cloudflare-CDN-Cache-TTL: 31536000
+
+# Panel manifests - Background revalidate for metadata
+/comic/panels/*-manifest.json
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+  Cloudflare-CDN-Cache-TTL: 86400
+
+# Service Worker - Always revalidate for updates
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Cloudflare-CDN-Cache-TTL: 0
+
+# Story data - Background updates for game state
+/story.json
+  Cache-Control: public, max-age=3600, stale-while-revalidate=1800
+  Cloudflare-CDN-Cache-TTL: 3600
+
+# App manifest and favicon - Long cache with revalidation
+/manifest.webmanifest
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  Cloudflare-CDN-Cache-TTL: 604800
+
+/favicon.svg
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  Cloudflare-CDN-Cache-TTL: 604800
+
+# Fonts - Aggressive caching (font files are immutable)
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Cloudflare-CDN-Cache-TTL: 31536000
+
+# Styles - Medium cache with revalidation
+/styles/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+  Cloudflare-CDN-Cache-TTL: 86400
+
+# Legal documents - Daily cache with background updates
+/legal/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+  Cloudflare-CDN-Cache-TTL: 86400
+
+# JavaScript bundles - Aggressive caching (versioned filenames)
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  Cloudflare-CDN-Cache-TTL: 31536000
+
+# CSS assets - Aggressive caching (versioned filenames)
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  Cloudflare-CDN-Cache-TTL: 31536000
+
+# Root HTML - Short cache for app shell updates
+/
+  Cache-Control: public, max-age=300, stale-while-revalidate=60
+  Cloudflare-CDN-Cache-TTL: 300
+
+# Performance optimization headers
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin

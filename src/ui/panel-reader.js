@@ -2,11 +2,12 @@
  * Panel Reader — Standalone comic panel gallery
  * Allows browsing unlocked panels independently from game
  * Enhanced with GDPR-compliant analytics tracking
+ * FQST-013: Enhanced with lazy loading and responsive images
  */
 
 import { getPanelsByCategory, PANEL_PROGRESSION } from '../engine/panel-progression.js';
-import { panelModal } from './panel-modal.js';
 import { privacyAnalytics } from '../utils/privacy-analytics.js';
+import { LazyImageLoader, NetworkAdaptiveLoader, LAZY_LOADING_STYLES } from './panel-reader-lazy.js';
 
 export class PanelReader {
   constructor() {
@@ -17,13 +18,35 @@ export class PanelReader {
     this.backdropEl = null;
     this.sessionStartTime = null;
     this.panelsViewedInSession = 0;
+    this.lazyLoader = new LazyImageLoader();
+    this.panelModal = null; // Will be loaded dynamically
+    this.unlockedPanels = new Set(); // Cached unlocked panels
 
     this.init();
+    this.injectLazyLoadingStyles();
   }
 
   init() {
     this.createReaderInterface();
     this.bindEvents();
+  }
+
+  injectLazyLoadingStyles() {
+    // Add lazy loading CSS if not already present
+    if (!document.querySelector('#lazy-loading-styles')) {
+      const styleEl = document.createElement('style');
+      styleEl.id = 'lazy-loading-styles';
+      styleEl.textContent = LAZY_LOADING_STYLES;
+      document.head.appendChild(styleEl);
+    }
+  }
+
+  async getPanelModal() {
+    if (!this.panelModal) {
+      const { panelModal } = await import('./panel-modal.js');
+      this.panelModal = panelModal;
+    }
+    return this.panelModal;
   }
 
   createReaderInterface() {
@@ -418,7 +441,7 @@ export class PanelReader {
         const panelId = card.dataset.panelId;
         if (panelId) {
           this.panelsViewedInSession++;
-          panelModal.show(panelId, 'gallery', 'unlocked');
+          this.showPanel(panelId);
         }
       }
 
@@ -465,6 +488,10 @@ export class PanelReader {
   close() {
     if (!this.isOpen) return;
 
+    // Clean up lazy loader
+    this.lazyLoader.unobserveAll();
+    this.lazyLoader.reportPerformance();
+
     // Track reader session before closing
     if (this.sessionStartTime) {
       const sessionTime = Date.now() - this.sessionStartTime;
@@ -488,6 +515,9 @@ export class PanelReader {
     const previousCategory = this.currentCategory;
     this.currentCategory = categoryName;
 
+    // Clean up lazy loader before switching
+    this.lazyLoader.unobserveAll();
+
     // Update nav tabs
     this.readerEl.querySelectorAll('.nav-tab').forEach(tab => {
       const isActive = tab.dataset.category === categoryName;
@@ -495,15 +525,21 @@ export class PanelReader {
       tab.setAttribute('aria-selected', isActive);
     });
 
-    // Load panels for new category
+    // Load panels for new category (includes lazy loading reinitialization)
     this.renderPanelsGrid();
 
-    // Track category switch
-    privacyAnalytics.trackReaderModeUsage('category_switched', 0, 0);
+    // Track category switch with performance metrics
+    const lazyStats = this.lazyLoader.getStats();
+    privacyAnalytics.trackReaderModeUsage('category_switched', lazyStats.loaded, 0);
   }
 
-  loadPanels() {
+  async loadPanels() {
     this.categories = getPanelsByCategory();
+
+    // Load panelModal and cache unlocked panels
+    const panelModal = await this.getPanelModal();
+    this.unlockedPanels = new Set(panelModal.unlockedPanels);
+
     this.renderPanelsGrid();
     this.updateProgressInfo();
   }
@@ -522,14 +558,14 @@ export class PanelReader {
     }
 
     grid.innerHTML = panels.map(panel => {
-      const isUnlocked = panelModal.unlockedPanels.has(panel.id);
+      const isUnlocked = this.unlockedPanels.has(panel.id);
       const badges = this.getPanelBadges(panel);
 
       return `
         <div class="panel-card ${isUnlocked ? '' : 'locked'}" data-panel-id="${panel.id}">
           <div class="panel-preview">
             ${isUnlocked
-              ? `<img src="/comic/panels/${panel.id}-generated.png" alt="${panel.title}" />`
+              ? this.generateResponsiveImage(panel.id, panel.title)
               : `<div class="panel-locked-overlay">
                    <div>🔒</div>
                    <div class="panel-locked-text">Locked</div>
@@ -544,6 +580,54 @@ export class PanelReader {
         </div>
       `;
     }).join('');
+
+    // Initialize lazy loading after grid render
+    this.initializeLazyLoading();
+  }
+
+  generateResponsiveImage(panelId, title) {
+    const supportsWebP = NetworkAdaptiveLoader.supportsWebP();
+
+    return `
+      <picture>
+        <source
+          data-srcset="/comic/panels/${panelId}-thumb.webp"
+          type="image/webp" />
+        <img
+          class="panel-thumb"
+          data-src="/comic/panels/${panelId}-thumb.png"
+          alt="${title}"
+          width="100"
+          height="150"
+          style="aspect-ratio: 2/3; opacity: 0;"
+          loading="lazy" />
+      </picture>
+    `;
+  }
+
+  initializeLazyLoading() {
+    // Clean up previous lazy loader
+    this.lazyLoader.unobserveAll();
+
+    // Initialize new lazy loader
+    this.lazyLoader.init();
+
+    // Observe all lazy images in current grid
+    const lazyImages = this.readerEl.querySelectorAll('img[data-src]');
+    lazyImages.forEach(img => {
+      this.lazyLoader.observe(img);
+    });
+
+    console.log(`🔄 Lazy loading initialized for ${lazyImages.length} images`);
+  }
+
+  async showPanel(panelId) {
+    try {
+      const panelModal = await this.getPanelModal();
+      panelModal.show(panelId, 'gallery', 'unlocked');
+    } catch (error) {
+      console.error('Failed to show panel:', error);
+    }
   }
 
   getPanelBadges(panel) {
@@ -574,7 +658,7 @@ export class PanelReader {
 
   updateProgressInfo() {
     const totalPanels = Object.keys(PANEL_PROGRESSION).length;
-    const unlockedCount = panelModal.unlockedPanels.size;
+    const unlockedCount = this.unlockedPanels.size;
 
     const unlockedEl = this.readerEl.querySelector('#unlocked-count');
     const totalEl = this.readerEl.querySelector('#total-count');

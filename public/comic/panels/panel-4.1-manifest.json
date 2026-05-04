@@ -11,5 +11,42 @@
   },
   "status": "completed",
   "filePath": "C:\\JOHNDOE_CLAUDE\\folkup-quest\\scripts\\comic\\panels\\panel-4.1-generated.png",
-  "estimatedCost": 3.5
+  "estimatedCost": 3.5,
+  "variants": {
+    "thumb": {
+      "webp": "/comic/panels/panel-4.1-thumb.webp",
+      "png": "/comic/panels/panel-4.1-thumb.png",
+      "width": 100,
+      "height": 150,
+      "webpSize": 3890,
+      "pngSize": 7549
+    },
+    "medium": {
+      "webp": "/comic/panels/panel-4.1-medium.webp",
+      "png": "/comic/panels/panel-4.1-medium.png",
+      "width": 512,
+      "height": 768,
+      "webpSize": 79972,
+      "pngSize": 136755
+    },
+    "full": {
+      "webp": "/comic/panels/panel-4.1-full.webp",
+      "png": "/comic/panels/panel-4.1-full.png",
+      "width": 1024,
+      "height": 1536,
+      "webpSize": 234114,
+      "pngSize": 579633
+    }
+  },
+  "aspectRatio": "2:3",
+  "optimization": {
+    "generated": "2026-05-04T00:46:07.502Z",
+    "originalDimensions": {
+      "width": 816,
+      "height": 1232
+    },
+    "pipeline": "FQST-013-sharp-v1.0",
+    "authority": "Enhanced Alice v2.0 L3"
+  },
+  "cacheBusting": "v1.0-1777855567502"
 }
