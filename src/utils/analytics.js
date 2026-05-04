@@ -1,5 +1,6 @@
 /**
  * Analytics abstraction — zero dependencies, opt-in, no-op by default.
+ * Enhanced with GDPR-compliant privacy controls.
  *
  * Events:
  *   game_start       — new game or continue
@@ -7,13 +8,20 @@
  *   act_changed       — act transition (act number)
  *   ending_reached   — specific ending reached
  *   game_completed   — game finished (with ending, folk_counter)
+ *   panel_viewed     — comic panel opened
+ *   panel_engagement — time spent on panel
+ *   panel_navigation — navigation between panels
+ *   reader_mode      — gallery usage
+ *   privacy_action   — privacy-related actions
  */
 
 let enabled = false;
+let privacyAnalytics = null;
 
 /**
  * Initialize analytics. Call once on page load.
  * Only enables if Cloudflare Web Analytics beacon is present.
+ * Respects privacy-first analytics consent levels.
  */
 export function initAnalytics() {
   // Cloudflare Web Analytics sets __cfBeacon on window
@@ -23,6 +31,17 @@ export function initAnalytics() {
     enabled = true; // Always log in dev mode
     console.log('[analytics] dev mode — logging to console');
   }
+
+  // Lazy load privacy analytics to avoid circular imports
+  setTimeout(async () => {
+    try {
+      const module = await import('./privacy-analytics.js');
+      privacyAnalytics = module.privacyAnalytics;
+      console.log('[analytics] Privacy-first analytics integrated');
+    } catch (e) {
+      console.warn('[analytics] Failed to load privacy analytics:', e);
+    }
+  }, 0);
 }
 
 /**
@@ -32,6 +51,12 @@ export function initAnalytics() {
  */
 export function trackEvent(name, params = {}) {
   if (!enabled) return;
+
+  // Check privacy consent for analytics events
+  if (privacyAnalytics && !privacyAnalytics.canTrackAnalytics() &&
+      !['privacy_action', 'consent_changed'].includes(name)) {
+    return; // Block non-essential tracking
+  }
 
   if (import.meta.env?.DEV) {
     console.log(`[analytics] ${name}`, params);

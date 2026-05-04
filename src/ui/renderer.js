@@ -17,6 +17,7 @@ import {
 } from '../engine/knowledge-system.js';
 import { EndingTracker } from '../engine/ending-tracker.js';
 import { trackActChanged } from '../utils/analytics.js';
+import { privacyAnalytics } from '../utils/privacy-analytics.js';
 import {
   CHARACTER_IMAGES,
   SCENE_CHARACTER_MAP,
@@ -538,6 +539,42 @@ export class Renderer {
     }
   }
 
+  /** Determine how a panel was unlocked for analytics */
+  getUnlockMethod(panel, gameState) {
+    if (panel.required) {
+      return 'story_progress';
+    }
+
+    if (panel.condition) {
+      if (panel.condition.includes('choice_')) {
+        return 'story_choice';
+      }
+      if (panel.condition.includes('trust')) {
+        return 'character_trust';
+      }
+      if (panel.condition.includes('folk_counter')) {
+        return 'folk_path_progression';
+      }
+      if (panel.condition.includes('ending_')) {
+        return 'ending_achieved';
+      }
+    }
+
+    if (panel.folk_path) {
+      return 'folk_path';
+    }
+
+    if (panel.dragon_path) {
+      return 'dragon_path';
+    }
+
+    if (panel.bonus) {
+      return 'bonus_condition';
+    }
+
+    return 'unknown';
+  }
+
   /** Check for multiple panel unlocks based on current game state */
   checkPanelUnlocks(gameState) {
     const unlockable = getUnlockablePanels(gameState);
@@ -545,7 +582,20 @@ export class Renderer {
 
     for (const panel of unlockable) {
       if (!panelModal.unlockedPanels.has(panel.id)) {
+        // Determine unlock method based on panel configuration
+        const unlockMethod = this.getUnlockMethod(panel, gameState);
+
         panelModal.unlockPanel(panel.id);
+
+        // Track panel unlock (essential function, always allowed)
+        privacyAnalytics.trackPrivacyAction('panel_unlocked', {
+          panel_id: panel.id,
+          unlock_method: unlockMethod,
+          act: panel.act,
+          required: panel.required,
+          folk_path: panel.folk_path,
+          dragon_path: panel.dragon_path
+        });
 
         // Show notification for new unlocks (but don't auto-show)
         this.showPanelUnlockNotification(panel.id, panel.title);

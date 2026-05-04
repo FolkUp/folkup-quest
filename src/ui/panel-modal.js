@@ -2,7 +2,10 @@
  * Comic Panel Modal System — FolkUp Quest
  * Based on declaration-guide CookieConsent pattern
  * WCAG 2.1 AA modal with focus trap + keyboard navigation
+ * Enhanced with GDPR-compliant analytics tracking
  */
+
+import { privacyAnalytics } from '../utils/privacy-analytics.js';
 
 export class PanelModal {
   constructor() {
@@ -11,6 +14,8 @@ export class PanelModal {
     this.modal = null;
     this.focusTrapElements = [];
     this.lastActiveElement = null;
+    this.panelStartTime = null;
+    this.panelSource = 'unknown';
 
     this.init();
   }
@@ -92,7 +97,7 @@ export class PanelModal {
   bindEvents() {
     // Close button
     this.modal.querySelector('.panel-close').addEventListener('click', () => {
-      this.close();
+      this.close('close_button');
     });
 
     // Navigation buttons
@@ -112,7 +117,7 @@ export class PanelModal {
     // Click outside to close
     this.modal.addEventListener('click', (e) => {
       if (e.target === this.modal) {
-        this.close();
+        this.close('click_outside');
       }
     });
   }
@@ -125,7 +130,7 @@ export class PanelModal {
     switch (e.key) {
       case 'Escape':
         e.preventDefault();
-        this.close();
+        this.close('escape_key');
         break;
 
       case 'Tab':
@@ -170,8 +175,10 @@ export class PanelModal {
   /**
    * Show panel modal
    * @param {string} panelId — e.g. "panel-1.1"
+   * @param {string} source — tracking source: 'game', 'gallery', 'direct'
+   * @param {string} unlockMethod — how panel was unlocked
    */
-  async show(panelId) {
+  async show(panelId, source = 'unknown', unlockMethod = null) {
     if (!this.isUnlocked(panelId)) {
       console.warn(`Panel ${panelId} is not unlocked yet`);
       return;
@@ -185,8 +192,12 @@ export class PanelModal {
       }
 
       this.currentPanel = panelId;
+      this.panelSource = source;
       this.updateModalContent(panelData);
       this.open();
+
+      // Track panel view
+      privacyAnalytics.trackPanelViewed(panelId, source, unlockMethod);
     } catch (error) {
       console.error('Error showing panel:', error);
     }
@@ -255,6 +266,7 @@ export class PanelModal {
    */
   open() {
     this.lastActiveElement = document.activeElement;
+    this.panelStartTime = Date.now(); // Start timing for analytics
 
     this.modal.classList.add('active');
     this.modal.setAttribute('aria-hidden', 'false');
@@ -271,8 +283,15 @@ export class PanelModal {
 
   /**
    * Close modal and restore focus
+   * @param {string} exitMethod — how the modal was closed
    */
-  close() {
+  close(exitMethod = 'unknown') {
+    // Track time spent if we have timing data
+    if (this.currentPanel && this.panelStartTime) {
+      const timeSpent = Date.now() - this.panelStartTime;
+      privacyAnalytics.trackPanelTimeSpent(this.currentPanel, timeSpent, exitMethod);
+    }
+
     this.modal.classList.remove('active');
     this.modal.setAttribute('aria-hidden', 'true');
 
@@ -285,6 +304,7 @@ export class PanelModal {
     }
 
     this.currentPanel = null;
+    this.panelStartTime = null;
   }
 
   /**
@@ -293,6 +313,11 @@ export class PanelModal {
   navigateToPrevious() {
     // TODO: Implement in Phase 3
     console.log('Navigate to previous panel');
+
+    // Track navigation attempt (for future implementation)
+    if (this.currentPanel) {
+      privacyAnalytics.trackPanelSequenceNavigation(this.currentPanel, 'previous', 'prev_button');
+    }
   }
 
   /**
@@ -301,6 +326,11 @@ export class PanelModal {
   navigateToNext() {
     // TODO: Implement in Phase 3
     console.log('Navigate to next panel');
+
+    // Track navigation attempt (for future implementation)
+    if (this.currentPanel) {
+      privacyAnalytics.trackPanelSequenceNavigation(this.currentPanel, 'next', 'next_button');
+    }
   }
 
   /**

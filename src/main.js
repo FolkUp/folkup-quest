@@ -18,6 +18,10 @@ import {
   trackEndingReached,
   trackGameCompleted,
 } from './utils/analytics.js';
+import { privacyAnalytics } from './utils/privacy-analytics.js';
+import { consentModal } from './ui/consent-modal.js';
+import { privacySettings } from './ui/privacy-settings.js';
+import { dataRetentionManager } from './utils/data-retention.js';
 import { panelReader } from './ui/panel-reader.js';
 
 let engine = null;
@@ -79,8 +83,9 @@ async function init() {
   knowledgeState = new KnowledgeState();
   renderer.setKnowledgeState(knowledgeState);
 
-  // Initialize analytics
+  // Initialize analytics and privacy system
   initAnalytics();
+  // Privacy analytics and data retention are auto-initialized via import
 
   // Register Service Worker
   if ('serviceWorker' in navigator) {
@@ -161,6 +166,9 @@ function startGame(startScreen, storyEl) {
   // Show gallery button
   createGalleryButton(document.getElementById('game'));
 
+  // Show privacy settings button
+  createPrivacyButton(document.getElementById('game'));
+
   advance();
 }
 
@@ -226,6 +234,52 @@ function createGalleryButton(container) {
   btn.addEventListener('mouseleave', () => {
     btn.style.transform = 'scale(1)';
     btn.style.background = 'var(--folkup-sage)';
+  });
+
+  container.appendChild(btn);
+}
+
+function createPrivacyButton(container) {
+  const btn = document.createElement('button');
+  btn.className = 'privacy-btn';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Privacy Settings');
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+
+  // Style the privacy button
+  Object.assign(btn.style, {
+    position: 'fixed',
+    bottom: '140px',
+    right: '20px',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    border: 'none',
+    background: 'var(--folkup-bordeaux)',
+    color: 'white',
+    cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+    zIndex: '999',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '0.8rem',
+    opacity: '0.8'
+  });
+
+  btn.addEventListener('click', () => {
+    privacySettings.open();
+  });
+
+  btn.addEventListener('mouseenter', () => {
+    btn.style.transform = 'scale(1.05)';
+    btn.style.opacity = '1';
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'scale(1)';
+    btn.style.opacity = '0.8';
   });
 
   container.appendChild(btn);

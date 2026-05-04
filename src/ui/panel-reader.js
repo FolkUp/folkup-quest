@@ -1,10 +1,12 @@
 /**
  * Panel Reader — Standalone comic panel gallery
  * Allows browsing unlocked panels independently from game
+ * Enhanced with GDPR-compliant analytics tracking
  */
 
 import { getPanelsByCategory, PANEL_PROGRESSION } from '../engine/panel-progression.js';
 import { panelModal } from './panel-modal.js';
+import { privacyAnalytics } from '../utils/privacy-analytics.js';
 
 export class PanelReader {
   constructor() {
@@ -13,6 +15,8 @@ export class PanelReader {
     this.categories = null;
     this.readerEl = null;
     this.backdropEl = null;
+    this.sessionStartTime = null;
+    this.panelsViewedInSession = 0;
 
     this.init();
   }
@@ -413,7 +417,8 @@ export class PanelReader {
         const card = e.target.closest('.panel-card');
         const panelId = card.dataset.panelId;
         if (panelId) {
-          panelModal.show(panelId);
+          this.panelsViewedInSession++;
+          panelModal.show(panelId, 'gallery', 'unlocked');
         }
       }
 
@@ -440,6 +445,8 @@ export class PanelReader {
     if (this.isOpen) return;
 
     this.isOpen = true;
+    this.sessionStartTime = Date.now();
+    this.panelsViewedInSession = 0;
     this.loadPanels();
 
     // Show interface
@@ -450,10 +457,19 @@ export class PanelReader {
     this.readerEl.style.transform = 'translate(-50%, -50%) scale(1)';
 
     document.body.style.overflow = 'hidden';
+
+    // Track reader mode opened
+    privacyAnalytics.trackReaderModeUsage('opened');
   }
 
   close() {
     if (!this.isOpen) return;
+
+    // Track reader session before closing
+    if (this.sessionStartTime) {
+      const sessionTime = Date.now() - this.sessionStartTime;
+      privacyAnalytics.trackReaderModeUsage('closed', this.panelsViewedInSession, sessionTime);
+    }
 
     this.isOpen = false;
 
@@ -469,6 +485,7 @@ export class PanelReader {
   switchCategory(categoryName) {
     if (this.currentCategory === categoryName) return;
 
+    const previousCategory = this.currentCategory;
     this.currentCategory = categoryName;
 
     // Update nav tabs
@@ -480,6 +497,9 @@ export class PanelReader {
 
     // Load panels for new category
     this.renderPanelsGrid();
+
+    // Track category switch
+    privacyAnalytics.trackReaderModeUsage('category_switched', 0, 0);
   }
 
   loadPanels() {
