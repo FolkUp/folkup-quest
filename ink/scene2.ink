@@ -86,3 +86,75 @@
 
 * {not micro_story_active} [Изучить угол библиотеки]
     -> scene2_5
+
+* {not micro_story_active && (choice_5_listened || choice_5_refused)} [Найти тихое место для размышлений]
+    -> scene2_7
+
+* {not micro_story_active && folk_counter && (has_diary || has_breus_analysis)} [Остаться наедине с собой]
+    -> scene3_5
+
+* {not micro_story_active && has_breus_analysis && has_reflection_journal} [Синтез всех insights — скрытая история]
+    -> hidden_synthesis
+
+= hidden_synthesis
+
+# SCENE: synthesis_discovery
+# ACT: 1
+# PANEL: panel-1.16
+
+~ discovery_unlocked = true
+~ micro_story_active = true
+
+Все insights собираются в единую картину. Library corner, study room reflection, внутренний голос — три зеркала одной истории.
+
+Dr. Folkup оставил дневник не случайно. Бреус пришёл не случайно. Твоё reflection — тоже не случайность.
+
+Закономерности становятся видимы только тогда, когда готов их увидеть.
+
+# DISCOVERY: profound
+# CONTINUE
+
+{diary_choice == "read" && study_choice == "motives" && reflection_choice == "values":
+    ~ perfect_synthesis = true
+    ~ folk_counter += 25
+    ~ master_insight = true
+
+    Полная картина: Dr. Folkup верил в мосты между историями. Бреус видел только transactions. Ты выбрал values как foundation.
+
+    Это не три разных пути — это одна эволюция understanding. От чтения мудрости к анализу угроз к пониманию себя.
+
+    FolkUp — это продолжение работы Dr. Folkup, но твоими hands и твоими values.
+
+    # MASTERY: achieved
+    # CONTINUE
+
+    *[Записать master insight]
+        ~ has_master_understanding = true
+        Записка: "FolkUp — это мост между прошлой мудростью и будущими возможностями. Dr. Folkup начал. Я продолжаю."
+        -> synthesis_complete
+
+- else:
+    ~ folk_counter += 15
+    ~ deep_insight = true
+
+    Каждая micro-story добавила кусочек понимания. Вместе они формируют более глубокий взгляд на то, что строишь.
+
+    Business decisions, personal values, legacy работы — всё interconnected в экосистеме FolkUp.
+
+    # INSIGHT: integrated
+    # CONTINUE
+
+    *[Записать integrated insight]
+        ~ has_integrated_understanding = true
+        Записка: "Micro-decisions формируют macro-direction. Каждый выбор важен."
+        -> synthesis_complete
+}
+
+= synthesis_complete
+
+Скрытая история revealed. Библиотека стала не просто местом работы — стала space для роста.
+
+~ micro_story_active = false
+
+*[Вернуться к основному пути]
+    -> scene2_doors

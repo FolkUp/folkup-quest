@@ -88,6 +88,80 @@ export const PANEL_PROGRESSION = {
     micro_story: true
   },
 
+  // === MICRO-STORY: STUDY ROOM DISCOVERY (panels 1.10-1.12) ===
+  'panel-1.10': {
+    scene: 'scene2_7',
+    title: 'Размышления о встрече',
+    description: 'Study room reflection на предложение Бреуса.',
+    act: 1,
+    condition: 'current_scene >= 7 || choice_5_listened || choice_5_refused',
+    optional: true,
+    micro_story: true
+  },
+
+  'panel-1.11': {
+    scene: 'scene2_7',
+    title: 'Анализ мотивов',
+    description: 'Проработка последствий business proposal.',
+    act: 1,
+    condition: 'micro_story_active && study_choice',
+    optional: true,
+    micro_story: true
+  },
+
+  'panel-1.12': {
+    scene: 'scene2_7',
+    title: 'Принятие решения',
+    description: 'Clarity о независимом пути развития.',
+    act: 1,
+    condition: 'has_breus_analysis',
+    optional: true,
+    micro_story: true
+  },
+
+  // === MICRO-STORY: CHARACTER REFLECTION (panels 1.13-1.15) ===
+  'panel-1.13': {
+    scene: 'scene3_5',
+    title: 'Внутренний голос',
+    description: 'Момент честной self-reflection и personal insight.',
+    act: 1,
+    condition: 'folk_counter && (has_diary || has_breus_analysis)',
+    optional: true,
+    micro_story: true
+  },
+
+  'panel-1.14': {
+    scene: 'scene3_5',
+    title: 'Зеркало души',
+    description: 'Character analysis через path, fears, или values.',
+    act: 1,
+    condition: 'micro_story_active && reflection_choice',
+    optional: true,
+    micro_story: true
+  },
+
+  'panel-1.15': {
+    scene: 'scene3_5',
+    title: 'Clarity достигнут',
+    description: 'Synthesis of personal insights и direction forward.',
+    act: 1,
+    condition: 'has_reflection_journal',
+    optional: true,
+    micro_story: true
+  },
+
+  // === HIDDEN DISCOVERY: SYNTHESIS (panel 1.16) ===
+  'panel-1.16': {
+    scene: 'scene2',
+    title: 'Master Synthesis',
+    description: 'Скрытая история: integration всех micro-story insights.',
+    act: 1,
+    condition: 'discovery_unlocked && (has_master_understanding || has_integrated_understanding)',
+    optional: true,
+    micro_story: true,
+    hidden: true
+  },
+
   // === ACT 2: CHALLENGE (panels 2.1-2.7) ===
   'panel-2.1': {
     scene: 'scene7',

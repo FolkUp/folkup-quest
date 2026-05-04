@@ -112,7 +112,7 @@ FolkUp Quest features a comprehensive comic panel system that enhances the narra
 | Category | Panels | Description |
 |----------|--------|-------------|
 | Act I: Discovery | 1.1-1.7 | Character introductions, world establishment |
-| Act I: Micro-Stories | 1.8-1.9 | Library Side-Quest: Dr. Folkup's diary discovery |
+| Act I: Micro-Stories | 1.8-1.16 | Library Side-Quest, Study Room reflection, Character introspection, Hidden synthesis |
 | Act II: Challenge | 2.1-2.7 | Central conflict, key decisions |
 | Act III: Resolution | 3.1-3.7 | Philosophical confrontation, final choices |
 | Epilogue | 4.1-4.7 | Endings, consequences, reflections |
