@@ -17,6 +17,8 @@ Interactive text adventure built with [Ink](https://www.inklestudios.com/ink/) e
 - **Comic Integration:** 28 interactive comic panels with progressive unlock system
 - **Panel Gallery:** Standalone reader interface with act-based categorization
 - **Branching Paths:** Folk Path vs Dragon Path unlock different panel sets
+- **Privacy-First Analytics:** GDPR-compliant engagement tracking with granular consent
+- **User Privacy Controls:** Complete data rights dashboard with one-click data export/deletion
 
 ## Brand Integration
 
@@ -41,12 +43,19 @@ FolkUp Quest underwent comprehensive brand integration (April 2026) to align wit
 │   ├── engine/         # Ink engine, game logic, and panel progression
 │   │   ├── panel-progression.js  # 28-panel unlock system
 │   │   └── moral-system.js       # Tag parsing (PANEL, FEEDBACK, etc.)
-│   └── ui/            # User interface components  
-│       ├── panel-modal.js        # WCAG 2.1 AA comic panel modal
-│       ├── panel-reader.js       # Standalone gallery interface
-│       └── renderer.js           # Game renderer with panel integration
+│   ├── ui/            # User interface components  
+│   │   ├── panel-modal.js        # WCAG 2.1 AA comic panel modal
+│   │   ├── panel-reader.js       # Standalone gallery interface
+│   │   ├── consent-modal.js      # GDPR consent interface
+│   │   ├── privacy-settings.js   # User data rights dashboard
+│   │   └── renderer.js           # Game renderer with panel integration
+│   └── utils/         # Utilities and analytics
+│       ├── privacy-analytics.js  # GDPR-compliant analytics engine
+│       ├── data-retention.js     # Automated data cleanup system
+│       └── analytics.js          # Core analytics integration
 ├── styles/             # CSS styling including panel modal styles
 ├── public/comic/panels/ # Comic panel assets (28 panels + manifests)
+├── public/legal/       # Privacy policy and GDPR compliance docs
 ├── scripts/comic/      # Comic generation and source assets
 ├── ink/               # Ink story files with PANEL tags
 └── _meta/            # Project documentation and audits
