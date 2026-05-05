@@ -454,15 +454,32 @@ export class Renderer {
 
     const preview = choiceData.preview;
 
-    // Generate preview content
-    this.choiceConsequencePreviewEl.innerHTML = `
-      <div class="preview-title">Choice Consequences</div>
-      <div class="preview-consequence">${preview.immediate}</div>
-      ${preview.long_term && preview.long_term.length > 0 ?
-        `<div class="preview-long-term">${preview.long_term[0]}</div>` : ''}
-      ${preview.panels_unlocked && preview.panels_unlocked.length > 0 ?
-        `<div class="preview-panels">Unlocks: ${preview.panels_unlocked.length} panel(s)</div>` : ''}
-    `;
+    // Generate preview content (DOM-based for XSS prevention)
+    this.choiceConsequencePreviewEl.innerHTML = '';
+
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'preview-title';
+    titleDiv.textContent = 'Choice Consequences';
+    this.choiceConsequencePreviewEl.appendChild(titleDiv);
+
+    const consequenceDiv = document.createElement('div');
+    consequenceDiv.className = 'preview-consequence';
+    consequenceDiv.textContent = preview.immediate;
+    this.choiceConsequencePreviewEl.appendChild(consequenceDiv);
+
+    if (preview.long_term && preview.long_term.length > 0) {
+      const longTermDiv = document.createElement('div');
+      longTermDiv.className = 'preview-long-term';
+      longTermDiv.textContent = preview.long_term[0];
+      this.choiceConsequencePreviewEl.appendChild(longTermDiv);
+    }
+
+    if (preview.panels_unlocked && preview.panels_unlocked.length > 0) {
+      const panelsDiv = document.createElement('div');
+      panelsDiv.className = 'preview-panels';
+      panelsDiv.textContent = `Unlocks: ${preview.panels_unlocked.length} panel(s)`;
+      this.choiceConsequencePreviewEl.appendChild(panelsDiv);
+    }
 
     // Position preview near choice button
     const rect = element.getBoundingClientRect();

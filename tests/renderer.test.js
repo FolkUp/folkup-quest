@@ -19,6 +19,10 @@ vi.mock('../src/engine/moral-system.js', () => ({
     const m = tag.match(/^AUDIO:\s*([\w-]+)$/i);
     return m ? m[1].toLowerCase() : null;
   },
+  parsePanelTag: (tag) => {
+    const m = tag.match(/^PANEL:\s*([\w.-]+)$/i);
+    return m ? m[1].toLowerCase() : null;
+  },
   getEndingName: (e) => ({ lantern: 'Фонарь', bridge: 'Мост', chair: 'Кресло' }[e] || e),
 }));
 
