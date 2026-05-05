@@ -1,0 +1,74 @@
+{
+  "comment": "Comic QA Standards Configuration - Banking-Level Precision",
+  "version": "1.0",
+  "created": "2026-05-05",
+  "created_by": "Johnny - QA Automation Architecture Specialist",
+
+  "resolution_standards": {
+    "target_dimensions": [4125, 6262],
+    "dimension_tolerance_pixels": 1,
+    "minimum_dpi": 600,
+    "acceptable_formats": ["PNG", "JPEG", "TIFF", "PSD"]
+  },
+
+  "color_standards": {
+    "comment": "КиберГонзо SURGICAL_COLOR_PROTOCOL implementation",
+    "spot_color_hex": "#839E75",
+    "spot_color_rgb": [131, 158, 117],
+    "color_tolerance_percent": 1.0,
+    "bleeding_detection_threshold": 0.02,
+    "color_precision_required": 0.95
+  },
+
+  "character_consistency_standards": {
+    "comment": "CHARACTER_DNA anchoring system requirements",
+    "character_recognition_threshold": 0.85,
+    "facial_consistency_threshold": 0.80,
+    "ponytail_visibility_requirement": true,
+    "alice_notebook_requirement": true,
+    "arni_ponytail_mandate": "CRITICAL - Must be visible from all angles",
+    "alice_sage_notebook_mandate": "CRITICAL - #839E75 color presence required"
+  },
+
+  "file_standards": {
+    "max_file_size_mb": 50.0,
+    "max_digital_size_kb": 500.0,
+    "pdf_xa1_compliance": true
+  },
+
+  "quality_gates": {
+    "comment": "Banking-level thresholds for pass/fail decisions",
+    "overall_pass_threshold": 0.90,
+    "critical_failure_threshold": 0.70,
+    "minor_failure_tolerance": 0.30,
+    "technical_standards_minimum": 0.85,
+    "character_consistency_minimum": 0.80,
+    "color_precision_minimum": 0.95
+  },
+
+  "editorial_integration": {
+    "comment": "Integration with editorial workflow (Наборщик 2-person review)",
+    "connect_to_editorial_workflow": true,
+    "pre_editorial_filtering": true,
+    "johnny_technical_threshold": 0.70,
+    "fonarshchik_visual_threshold": 0.70,
+    "cybergonzo_safety_veto": "ABSOLUTE"
+  },
+
+  "constitutional_compliance": {
+    "comment": "Constitutional framework enforcement per Enhanced Alice v2.0 Level 3",
+    "banking_level_standards": true,
+    "alpha_beta_verification": false,
+    "evidence_first_methodology": true,
+    "audit_trail_required": true,
+    "zero_defect_tolerance": true
+  },
+
+  "automation_settings": {
+    "enable_real_time_dashboard": true,
+    "generate_evidence_files": false,
+    "detailed_logging": true,
+    "performance_monitoring": true,
+    "integration_with_review_pipeline": true
+  }
+}

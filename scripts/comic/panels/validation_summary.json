@@ -1,0 +1,2489 @@
+{
+  "total_panels": 28,
+  "compliant_panels": 0,
+  "compliance_rate": 0.0,
+  "timestamp": "2026-05-05T22:30:14.945771",
+  "standards_applied": {
+    "target_dimensions": [
+      4125,
+      6262
+    ],
+    "minimum_dpi": 600,
+    "maximum_dimension_tolerance": 1,
+    "spot_color_hex": "#839E75",
+    "spot_color_rgb": [
+      131,
+      158,
+      117
+    ],
+    "color_tolerance_percent": 2.0,
+    "max_file_size_mb": 50,
+    "max_digital_size_kb": 500
+  },
+  "detailed_results": [
+    {
+      "file_path": "./panels\\panel-1.1-generated.png",
+      "timestamp": "2026-05-05T22:30:14.403144",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1042362,
+          "file_size_mb": 0.99,
+          "file_size_kb": 1017.93,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.99MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-1.2-generated.png",
+      "timestamp": "2026-05-05T22:30:14.424284",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1209665,
+          "file_size_mb": 1.15,
+          "file_size_kb": 1181.31,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.15MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-1.3-generated.png",
+      "timestamp": "2026-05-05T22:30:14.458526",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1120050,
+          "file_size_mb": 1.07,
+          "file_size_kb": 1093.8,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.07MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-1.4-generated.png",
+      "timestamp": "2026-05-05T22:30:14.478745",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 786419,
+          "file_size_mb": 0.75,
+          "file_size_kb": 767.99,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.75MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-1.5-generated.png",
+      "timestamp": "2026-05-05T22:30:14.493815",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1149466,
+          "file_size_mb": 1.1,
+          "file_size_kb": 1122.53,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.10MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-1.6-generated.png",
+      "timestamp": "2026-05-05T22:30:14.514624",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 764575,
+          "file_size_mb": 0.73,
+          "file_size_kb": 746.66,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.73MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-1.7-generated.png",
+      "timestamp": "2026-05-05T22:30:14.530179",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1485342,
+          "file_size_mb": 1.42,
+          "file_size_kb": 1450.53,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.42MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.1-generated.png",
+      "timestamp": "2026-05-05T22:30:14.551194",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1239718,
+          "file_size_mb": 1.18,
+          "file_size_kb": 1210.66,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.18MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.2-generated.png",
+      "timestamp": "2026-05-05T22:30:14.570893",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 874408,
+          "file_size_mb": 0.83,
+          "file_size_kb": 853.91,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.83MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.3-generated.png",
+      "timestamp": "2026-05-05T22:30:14.590136",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1162712,
+          "file_size_mb": 1.11,
+          "file_size_kb": 1135.46,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.11MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.4-generated.png",
+      "timestamp": "2026-05-05T22:30:14.611240",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 646069,
+          "file_size_mb": 0.62,
+          "file_size_kb": 630.93,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.62MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.5-generated.png",
+      "timestamp": "2026-05-05T22:30:14.623921",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 852899,
+          "file_size_mb": 0.81,
+          "file_size_kb": 832.91,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.81MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.6-generated.png",
+      "timestamp": "2026-05-05T22:30:14.641672",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 823651,
+          "file_size_mb": 0.79,
+          "file_size_kb": 804.35,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.79MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-2.7-generated.png",
+      "timestamp": "2026-05-05T22:30:14.661348",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1069060,
+          "file_size_mb": 1.02,
+          "file_size_kb": 1044.0,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.02MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.1-generated.png",
+      "timestamp": "2026-05-05T22:30:14.683205",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 874644,
+          "file_size_mb": 0.83,
+          "file_size_kb": 854.14,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.83MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.2-generated.png",
+      "timestamp": "2026-05-05T22:30:14.701159",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1111171,
+          "file_size_mb": 1.06,
+          "file_size_kb": 1085.13,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.06MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.3-generated.png",
+      "timestamp": "2026-05-05T22:30:14.718430",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1333152,
+          "file_size_mb": 1.27,
+          "file_size_kb": 1301.91,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.27MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.4-generated.png",
+      "timestamp": "2026-05-05T22:30:14.744181",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 768712,
+          "file_size_mb": 0.73,
+          "file_size_kb": 750.7,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.73MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.5-generated.png",
+      "timestamp": "2026-05-05T22:30:14.762149",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 763953,
+          "file_size_mb": 0.73,
+          "file_size_kb": 746.05,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.73MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.6-generated.png",
+      "timestamp": "2026-05-05T22:30:14.777689",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 981867,
+          "file_size_mb": 0.94,
+          "file_size_kb": 958.85,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.94MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-3.7-generated.png",
+      "timestamp": "2026-05-05T22:30:14.802860",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 943116,
+          "file_size_mb": 0.9,
+          "file_size_kb": 921.01,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.90MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.1-generated.png",
+      "timestamp": "2026-05-05T22:30:14.820696",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1422127,
+          "file_size_mb": 1.36,
+          "file_size_kb": 1388.8,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.36MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.2-generated.png",
+      "timestamp": "2026-05-05T22:30:14.841985",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 952750,
+          "file_size_mb": 0.91,
+          "file_size_kb": 930.42,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.91MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.3-generated.png",
+      "timestamp": "2026-05-05T22:30:14.863251",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 1147215,
+          "file_size_mb": 1.09,
+          "file_size_kb": 1120.33,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 1.09MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.4-generated.png",
+      "timestamp": "2026-05-05T22:30:14.882909",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 695221,
+          "file_size_mb": 0.66,
+          "file_size_kb": 678.93,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.66MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.5-generated.png",
+      "timestamp": "2026-05-05T22:30:14.896349",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 903473,
+          "file_size_mb": 0.86,
+          "file_size_kb": 882.3,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.86MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.6-generated.png",
+      "timestamp": "2026-05-05T22:30:14.915617",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 609350,
+          "file_size_mb": 0.58,
+          "file_size_kb": 595.07,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.58MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    },
+    {
+      "file_path": "./panels\\panel-4.7-generated.png",
+      "timestamp": "2026-05-05T22:30:14.928013",
+      "checks": {
+        "resolution": {
+          "passed": false,
+          "actual_dpi": {
+            "x": 0,
+            "y": 0
+          },
+          "required_dpi": 600,
+          "status": "FAIL",
+          "message": "DPI: 0x0 (Required: 600)"
+        },
+        "dimensions": {
+          "passed": false,
+          "actual_dimensions": {
+            "width": 816,
+            "height": 1232
+          },
+          "target_dimensions": {
+            "width": 4125,
+            "height": 6262
+          },
+          "tolerance": 1,
+          "differences": {
+            "width": 3309,
+            "height": 5030
+          },
+          "status": "FAIL",
+          "message": "Dimensions: 816x1232 (Target: 4125x6262)"
+        },
+        "color_profile": {
+          "passed": true,
+          "color_mode": "RGB",
+          "has_icc_profile": false,
+          "acceptable_modes": [
+            "RGB",
+            "RGBA",
+            "CMYK",
+            "L",
+            "LA"
+          ],
+          "status": "PASS",
+          "message": "Color mode: RGB (ICC Profile: False)"
+        },
+        "spot_color": {
+          "passed": true,
+          "spot_color_detected": false,
+          "target_color": "#839E75",
+          "target_rgb": [
+            131,
+            158,
+            117
+          ],
+          "tolerance_percent": 2.0,
+          "status": "PASS",
+          "message": "Spot color analysis complete (Target: #839E75)"
+        },
+        "file_format": {
+          "passed": true,
+          "file_extension": ".png",
+          "image_format": "PNG",
+          "acceptable_formats": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".tiff",
+            ".tif",
+            ".psd"
+          ],
+          "status": "PASS",
+          "message": "Format: PNG (.png)"
+        },
+        "file_size": {
+          "passed": true,
+          "file_size_bytes": 878660,
+          "file_size_mb": 0.84,
+          "file_size_kb": 858.07,
+          "max_allowed_mb": 50,
+          "max_digital_kb": 500,
+          "status": "PASS",
+          "message": "File size: 0.84MB (Max: 50MB)"
+        }
+      },
+      "overall_compliance": false,
+      "compliance_level": "NON_COMPLIANT"
+    }
+  ]
+}

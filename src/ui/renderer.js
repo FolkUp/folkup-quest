@@ -1009,12 +1009,21 @@ export class Renderer {
     // Create temporary notification element
     const notification = document.createElement('div');
     notification.className = 'panel-unlock-notification';
-    notification.innerHTML = `
-      <div class="notification-content">
-        <span class="notification-icon">🎨</span>
-        <span class="notification-text">Unlocked: ${escapeHtml(displayTitle)}</span>
-      </div>
-    `;
+    // DOM-based rendering for XSS prevention
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'notification-content';
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'notification-icon';
+    iconSpan.textContent = '🎨';
+
+    const textSpan = document.createElement('span');
+    textSpan.className = 'notification-text';
+    textSpan.textContent = `Unlocked: ${displayTitle}`;
+
+    contentDiv.appendChild(iconSpan);
+    contentDiv.appendChild(textSpan);
+    notification.appendChild(contentDiv);
 
     // Add notification styles
     Object.assign(notification.style, {
@@ -1054,13 +1063,26 @@ export class Renderer {
   showMultiPanelNotification(count) {
     const notification = document.createElement('div');
     notification.className = 'panel-unlock-notification multi-unlock';
-    notification.innerHTML = `
-      <div class="notification-content">
-        <span class="notification-icon">🎨</span>
-        <span class="notification-text">${count} new illustrations unlocked!</span>
-        <small class="notification-subtitle">Check the gallery to view them</small>
-      </div>
-    `;
+    // DOM-based rendering for XSS prevention
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'notification-content';
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'notification-icon';
+    iconSpan.textContent = '🎨';
+
+    const textSpan = document.createElement('span');
+    textSpan.className = 'notification-text';
+    textSpan.textContent = `${count} new illustrations unlocked!`;
+
+    const subtitleSmall = document.createElement('small');
+    subtitleSmall.className = 'notification-subtitle';
+    subtitleSmall.textContent = 'Check the gallery to view them';
+
+    contentDiv.appendChild(iconSpan);
+    contentDiv.appendChild(textSpan);
+    contentDiv.appendChild(subtitleSmall);
+    notification.appendChild(contentDiv);
 
     // Enhanced styles for multi-unlock notification
     Object.assign(notification.style, {
