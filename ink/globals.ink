@@ -128,3 +128,17 @@ VAR introspection_skill = 0
 VAR psychological_insight = 0
 VAR unconventional_thinking = 0
 VAR creativity = 0
+
+// Additional Character Development Variables (FQST-010 Fix)
+VAR creative_freedom = 0
+VAR risk_management = 0
+VAR mutual_trust = 0
+VAR collective_strength = 0
+VAR negotiation_skill = 0
+VAR creative_problem_solving = 0
+VAR business_innovation = 0
+VAR strategic_anticipation = 0
+VAR people_reading_skill = 0
+VAR team_coordination = 0
+VAR presentation_skill = 0
+VAR collective_preparation = 0
