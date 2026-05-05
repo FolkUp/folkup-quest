@@ -37,7 +37,7 @@
   font-family: 'PT Sans Caption';
   font-style: normal;
   font-weight: 700;
-  src: url('pt-sans-caption-700-cyrillic.woff2') format('woff2');
+  src: local('PT Sans Caption Bold'), local('PT Sans Bold'), local('DejaVu Sans Bold'), local('Arial Bold');
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 @font-face {
@@ -62,7 +62,7 @@
   font-family: 'Source Code Pro';
   font-style: normal;
   font-weight: 400;
-  src: url('source-code-pro-400-cyrillic.woff2') format('woff2');
+  src: local('Source Code Pro'), local('Consolas'), local('Monaco'), local('Liberation Mono'), local('DejaVu Sans Mono'), monospace;
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 @font-face {
