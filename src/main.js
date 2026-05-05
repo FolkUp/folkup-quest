@@ -11,6 +11,7 @@ import { SaveManager } from './engine/save-manager.js';
 import { Renderer } from './ui/renderer.js';
 import { AudioManager } from './engine/audio-manager.js';
 import { KnowledgeState } from './engine/knowledge-system.js';
+import { InteractiveChoiceSystem } from './engine/interactive-choice-system.js';
 import {
   initAnalytics,
   trackGameStart,
@@ -27,6 +28,7 @@ let engine = null;
 let renderer = null;
 let audioManager = null;
 let knowledgeState = null;
+let interactiveChoiceSystem = null;
 
 async function init() {
   const startScreen = document.getElementById('start-screen');
@@ -81,6 +83,10 @@ async function init() {
   renderer = new Renderer(document.getElementById('game'), audioManager);
   knowledgeState = new KnowledgeState();
   renderer.setKnowledgeState(knowledgeState);
+
+  // FQST-017 Phase 1B-Full: Initialize Interactive Choice System
+  interactiveChoiceSystem = new InteractiveChoiceSystem(engine);
+  renderer.setInteractiveChoiceSystem(interactiveChoiceSystem);
 
   // Initialize analytics and privacy system
   initAnalytics();

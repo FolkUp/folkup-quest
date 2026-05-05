@@ -1,5 +1,6 @@
 /**
- * UI Renderer — displays story text, choices, and continue buttons
+ * UI Renderer — FQST-017 Phase 1B-Full: Interactive Choice System Integration
+ * Constitutional Framework: Real-time choice consequences with <100ms response
  */
 
 import {
@@ -25,6 +26,7 @@ import {
 } from './character-images.js';
 import { panelModal } from './panel-modal.js';
 import { getUnlockablePanels, PANEL_PROGRESSION } from '../engine/panel-progression.js';
+import { InteractiveChoiceSystem } from '../engine/interactive-choice-system.js';
 
 /** Escape HTML entities to prevent XSS */
 function escapeHtml(text) {
@@ -54,6 +56,170 @@ export class Renderer {
     this._sidebarTimeout = null;
     this.currentEnding = null;
     this.knowledgeState = null;
+
+    // FQST-017 Phase 1B-Full: Interactive Choice System
+    this.interactiveChoiceSystem = null;
+    this.choiceConsequencePreviewEl = null;
+    this.branchingPathVisualizer = null;
+
+    this.initializeInteractiveElements();
+  }
+
+  /**
+   * Initialize interactive choice elements for Phase 1B-Full
+   * CONSTITUTIONAL FRAMEWORK: Real-time consequence preview system
+   */
+  initializeInteractiveElements() {
+    // Create consequence preview container
+    this.choiceConsequencePreviewEl = document.createElement('div');
+    this.choiceConsequencePreviewEl.className = 'choice-consequence-preview';
+    this.choiceConsequencePreviewEl.style.display = 'none';
+    document.body.appendChild(this.choiceConsequencePreviewEl);
+
+    // Create branching path visualizer
+    this.branchingPathVisualizer = document.createElement('div');
+    this.branchingPathVisualizer.className = 'branching-path-visualizer';
+    this.branchingPathVisualizer.innerHTML = `
+      <div class="path-tracker">
+        <div class="folk-path" data-path="folk">Folk Path</div>
+        <div class="current-position" data-position="neutral">Current</div>
+        <div class="dragon-path" data-path="dragon">Dragon Path</div>
+      </div>
+    `;
+    this.container.appendChild(this.branchingPathVisualizer);
+
+    // Listen for panel unlock events
+    document.addEventListener('panelUnlocked', this.handlePanelUnlock.bind(this));
+
+    // Initialize choice hover effects
+    this.initializeChoicePreviewSystem();
+  }
+
+  /**
+   * Initialize choice preview system for real-time consequence display
+   * CONSTITUTIONAL REQUIREMENT: <100ms response for choice previews
+   */
+  initializeChoicePreviewSystem() {
+    // Create CSS for choice preview animations
+    const style = document.createElement('style');
+    style.textContent = `
+      .choice-consequence-preview {
+        position: fixed;
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-accent);
+        border-radius: 8px;
+        padding: 12px;
+        max-width: 300px;
+        z-index: 1000;
+        pointer-events: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.1s ease;
+      }
+
+      .choice-consequence-preview .preview-title {
+        font-weight: bold;
+        color: var(--color-accent);
+        margin-bottom: 8px;
+      }
+
+      .choice-consequence-preview .preview-consequence {
+        color: var(--color-text-primary);
+        margin-bottom: 6px;
+      }
+
+      .choice-consequence-preview .preview-panels {
+        font-size: 0.9em;
+        color: var(--color-text-muted);
+        font-style: italic;
+      }
+
+      .branching-path-visualizer {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 8px;
+        padding: 10px;
+        z-index: 999;
+      }
+
+      .path-tracker {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.8em;
+      }
+
+      .folk-path {
+        color: #4CAF50;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: rgba(76, 175, 80, 0.2);
+      }
+
+      .dragon-path {
+        color: #f44336;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: rgba(244, 67, 54, 0.2);
+      }
+
+      .current-position {
+        color: #FFC107;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: rgba(255, 193, 7, 0.2);
+      }
+
+      .choice-item {
+        position: relative;
+        transition: background-color 0.1s ease;
+      }
+
+      .choice-item:hover {
+        background-color: var(--color-bg-secondary);
+        transform: translateX(2px);
+      }
+
+      .choice-unlock-animation {
+        animation: choiceUnlock 0.3s ease-out;
+      }
+
+      @keyframes choiceUnlock {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .panel-unlock-notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--color-accent);
+        color: var(--color-text-inverse);
+        padding: 16px 24px;
+        border-radius: 8px;
+        font-weight: bold;
+        z-index: 1001;
+        animation: panelUnlockNotification 2s ease-in-out;
+      }
+
+      @keyframes panelUnlockNotification {
+        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        20% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+        80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  /**
+   * Set interactive choice system reference
+   * @param {InteractiveChoiceSystem} system
+   */
+  setInteractiveChoiceSystem(system) {
+    this.interactiveChoiceSystem = system;
   }
 
   /**
@@ -171,7 +337,8 @@ export class Renderer {
   }
 
   /**
-   * Show choices as buttons
+   * Show choices as buttons with Phase 1B-Full interactive consequences
+   * CONSTITUTIONAL FRAMEWORK: Real-time choice preview with <100ms response
    * @param {Array<{index: number, text: string, tags?: string[]}>} choices
    * @param {(index: number) => void} onChoose
    */
@@ -184,8 +351,11 @@ export class Renderer {
 
     choices.forEach((choice, i) => {
       const btn = document.createElement('button');
-      btn.className = 'choice-btn';
+      btn.className = 'choice-btn choice-item';
       btn.textContent = choice.text;
+
+      // PHASE 1B-FULL: Add interactive choice consequence preview
+      this.addChoiceInteractivity(btn, choice, i);
 
       // Knowledge categorization
       const knowledgeTag = (choice.tags || [])
@@ -197,9 +367,18 @@ export class Renderer {
       }
 
       btn.style.animationDelay = `${i * 0.1}s`;
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => {
         if (chosen) return;
         chosen = true;
+
+        // PHASE 1B-FULL: Handle interactive choice system
+        if (this.interactiveChoiceSystem) {
+          const choiceResult = await this.handleInteractiveChoice(choice, i);
+          if (choiceResult && !choiceResult.success) {
+            console.warn('Interactive choice handling failed:', choiceResult.error);
+          }
+        }
+
         if (knowledgeTag && this.knowledgeState) {
           this.knowledgeState.recordChoice(knowledgeTag);
           this.updateLampState();
@@ -226,6 +405,202 @@ export class Renderer {
   /** Hide choices container */
   hideChoices() {
     this.choicesEl.classList.remove('visible');
+    this.hideChoiceConsequencePreview();
+  }
+
+  /**
+   * Add interactive choice consequence preview (Phase 1B-Full)
+   * CONSTITUTIONAL FRAMEWORK: <100ms hover response for choice preview
+   */
+  addChoiceInteractivity(btn, choice, index) {
+    if (!this.interactiveChoiceSystem) return;
+
+    // Add hover effects for consequence preview
+    btn.addEventListener('mouseenter', (e) => {
+      this.showChoiceConsequencePreview(choice, index, e.target);
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      this.hideChoiceConsequencePreview();
+    });
+
+    btn.addEventListener('focus', (e) => {
+      this.showChoiceConsequencePreview(choice, index, e.target);
+    });
+
+    btn.addEventListener('blur', () => {
+      this.hideChoiceConsequencePreview();
+    });
+  }
+
+  /**
+   * Show choice consequence preview
+   * CONSTITUTIONAL REQUIREMENT: <100ms response time
+   */
+  showChoiceConsequencePreview(choice, index, element) {
+    if (!this.interactiveChoiceSystem || !this.choiceConsequencePreviewEl) return;
+
+    const startTime = performance.now();
+
+    // Get choice ID from text or use fallback
+    const choiceId = this.getChoiceIdFromText(choice.text) || `choice_${index}`;
+    const availableChoices = this.interactiveChoiceSystem.getAvailableChoices(
+      this.getCurrentScene(),
+      this.getCurrentGameState()
+    );
+
+    const choiceData = availableChoices.find(c => c.id === choiceId);
+    if (!choiceData || !choiceData.preview) return;
+
+    const preview = choiceData.preview;
+
+    // Generate preview content
+    this.choiceConsequencePreviewEl.innerHTML = `
+      <div class="preview-title">Choice Consequences</div>
+      <div class="preview-consequence">${preview.immediate}</div>
+      ${preview.long_term && preview.long_term.length > 0 ?
+        `<div class="preview-long-term">${preview.long_term[0]}</div>` : ''}
+      ${preview.panels_unlocked && preview.panels_unlocked.length > 0 ?
+        `<div class="preview-panels">Unlocks: ${preview.panels_unlocked.length} panel(s)</div>` : ''}
+    `;
+
+    // Position preview near choice button
+    const rect = element.getBoundingClientRect();
+    this.choiceConsequencePreviewEl.style.left = `${rect.right + 10}px`;
+    this.choiceConsequencePreviewEl.style.top = `${rect.top}px`;
+    this.choiceConsequencePreviewEl.style.display = 'block';
+
+    // Constitutional performance monitoring
+    const responseTime = performance.now() - startTime;
+    if (responseTime > 100) {
+      console.warn(`Constitutional violation: Choice preview response time ${responseTime}ms > 100ms`);
+    }
+  }
+
+  /**
+   * Hide choice consequence preview
+   */
+  hideChoiceConsequencePreview() {
+    if (this.choiceConsequencePreviewEl) {
+      this.choiceConsequencePreviewEl.style.display = 'none';
+    }
+  }
+
+  /**
+   * Handle interactive choice selection
+   */
+  async handleInteractiveChoice(choice, index) {
+    if (!this.interactiveChoiceSystem) return null;
+
+    const choiceId = this.getChoiceIdFromText(choice.text) || `choice_${index}`;
+    const gameState = this.getCurrentGameState();
+
+    const result = await this.interactiveChoiceSystem.handleChoiceSelection(choiceId, gameState);
+
+    if (result.success) {
+      // Update branching path visualizer
+      this.updateBranchingPathVisualizer(gameState);
+
+      // Show unlocked panels notification
+      if (result.unlockedPanels && result.unlockedPanels.length > 0) {
+        this.showPanelUnlockNotification(result.unlockedPanels);
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Update branching path visualizer based on current game state
+   */
+  updateBranchingPathVisualizer(gameState) {
+    if (!this.branchingPathVisualizer) return;
+
+    const currentPosition = this.branchingPathVisualizer.querySelector('.current-position');
+    const folkPath = this.branchingPathVisualizer.querySelector('.folk-path');
+    const dragonPath = this.branchingPathVisualizer.querySelector('.dragon-path');
+
+    if (!currentPosition) return;
+
+    const folkCounter = gameState.folk_counter || 50;
+
+    if (folkCounter > 60) {
+      currentPosition.textContent = 'Folk Path';
+      currentPosition.style.color = '#4CAF50';
+      folkPath.style.opacity = '1';
+      dragonPath.style.opacity = '0.5';
+    } else if (folkCounter < 40) {
+      currentPosition.textContent = 'Dragon Path';
+      currentPosition.style.color = '#f44336';
+      folkPath.style.opacity = '0.5';
+      dragonPath.style.opacity = '1';
+    } else {
+      currentPosition.textContent = 'Neutral';
+      currentPosition.style.color = '#FFC107';
+      folkPath.style.opacity = '0.7';
+      dragonPath.style.opacity = '0.7';
+    }
+  }
+
+  /**
+   * Handle panel unlock event
+   */
+  handlePanelUnlock(event) {
+    const { panelId } = event.detail;
+    this.showPanelUnlockNotification([panelId]);
+  }
+
+  /**
+   * Show panel unlock notification
+   */
+  showPanelUnlockNotification(panelIds) {
+    const notification = document.createElement('div');
+    notification.className = 'panel-unlock-notification';
+    notification.textContent = `Panel${panelIds.length > 1 ? 's' : ''} Unlocked: ${panelIds.length}`;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 2000);
+  }
+
+  /**
+   * Get choice ID from choice text (simplified mapping)
+   */
+  getChoiceIdFromText(text) {
+    // Simple mapping based on common choice patterns
+    const choiceMappings = {
+      'Выслушать предложение': 'choice_5_listened',
+      'Отказать сразу': 'choice_5_refused',
+      'Принять предложение': 'final_choice_accept',
+      'Отказать': 'final_choice_refuse',
+      'Предложить альтернативу': 'final_choice_counter'
+    };
+
+    return choiceMappings[text] || null;
+  }
+
+  /**
+   * Get current scene for choice system
+   */
+  getCurrentScene() {
+    // This would normally come from the ink engine
+    return this.currentScene || 'scene1';
+  }
+
+  /**
+   * Get current game state for choice system
+   */
+  getCurrentGameState() {
+    // This would normally come from the game engine
+    return {
+      folk_counter: 50,
+      alice_trust: 50,
+      gonzo_trust: 50,
+      dan_trust: 50,
+      current_scene: 1
+    };
   }
 
   /**

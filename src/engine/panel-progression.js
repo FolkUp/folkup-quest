@@ -1,11 +1,24 @@
 /**
  * Panel Progression System — FolkUp Quest
+ * FQST-017 Phase 1B-Full Scope: 15+ Interactive Panels with Multiple Narrative Paths
+ * Constitutional Framework Implementation with 3+ Major Choice Branches
  * Maps narrative beats to comic panel unlocks with branching paths
  */
 
 /**
- * Complete panel progression configuration
- * Maps scene tags and conditions to panel unlocks
+ * Phase 1B-Full Scope Panel Configuration
+ * CONSTITUTIONAL IMPLEMENTATION: 28 panels available, targeting 15+ interactive with branching
+ *
+ * MAJOR CHOICE BRANCHES:
+ * 1. FOLK vs DRAGON Path (Scene 7: Breus Proposal)
+ * 2. TRUST vs BUSINESS Dynamics (Scene 8: Team Response)
+ * 3. FINAL DESTINY Choice (Scene 10: Three Endings)
+ *
+ * Interactive Features:
+ * - Real-time choice consequence visualization
+ * - Multi-path narrative unlocks
+ * - Micro-story integration with branching
+ * - Hidden discovery paths based on choices
  */
 export const PANEL_PROGRESSION = {
   // === ACT 1: DISCOVERY (panels 1.1-1.7) ===
@@ -162,7 +175,7 @@ export const PANEL_PROGRESSION = {
     hidden: true
   },
 
-  // === ACT 2: CHALLENGE (panels 2.1-2.7) ===
+  // === ACT 2: CHALLENGE (panels 2.1-2.10) - PHASE 1B-FULL EXPANSION ===
   'panel-2.1': {
     scene: 'scene7',
     title: 'Приход Бреуса',
@@ -224,7 +237,38 @@ export const PANEL_PROGRESSION = {
     optional: true
   },
 
-  // === ACT 3: RESOLUTION (panels 3.1-3.7) ===
+  // === PHASE 1B-FULL: EXTENDED CHOICE CONSEQUENCES (panels 2.8-2.10) ===
+  'panel-2.8': {
+    scene: 'scene7_5',
+    title: 'Анализ последствий',
+    description: 'Команда обсуждает выслушанное предложение.',
+    act: 2,
+    condition: 'choice_5_listened',
+    interactive: true,
+    major_branch: 'breus_proposal'
+  },
+
+  'panel-2.9': {
+    scene: 'scene8_5',
+    title: 'Глубокий анализ команды',
+    description: 'Детальное изучение командной динамики после решения.',
+    act: 2,
+    condition: 'current_scene >= 8',
+    interactive: true,
+    character_development: true
+  },
+
+  'panel-2.10': {
+    scene: 'scene7_5',
+    title: 'Независимый путь',
+    description: 'Обсуждение альтернатив после отказа Бреусу.',
+    act: 2,
+    condition: 'choice_5_refused',
+    interactive: true,
+    major_branch: 'independence_path'
+  },
+
+  // === ACT 3: RESOLUTION (panels 3.1-3.10) - ENHANCED BRANCHING ===
   'panel-3.1': {
     scene: 'scene9',
     title: 'Зеркало дракона',
@@ -284,6 +328,38 @@ export const PANEL_PROGRESSION = {
     act: 3,
     condition: 'final_choice == "counter_offer"',
     folk_path: true
+  },
+
+  // === PHASE 1B-FULL: ENHANCED RESOLUTION PATHS (panels 3.8-3.10) ===
+  'panel-3.8': {
+    scene: 'scene9_5',
+    title: 'Глубокое отражение',
+    description: 'Расширенный анализ зеркального момента и внутренних противоречий.',
+    act: 3,
+    condition: 'current_scene >= 9',
+    interactive: true,
+    character_development: true,
+    major_branch: 'self_reflection'
+  },
+
+  'panel-3.9': {
+    scene: 'scene10_5',
+    title: 'Последствия выбора',
+    description: 'Детальное изучение результатов финального решения.',
+    act: 3,
+    condition: 'final_choice',
+    interactive: true,
+    major_branch: 'final_destiny'
+  },
+
+  'panel-3.10': {
+    scene: 'scene10_5',
+    title: 'Командная реакция',
+    description: 'Реакция команды на принятое финальное решение.',
+    act: 3,
+    condition: 'final_choice && (team_loyalty >= 60 || has_team_clarity)',
+    interactive: true,
+    character_development: true
   },
 
   // === ACT 4: EPILOGUE (panels 4.1-4.7) ===

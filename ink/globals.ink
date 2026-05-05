@@ -75,3 +75,56 @@ VAR master_insight = false
 VAR has_master_understanding = false
 VAR deep_insight = false
 VAR has_integrated_understanding = false
+
+// PHASE 1B-FULL: Extended Character Development Variables (FQST-017)
+VAR has_emotional_clarity = false
+VAR has_practical_clarity = false
+VAR has_team_clarity = false
+VAR pragmatic_approach = 0
+VAR integrated_self_view = 0
+VAR inner_harmony = 0
+VAR complex_thinking = 0
+VAR independence = 0
+VAR isolation_risk = 0
+VAR action_orientation = 0
+VAR self_reflection_avoidance = 0
+VAR leadership_adaptation = 0
+VAR negotiation_preparation = 0
+VAR team_input_integration = 0
+VAR professional_development = 0
+VAR negotiation_strategy = 0
+VAR business_acumen = 0
+VAR creative_control = 0
+VAR compromise_strategy = 0
+VAR diplomatic_approach = 0
+
+// Extended Character Stats (FQST-017)
+VAR financial_independence = 0
+VAR self_reliance = 0
+VAR authentic_path = 0
+VAR full_responsibility = 0
+VAR defensive_strategy = 0
+VAR team_protection = 0
+VAR unbreakable_bond = 0
+VAR shared_destiny = 0
+VAR win_win_thinking = 0
+VAR innovative_solution = 0
+VAR persuasion_strategy = 0
+VAR business_psychology = 0
+VAR negotiation_confidence = 0
+VAR team_support = 0
+
+// Psychological Development Variables
+VAR honest_self_assessment = 0
+VAR confidence_in_uncertainty = 0
+VAR philosophical_thinking = 0
+VAR acceptance_of_imperfection = 0
+VAR visionary_thinking = 0
+VAR strategic_imagination = 0
+VAR future_orientation = 0
+VAR future_planning_wisdom = 0
+VAR process_orientation = 0
+VAR introspection_skill = 0
+VAR psychological_insight = 0
+VAR unconventional_thinking = 0
+VAR creativity = 0
