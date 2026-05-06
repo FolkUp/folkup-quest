@@ -7,6 +7,10 @@ from PIL import Image, ImageDraw
 def create_test_panel():
     """Create a test panel that meets commercial standards"""
 
+    # Ensure test_panels directory exists
+    import os
+    os.makedirs('test_panels', exist_ok=True)
+
     # Create image with correct dimensions and DPI
     width, height = 4125, 6262
     image = Image.new('RGB', (width, height), color='white')
