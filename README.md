@@ -135,11 +135,17 @@ npm run build
 
 ## Deployment
 
-Hosted on Cloudflare Pages with manual deployment:
+Hosted on self-managed VPS with Docker + nginx-proxy:
 
 ```bash
-npx wrangler pages deploy dist --project-name folkup-quest --branch master
+# Build for production
+npm run build
+
+# Deploy to VPS (requires SSH key authentication)
+scp -i ~/.ssh/folkup_vps_dedicated -r dist/* deploy@46.225.107.2:/home/deploy/quest-html/
 ```
+
+Production URL: https://quest.folkup.app
 
 ## SPDX Licensing
 

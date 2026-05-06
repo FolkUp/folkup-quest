@@ -4,8 +4,8 @@
  * Enhanced Alice v2.0 Level 3 Cartouche Autonome
  */
 
-const CACHE_VERSION = 'fqst-v1.0-20260504';
-const ASSET_CACHE = 'fqst-assets-v1.0';
+const CACHE_VERSION = 'fqst-v1.1.2-20260506';
+const ASSET_CACHE = 'fqst-assets-v1.1.2';
 
 // Critical assets for precaching
 const PRECACHE_URLS = [
