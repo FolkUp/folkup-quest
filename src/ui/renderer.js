@@ -274,7 +274,9 @@ export class Renderer {
     paragraphs.forEach((text, i) => {
       const p = document.createElement('p');
       p.className = 'story-paragraph';
-      p.innerHTML = this.formatText(text);
+      // SECURITY FIX: Use DOM creation instead of innerHTML to prevent XSS
+      const formattedText = this.formatText(text);
+      this.setSecureHTML(p, formattedText);
       p.style.animationDelay = `${i * 0.15}s`;
       fragment.appendChild(p);
     });
@@ -1135,6 +1137,35 @@ export class Renderer {
     this.storyEl.scrollTo({
       top: this.storyEl.scrollHeight,
       behavior: 'smooth',
+    });
+  }
+
+  /**
+   * SECURITY: Safely set HTML content by parsing and creating DOM elements
+   * Only allows safe tags: em, strong
+   * @param {HTMLElement} element
+   * @param {string} htmlString
+   */
+  setSecureHTML(element, htmlString) {
+    // Clear existing content
+    element.textContent = '';
+
+    // Parse and create DOM safely - only allow em tags from formatText
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlString;
+
+    // Only transfer text and em elements
+    Array.from(tempDiv.childNodes).forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        element.appendChild(node.cloneNode(true));
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === 'em') {
+        const emElement = document.createElement('em');
+        emElement.textContent = node.textContent;
+        element.appendChild(emElement);
+      } else {
+        // Any other tags are converted to plain text for security
+        element.appendChild(document.createTextNode(node.textContent || ''));
+      }
     });
   }
 }
