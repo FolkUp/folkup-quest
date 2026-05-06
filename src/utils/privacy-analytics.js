@@ -286,6 +286,29 @@ export class PrivacyFirstAnalytics {
   }
 
   /**
+   * Generic track event method for performance monitoring and other integrations
+   * Wrapper around the existing analytics system with privacy compliance
+   */
+  trackEvent(name, params = {}) {
+    if (!this.canTrackAnalytics() && !['privacy_action', 'consent_changed'].includes(name)) {
+      return; // Block non-essential tracking
+    }
+
+    // Use the imported trackEvent function from analytics.js
+    trackEvent(name, params);
+
+    // Buffer the event for privacy compliance tracking
+    this.bufferEvent({
+      type: 'generic_event',
+      category: 'analytics',
+      name: name,
+      params: params,
+      timestamp: Date.now(),
+      sessionId: this.session?.id || 'no-session'
+    });
+  }
+
+  /**
    * Check if analytics tracking is allowed
    */
   canTrackAnalytics() {

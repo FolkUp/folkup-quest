@@ -1,5 +1,0 @@
-name = "folkup-quest"
-compatibility_date = "2024-03-01"
-
-[env.production]
-pages_build_output_dir = "dist"
